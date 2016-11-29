@@ -10,7 +10,7 @@
     </servlet>
     <servlet-mapping>
     	<servlet-name>FinanceServlet</servlet-name>
-    	<url-pattern>/FinanceServlet</url-pattern>
+    	<url-pattern>/finance</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
