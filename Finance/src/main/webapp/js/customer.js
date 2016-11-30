@@ -89,4 +89,25 @@ $(document).on('keyup','#acc',function(){
 			$('#colltype').val("");
 		}
 	}
+});
+$(document).on('click','#update',function(){
+	var accno = $('#acc').val();
+	var cname = $('#cusname').val();
+	var line = $('#line').val();
+	var add = $('#addr').val();
+	var cno = $('#conno').val();
+	var ctype = $('#colltype').val();
+	var url = "/Finance/finance?operation=updateCustomer&accno=" + accno+"&cname=" + cname+"&line=" + line+"&add=" + add +"&cno=" + cno +"&ctype=" + ctype; 
+	$.ajax({
+		url:url,
+		type:'POST'
+	})
+	.done(function(result){
+		getAllCustomer();
+	})
+	.fail(function(result){
+		alert(result);
+	})
 })
+
+
