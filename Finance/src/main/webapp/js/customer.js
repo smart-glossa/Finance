@@ -59,5 +59,34 @@ $(document).on('click','.delete',function(){
 	fail(function(result){
 		alert(result);
 	})
-	
+
 });
+$(document).on('keyup','#acc',function(){
+	var acc = $('#acc').val();
+	if(acc !== "" ){
+		if(acc.length>=5){
+			var url = "/Finance/finance?operation=getOneCustomer&accno="+ acc;
+			$.ajax({
+				url:url,
+				type:'POST'
+			})
+			.done(function(result){
+				var res = JSON.parse(result);
+				$('#cusname').val(res.customerName);
+				$('#line').val(res.line);
+				$('#addr').val(res.address);
+				$('#conno').val(res.contactNo);
+				$('#colltype').val(res.collectionType);
+			})
+			.fail(function(result){
+				alert(result);
+			})
+			}else{
+			$('#cusname').val("");
+			$('#line').val("");
+			$('#addr').val("");
+			$('#conno').val("");
+			$('#colltype').val("");
+		}
+	}
+})
