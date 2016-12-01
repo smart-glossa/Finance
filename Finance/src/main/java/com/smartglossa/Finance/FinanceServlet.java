@@ -28,15 +28,13 @@ public class FinanceServlet extends HttpServlet {
 		if(op.equals("addCustomer")){
 			JSONObject obj = new JSONObject();
 			String cusName = request.getParameter("cname");
-			String line = request.getParameter("line");
 			String addr = request.getParameter("add");
 			String conNo = request.getParameter("cno");
-			String collType = request.getParameter("ctype");
 			try {
 				Class.forName("com.mysql.jdbc.Driver");
 				Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/finance", "root", "root");
 				Statement stmt = conn.createStatement();
-				String query = "Insert into customer(customerName,line,address,contactNo,collectionType) values('"+ cusName +"','"+ line +"','"+ addr +"','"+ conNo +"','"+ collType +"')";
+				String query = "Insert into customer(cusName,address,contactNo) values('"+ cusName +"','"+ addr +"','"+ conNo +"')";
 				stmt.execute(query);
 				obj.put("status", "success");
 			} catch (Exception e) {
@@ -55,12 +53,10 @@ public class FinanceServlet extends HttpServlet {
 				ResultSet set = stmt.executeQuery(query);
 				while(set.next()){
 					JSONObject obj = new JSONObject();
-					obj.put("accountNo" ,set.getInt("accountNo"));
-					obj.put("customerName",set.getString("customerName"));
-					obj.put("line",set.getString("line"));
+					obj.put("cusId" ,set.getInt("cusId"));
+					obj.put("cusName",set.getString("cusName"));
 					obj.put("address",set.getString("address"));
 					obj.put("contactNo",set.getString("contactNo"));
-					obj.put("collectionType", set.getString("collectionType"));
 					result.put(obj);
 				}
 				
@@ -72,17 +68,15 @@ public class FinanceServlet extends HttpServlet {
 
 		}else if(op.equals("updateCustomer")){
 			JSONObject obj = new JSONObject();
-		 	int accNo = Integer.parseInt(request.getParameter("accno"));
+		 	int cusId = Integer.parseInt(request.getParameter("cusid"));
 			String cusName = request.getParameter("cname");
-			String line = request.getParameter("line");
 			String addr = request.getParameter("add");
 			String conNo = request.getParameter("cno");
-			String collType = request.getParameter("ctype");
 			try {
 				Class.forName("com.mysql.jdbc.Driver");
 				Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/finance", "root", "root");
 				Statement stmt = conn.createStatement();
-				String query = "update customer set customerName='"+ cusName +"',line='"+ line +"',address='"+ addr +"',contactNo='"+ conNo +"',collectionType='"+ collType + "'where accountNo="+ accNo;
+				String query = "update customer set cusName='"+ cusName +"',address='"+ addr +"',contactNo='"+ conNo +"'where cusId="+ cusId;
 				stmt.execute(query);
 				obj.put("status", "success");
 				
@@ -94,20 +88,18 @@ public class FinanceServlet extends HttpServlet {
 			
 		}else if(op.equals("getOneCustomer")){
 			JSONObject obj = new JSONObject();
-			int accNo = Integer.parseInt(request.getParameter("accno"));
+			int cusId = Integer.parseInt(request.getParameter("cusId"));
 			try {
 				Class.forName("com.mysql.jdbc.Driver");
 				Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/finance", "root", "root");
 				Statement stmt = conn.createStatement();
-				String query = "select * from customer where accountNo="+ accNo;
+				String query = "select * from customer where cusId="+ cusId;
 				ResultSet set = stmt.executeQuery(query);
 				if(set.next()){
-					obj.put("accountNo" ,set.getInt("accountNo"));
-					obj.put("customerName",set.getString("customerName"));
-					obj.put("line",set.getString("line"));
+					obj.put("cusId" ,set.getInt("cusId"));
+					obj.put("cusName",set.getString("cusName"));
 					obj.put("address",set.getString("address"));
 					obj.put("contactNo",set.getString("contactNo"));
-					obj.put("collectionType", set.getString("collectionType"));
 					
 				}
 			} catch (Exception e) {
@@ -116,12 +108,12 @@ public class FinanceServlet extends HttpServlet {
 			response.getWriter().print(obj);
 		}else if(op.equals("deleteCustomer")){
 			JSONObject obj = new JSONObject();
-			int accNo = Integer.parseInt(request.getParameter("accno"));
+			int cusId = Integer.parseInt(request.getParameter("cusId"));
 			try {
 				Class.forName("com.mysql.jdbc.Driver");
 				Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/finance", "root", "root");
 				Statement stmt = conn.createStatement();
-				String query = "delete from customer where accountNo="+ accNo;
+				String query = "delete from customer where cusId="+ cusId;
 				stmt.execute(query);
 				obj.put("status", "success");
 				} catch (Exception e) {
