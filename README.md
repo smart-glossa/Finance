@@ -1,7 +1,7 @@
 Database:
 
 1.customer :CREATE TABLE `customer` (
-  `cusId` int(11) NOT NULL,
+  `cusId` int(11) NOT NULL auto_increment,
   `cusName` varchar(50) DEFAULT NULL,
   `address` varchar(100) DEFAULT NULL,
   `contactNo` varchar(50) DEFAULT NULL,
@@ -9,11 +9,11 @@ Database:
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 |
 
 2.Accounts :CREATE TABLE `Accounts` (
-  `accId` int(11) NOT NULL,
+  `accId` int(11) NOT NULL auto_increment,
   `cusId` int(11) DEFAULT NULL,
   `line` varchar(50) DEFAULT NULL,
   `amountGiven` varchar(50) DEFAULT NULL,
-  `amountType` varchar(50) DEFAULT NULL,
+  `amountToPay` varchar(50) DEFAULT NULL,
   `collType` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`accId`),
   KEY `cusId` (`cusId`),
@@ -21,7 +21,7 @@ Database:
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 |
 
 3.Payment :CREATE TABLE `Payment` (
-  `payId` int(11) NOT NULL,
+  `payId` int(11) NOT NULL auto_increment,
   `accId` int(11) DEFAULT NULL,
   `amount` varchar(100) DEFAULT NULL,
   `date` varchar(50) DEFAULT NULL,
