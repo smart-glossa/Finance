@@ -1,10 +1,9 @@
-package com.smartglossa.Finance;
+package com.smartglossa.accounts;
 
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 
 import javax.servlet.ServletException;
@@ -31,17 +30,16 @@ public class Account extends HttpServlet {
 		String operation = request.getParameter("operation");
 		if(operation.equals("addAccounts")){
 			JSONObject obj = new JSONObject();
-			int accId = Integer.parseInt(request.getParameter("accId"));
 			String line = request.getParameter("line");
 			String collType = request.getParameter("collType");
 			String amountGiven = request.getParameter("amountGiven");
-			String amountType = request.getParameter("ammountType");
+			String amountToPay = request.getParameter("amountToPay");
 			int cusId = Integer.parseInt(request.getParameter("cusId"));
 			try {
 				Class.forName("com.mysql.jdbc.Driver");
 				Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/finance", "root", "root");
 				Statement stmt = conn.createStatement();
-				String query = "insert into Accounts(accId,line,collType,amountType,cusId) values("+ accId +",'" + line + "','" + collType +"','"+ amountGiven +"','"+ amountType +"',"+ cusId +")";
+				String query = "insert into Accounts(line,collType,amountToPay,cusId) values('" + line + "','" + collType +"','"+ amountGiven +"','"+ amountToPay +"',"+ cusId +")";
 				stmt.execute(query);
 				obj.put("status", "success");
 			} catch (Exception e) {
@@ -55,13 +53,13 @@ public class Account extends HttpServlet {
 		String line = request.getParameter("line");
 		String collType = request.getParameter("collType");
 		String amountGiven = request.getParameter("amountGiven");
-		String amountType = request.getParameter("ammountType");
+		String amountToPay = request.getParameter("amountToPay");
 		int cusId = Integer.parseInt(request.getParameter("cusId"));
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/finance", "root", "root");
 			Statement stmt = conn.createStatement();
-			String query = "update Accounts set (line,collType,amountType,cusId) values('" + line + "','" + collType +"','"+ amountGiven +"','"+ amountType +"',"+ cusId +") where accid = "+ accId;
+			String query = "update Accounts set (line,collType,amountToPay,cusId) values('" + line + "','" + collType +"','"+ amountGiven +"','"+ amountToPay +"',"+ cusId +") where accid = "+ accId;
 			stmt.execute(query);
 			obj.put("status", "success");
 		} catch (Exception e) {
@@ -83,8 +81,8 @@ public class Account extends HttpServlet {
 				obj.put("accId" ,set.getInt("accId"));
 				obj.put("line",set.getString("line"));
 				obj.put("collType",set.getString("collType"));
-				obj.put("amountGiven",set.getString("ammountGiven"));
-				obj.put("amountType",set.getString("ammountType"));
+				obj.put("amountGiven",set.getString("amountGiven"));
+				obj.put("amountToPay",set.getString("amountToPay"));
 				obj.put("cusId", set.getInt("cusId"));
 				
 			}
@@ -99,7 +97,7 @@ public class Account extends HttpServlet {
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/finance", "root", "root");
 			Statement stmt = conn.createStatement();
-			String query = "delete from customer where accIdo="+ accId;
+			String query = "delete from Accounts where accId="+ accId;
 			stmt.execute(query);
 			obj.put("status", "success");
 			} catch (Exception e) {

@@ -13,14 +13,14 @@
     	</description>
     	<display-name>Account</display-name>
     	<servlet-name>Account</servlet-name>
-    	<servlet-class>account.Account</servlet-class>
+    	<servlet-class>com.smartglossa.accounts.Account</servlet-class>
     </servlet>
     <servlet>
     	<description>
     	</description>
     	<display-name>PaymentServlet</display-name>
-    	<servlet-name>Payment</servlet-name>
-    	<servlet-class>com.smartglossa.Finance.PaymentServlet</servlet-class>
+    	<servlet-name>PaymentServlet</servlet-name>
+    	<servlet-class>com.smartglossa.payment.PaymentServlet</servlet-class>
     </servlet>
     <servlet-mapping>
     	<servlet-name>FinanceServlet</servlet-name>
@@ -32,7 +32,7 @@
     </servlet-mapping>
     <servlet-mapping>
     	<servlet-name>PaymentServlet</servlet-name>
-    	<url-pattern>/PaymentServlet</url-pattern>
+    	<url-pattern>/payment</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -1,4 +1,4 @@
-package com.smartglossa.Finance;
+package com.smartglossa.payment;
 
 import java.io.IOException;
 import java.sql.DriverManager;
@@ -20,9 +20,7 @@ public class PaymentServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
    
-    public PaymentServlet() {
-        super();
-    }
+   
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doPost(request, response);
