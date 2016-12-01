@@ -8,9 +8,20 @@
     	<servlet-name>FinanceServlet</servlet-name>
     	<servlet-class>com.smartglossa.Finance.FinanceServlet</servlet-class>
     </servlet>
+    <servlet>
+    	<description>
+    	</description>
+    	<display-name>Account</display-name>
+    	<servlet-name>Account</servlet-name>
+    	<servlet-class>account.Account</servlet-class>
+    </servlet>
     <servlet-mapping>
     	<servlet-name>FinanceServlet</servlet-name>
     	<url-pattern>/finance</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>Account</servlet-name>
+    	<url-pattern>/account</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
