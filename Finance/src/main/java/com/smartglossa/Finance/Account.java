@@ -1,4 +1,4 @@
-package account;
+package com.smartglossa.Finance;
 
 import java.io.IOException;
 import java.sql.Connection;
