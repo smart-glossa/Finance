@@ -34,16 +34,16 @@ public class Account extends HttpServlet {
 		String operation = request.getParameter("operation");
 		if (operation.equals("addAccounts")) {
 			JSONObject obj = new JSONObject();
+			int cusId = Integer.parseInt(request.getParameter("cusId"));
 			String line = request.getParameter("line");
 			String collType = request.getParameter("collType");
 			String amountGiven = request.getParameter("amountGiven");
 			String amountToPay = request.getParameter("amountToPay");
-			int cusId = Integer.parseInt(request.getParameter("cusId"));
 			try {
 				Class.forName("com.mysql.jdbc.Driver");
 				Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/finance", "root", "root");
 				Statement stmt = conn.createStatement();
-				String query = "insert into Accounts(cusId,line,amountGiven,amountToPay,collType) values(" + cusId
+				String query = "insert into accounts(cusId,line,amountGiven,amountToPay,collType) values(" + cusId
 						+ ",'" + line + "','" + amountGiven + "','" + amountToPay + "','" + collType + "')";
 				stmt.execute(query);
 				obj.put("status", "success");
@@ -116,7 +116,7 @@ public class Account extends HttpServlet {
 				Class.forName("com.mysql.jdbc.Driver");
 				Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/finance", "root", "root");
 				Statement stmt = conn.createStatement();
-				String query = "Select *from Accouts";
+				String query = "Select *from accounts";
 				ResultSet rs = stmt.executeQuery(query);
 				while(rs.next()){
 					JSONObject obj = new JSONObject();
