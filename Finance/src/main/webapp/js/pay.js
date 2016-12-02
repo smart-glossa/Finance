@@ -45,8 +45,9 @@ function getAllPayment(){
 $(document).on('click','#updatepay',function(){
 	var payId = $('#payId').val();
 	vay accId = $('#accId').val();
-	
-	var url = "/Finance/finance?operation=updateCustomer&cusId=" + cusId +"&cname=" + cname+"&add=" + add +"&cno=" + cno ; 
+	var amount = $('#amount').val();
+	var date = $('date').val();
+	var url = "/Finance/payment?operation=updatePayment&payId=" + payId +"&accId=" + accId+"&amount=" + amount +"&date=" + date ; 
 	$.ajax({
 		url:url,
 		type:'POST'
@@ -62,7 +63,7 @@ $(document).on('click','.delete',function(){
 	var td = $(this).parent();
 	var tr = td.parent();
 	var cusId = tr.children()[0].innerHTML;
-	var url = "/Finance/finance?operation=deleteCustomer&cusId="+ cusId;
+	var url = "/Finance/payment?operation=deletePayment&payId="+ payId;
 	$.ajax({
 		url:url,
 		type:'POST'
@@ -75,3 +76,24 @@ $(document).on('click','.delete',function(){
 	})
 
 });
+$(document).on('keyup','#payId',function(){
+	var payId = $('#payId').val();
+	if(payId !== "" ){
+		
+			var url = "/Finance/payment?operation=getOnePayment&payId="+ payId;
+			$.ajax({
+				url:url,
+				type:'POST'
+			})
+			.done(function(result){
+				var res = JSON.parse(result);
+				$('#accId').val(res.accId);
+				$('#amount').val(res.amount);
+				$('#date').val(res.date);
+			})
+			.fail(function(result){
+				alert(result);
+			})
+	}
+});
+	}
