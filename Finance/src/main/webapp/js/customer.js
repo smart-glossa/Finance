@@ -3,29 +3,20 @@ $(document).ready(function(){
 })
 $(document).on('click','#add',function(){
 	var cname = $('#cusname').val();
-	var line = $('#line').val();
 	var add = $('#addr').val();
 	var cno = $('#conno').val();
-	var ctype = $('#colltype').val();
-	var url = "/Finance/finance?operation=addCustomer&cname="+ cname +"&line="+ line +"&add="+ add +"&cno="+ cno +"&ctype="+ ctype ;
+	var url = "/Finance/finance?operation=addCustomer&cname="+ cname +"&add="+ add +"&cno="+ cno ;
     if(cname === ""){
     	$('#cusname').focus().css('outline-color','red');
     	return false;
     }
-    if(line === ""){
-    	$('#line').focus().css('outline-color','red');
-    	return false;
-    }
+   
     if(add === ""){
     	$('#addr').focus().css('outline-color','red');
     	return false;
     }
     if(cno === ""){
     	$('#conno').focus().css('outline-color','red');
-    	return false;
-    }
-    if(ctype === ""){
-    	$('#colltype').focus().css('outline-color','red');
     	return false;
     }
 	$.ajax({
@@ -35,10 +26,8 @@ $(document).on('click','#add',function(){
 	.done(function(result){
 		getAllCustomer();
 		$('#cusname').val("");
-		$('#line').val("");
 		$('#addr').val("");
 		$('#conno').val("");
-		$('#colltype').val("");
 	});
 	fail(function(result){
 		alert(result);
@@ -47,8 +36,8 @@ $(document).on('click','#add',function(){
 $(document).on('click','.delete',function(){
 	var td = $(this).parent();
 	var tr = td.parent();
-	var accNo = tr.children()[0].innerHTML;
-	var url = "/Finance/finance?operation=deleteCustomer&accno="+ accNo;
+	var cusId = tr.children()[0].innerHTML;
+	var url = "/Finance/finance?operation=deleteCustomer&cusId="+ cusId;
 	$.ajax({
 		url:url,
 		type:'POST'
@@ -61,43 +50,36 @@ $(document).on('click','.delete',function(){
 	})
 
 });
-$(document).on('keyup','#acc',function(){
-	var acc = $('#acc').val();
-	if(acc !== "" ){
-		if(acc.length>=5){
-			var url = "/Finance/finance?operation=getOneCustomer&accno="+ acc;
+$(document).on('keyup','#cusId',function(){
+	var cusId = $('#cusId').val();
+	if(cusId !== "" ){
+		
+			var url = "/Finance/finance?operation=getOneCustomer&cusId="+ cusId;
 			$.ajax({
 				url:url,
 				type:'POST'
 			})
 			.done(function(result){
 				var res = JSON.parse(result);
-				$('#cusname').val(res.customerName);
-				$('#line').val(res.line);
+				$('#cusname').val(res.cusName);
 				$('#addr').val(res.address);
 				$('#conno').val(res.contactNo);
-				$('#colltype').val(res.collectionType);
 			})
 			.fail(function(result){
 				alert(result);
 			})
 			}else{
 			$('#cusname').val("");
-			$('#line').val("");
 			$('#addr').val("");
 			$('#conno').val("");
-			$('#colltype').val("");
 		}
-	}
 });
 $(document).on('click','#update',function(){
-	var accno = $('#acc').val();
+	var cusId = $('#cusId').val();
 	var cname = $('#cusname').val();
-	var line = $('#line').val();
 	var add = $('#addr').val();
 	var cno = $('#conno').val();
-	var ctype = $('#colltype').val();
-	var url = "/Finance/finance?operation=updateCustomer&accno=" + accno+"&cname=" + cname+"&line=" + line+"&add=" + add +"&cno=" + cno +"&ctype=" + ctype; 
+	var url = "/Finance/finance?operation=updateCustomer&cusId=" + cusId +"&cname=" + cname+"&add=" + add +"&cno=" + cno ; 
 	$.ajax({
 		url:url,
 		type:'POST'

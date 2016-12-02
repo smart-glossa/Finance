@@ -68,7 +68,7 @@ public class FinanceServlet extends HttpServlet {
 
 		}else if(op.equals("updateCustomer")){
 			JSONObject obj = new JSONObject();
-		 	int cusId = Integer.parseInt(request.getParameter("cusid"));
+		 	int cusId = Integer.parseInt(request.getParameter("cusId"));
 			String cusName = request.getParameter("cname");
 			String addr = request.getParameter("add");
 			String conNo = request.getParameter("cno");

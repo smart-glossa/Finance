@@ -30,15 +30,14 @@ public class PaymentServlet extends HttpServlet {
 		String op = request.getParameter("operation");
 		if(op.equals("addPayment")){
 			JSONObject obj = new JSONObject();
-			String pId = request.getParameter("pid");
 			String amount = request.getParameter("amount");
 			String date = request.getParameter("date");
 			String accId = request.getParameter("accid");
 			try {
 				Class.forName("com.mysql.jdbc.Driver");
-				Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/payment", "root", "root");
+				Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/finance", "root", "root");
 				Statement stmt = conn.createStatement();
-				String query = "Insert into payment(paymentId,amount,date,accountId) values('"+ pId +"','"+ amount +"','"+ date +"','"+ accId +"')";
+				String query = "Insert into Payment(accId,amount,date) values('"+ accId +"','"+ amount +"','"+ date +"')";
 				stmt.execute(query);
 				obj.put("status", "success");
 			} catch (Exception e) {
@@ -53,14 +52,15 @@ public class PaymentServlet extends HttpServlet {
 				Class.forName("com.mysql.jdbc.Driver");
 				Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/finance", "root", "root");
 				Statement stmt = conn.createStatement();
-				String query = "select * from payment";
+				String query = "select * from Payment";
 				ResultSet set = stmt.executeQuery(query);
 				while(set.next()){
 					JSONObject obj = new JSONObject();
-					obj.put("pId",set.getString("pId"));
+					obj.put("pId",set.getString("payId"));
+					obj.put("accId",set.getString("accId"));
 					obj.put("amount",set.getString("amount"));
 					obj.put("date",set.getString("date"));
-					obj.put("accId",set.getString("accId"));
+					
 					result.put(obj);
 				}
 				
@@ -79,7 +79,7 @@ public class PaymentServlet extends HttpServlet {
 				Class.forName("com.mysql.jdbc.Driver");
 				Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/finance", "root", "root");
 				Statement stmt = conn.createStatement();
-				String query = "update payment set pId='"+ pId +"',amount='"+ amount +"',date='"+ date +"where accId="+ accId;
+				String query = "update Payment set accId="+ accId +",amount='"+ amount +"',date='"+ date +"'where payId="+ pId;
 				stmt.execute(query);
 				obj.put("status", "success");
 				
@@ -91,15 +91,15 @@ public class PaymentServlet extends HttpServlet {
 			
 		}else if(op.equals("getOnePayment")){
 			JSONObject obj = new JSONObject();
-			String accId = request.getParameter("accid");
+			String pId = request.getParameter("pId");
 			try {
 				Class.forName("com.mysql.jdbc.Driver");
 				Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/finance", "root", "root");
 				Statement stmt = conn.createStatement();
-				String query = "select * from payment where accId="+ accId;
+				String query = "select * from Payment where payId="+ pId;
 				ResultSet set = stmt.executeQuery(query);
 				if(set.next()){
-					obj.put("pId",set.getString("pId"));
+					obj.put("pId",set.getString("payId"));
 					obj.put("amount",set.getString("amount"));
 					obj.put("date",set.getString("date"));
 					obj.put("accId",set.getString("accId"));
@@ -110,12 +110,12 @@ public class PaymentServlet extends HttpServlet {
 			response.getWriter().print(obj);
 		}else if(op.equals("deletePayment")){
 			JSONObject obj = new JSONObject();
-			String accId = request.getParameter("accid");
+			String pId = request.getParameter("pId");
 			try {
 				Class.forName("com.mysql.jdbc.Driver");
 				Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/finance", "root", "root");
 				Statement stmt = conn.createStatement();
-				String query = "delete from payment where accId="+ accId;
+				String query = "delete from Payment where payId="+ pId;
 				stmt.execute(query);
 				obj.put("status", "success");
 				} catch (Exception e) {
