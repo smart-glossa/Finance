@@ -23,8 +23,6 @@ public class Account extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
 		doPost(request, response);
 	}
 
@@ -43,7 +41,7 @@ public class Account extends HttpServlet {
 				Class.forName("com.mysql.jdbc.Driver");
 				Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/finance", "root", "root");
 				Statement stmt = conn.createStatement();
-				String query = "insert into accounts(cusId,line,amountGiven,amountToPay,collType) values(" + cusId
+				String query = "insert into Accounts(cusId,line,amountGiven,amountToPay,collType) values(" + cusId
 						+ ",'" + line + "','" + amountGiven + "','" + amountToPay + "','" + collType + "')";
 				stmt.execute(query);
 				obj.put("status", "success");
@@ -116,7 +114,7 @@ public class Account extends HttpServlet {
 				Class.forName("com.mysql.jdbc.Driver");
 				Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/finance", "root", "root");
 				Statement stmt = conn.createStatement();
-				String query = "Select *from accounts";
+				String query = "Select *from Accounts";
 				ResultSet rs = stmt.executeQuery(query);
 				while(rs.next()){
 					JSONObject obj = new JSONObject();
@@ -135,6 +133,41 @@ public class Account extends HttpServlet {
 				result.put(obj);				e.printStackTrace();
 			}
 			response.getWriter().print(result);
+		}else if(operation.equals("getStatement")){
+			JSONObject obj = new JSONObject();
+			JSONArray array = new JSONArray();
+			int accId = Integer.parseInt(request.getParameter("accId"));
+			int Balance = 0;
+			try {
+				Class.forName("com.mysql.jdbc.Driver");
+				Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/finance", "root", "root");
+				Statement stmt = conn.createStatement();
+				String query = "Select Accounts.amountToPay,customer.cusName from Accounts,customer where accId="+ accId;
+				ResultSet rs = stmt.executeQuery(query);
+				if(rs.next()){
+					obj.put("cusName", rs.getString("cusName"));
+					Balance = rs.getInt("amountToPay");
+					obj.put("AmountToPay", Balance);
+				}
+				Class.forName("com.mysql.jdbc.Driver");
+				Statement stm = conn.createStatement();
+				String qu = "Select amount from Payment where accId="+ accId;
+				ResultSet res = stm.executeQuery(qu);
+				while(res.next()){
+					JSONObject ob = new JSONObject();
+					int payment = res.getInt("amount");
+				    Balance = Balance - payment;
+					ob.put("pay", payment);
+					ob.put("Bal", Balance);
+					array.put(ob);
+				}
+			} catch (Exception e) {
+				obj.put("status", "Failure");
+				e.printStackTrace();
+			}
+			response.getWriter().print(obj);
+			response.getWriter().print(array);
+		     
 		}
 
 	}

@@ -32,7 +32,7 @@ public class PaymentServlet extends HttpServlet {
 			JSONObject obj = new JSONObject();
 			String amount = request.getParameter("amount");
 			String date = request.getParameter("date");
-			String accId = request.getParameter("accid");
+			String accId = request.getParameter("accId");
 			try {
 				Class.forName("com.mysql.jdbc.Driver");
 				Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/finance", "root", "root");
@@ -71,10 +71,10 @@ public class PaymentServlet extends HttpServlet {
 
 		}else if(op.equals("updatePayment")){
 			JSONObject obj = new JSONObject();
-			String pId = request.getParameter("pid");
+			String pId = request.getParameter("payId");
+			String accId = request.getParameter("accId");
 			String amount = request.getParameter("amount");
 			String date = request.getParameter("date");
-			String accId = request.getParameter("accid");
 			try {
 				Class.forName("com.mysql.jdbc.Driver");
 				Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/finance", "root", "root");
@@ -91,7 +91,7 @@ public class PaymentServlet extends HttpServlet {
 			
 		}else if(op.equals("getOnePayment")){
 			JSONObject obj = new JSONObject();
-			String pId = request.getParameter("pId");
+			String pId = request.getParameter("payId");
 			try {
 				Class.forName("com.mysql.jdbc.Driver");
 				Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/finance", "root", "root");
