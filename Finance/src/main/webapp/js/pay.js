@@ -1,5 +1,4 @@
 $(document).ready(function(){
-	getAllPayment();
 })
 $(document).on('click','#addpay',function(){
 	var  accId = $('#accId').val();
@@ -53,7 +52,7 @@ function getAllPayment(){
 
 				}
 					table += '</table>';  
-	                  $('.getAll')[0].innerHTML = table;
+	                  $('.getAllPayment')[0].innerHTML = table;
 				
 	      })
 		.fail(function(result){

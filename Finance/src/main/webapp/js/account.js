@@ -1,5 +1,4 @@
 $(document).ready(function(){
-	getAllAccount();
 $(document).on('click','#sub',function(){
 	var line = $("#line").val();
 	var cType = $("#colltype").val();
@@ -129,7 +128,7 @@ function getAllAccount(){
     	  var res = JSON.parse(result);
     	  var length = res.length;
     	  var table = '<table>'
-    		  table += '<tr><th>SerialNumber</th><th>AccountNumber</th><th>Line</th><th>CollectionType</th><th>AmountGiven</th><th>AmountT0Pay</th><th>Delete</th></tr>';
+    		  table += '<tr><th>SerialNumber</th><th>AccountNumber</th><th>Line</th><th>CollectionType</th><th>AmountGiven</th><th>AmountToPay</th><th>Delete</th></tr>';
     	      for(i=0;i<length;i++){
     	    	  table += '<tr class="row">'
     	    	  table += '<td>'+ res[i].cusId +'</td>';
@@ -141,7 +140,7 @@ function getAllAccount(){
     	    	  table += '<td><img src="images/delete.jpg" height="35px" width="35px" class="delete"></td></tr>';
     	      }
                   table += '</table>';  
-                  $('.getAll')[0].innerHTML = table;
+                  $('.getAllAccount')[0].innerHTML = table;
       })
 	.fail(function(result){
 		alert(result);
@@ -164,3 +163,36 @@ $(document).on('click','.delete',function(){
 	})
 
 });
+
+	$(document).on('keyup','#accId',function(){
+		var accId = $('#accId').val();
+		if(accId.length===5){
+			var url = "/Finance/account?operation=getStatement&accId="+ accId;
+			$.ajax({
+				url:url,
+				type:'POST'
+			})
+			.done(function(result){
+				res = JSON.parse(result);
+				var re = res[0];
+				$('#name').text(re.cusName);
+				$('#bal').text(re.AmountToPay);
+				var length = res.length;
+		    	  var table = '<table>'
+		    		  table += '<tr><th>SerialNumber</th><th>PaymentDate</th><th>Paid</th><th>Balance</th></tr>';
+		    	      for(i=1;i<length;i++){
+		    	    	  table += '<tr class="row">'
+		    	    	  table += '<td>'+ i +'</td>';
+		    	    	  table += '<td>'+ res[i].Date +'</td>';
+		    	    	  table += '<td>'+ res[i].pay +'</td>';
+		    	    	  table += '<td>'+ res[i].Bal +'</td>';
+		    	      }
+		                  table += '</table>';  
+		                  $('.getStatement')[0].innerHTML = table;
+			})
+		}
+		
+	})
+	
+
+

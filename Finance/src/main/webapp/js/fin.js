@@ -1,29 +1,131 @@
-function getAllCustomer(){
-	var url = "/Finance/finance?operation=getAllCustomer";
-	$.ajax({
-		url:url,
-		type:'POST'
-	})
-      .done(function(result){
-    	  var res = JSON.parse(result);
-    	  var length = res.length;
-    	  var table = '<table>'
-    		  table += '<tr><th>SerialNumber</th><th>CustomerName</th><th>Address</th><th>ContactNumber</th><th>Delete</th></tr>';
-    	      for(i=0;i<length;i++){
-    	    	  table += '<tr class="row">'
-    	    	  table += '<td>'+ res[i].cusId +'</td>';
-    	    	  table += '<td>'+ res[i].cusName +'</td>';
-    	    	  table += '<td>'+ res[i].address +'</td>';
-    	    	  table += '<td>'+ res[i].contactNo +'</td>';
-    	    	  table += '<td><img src="images/delete.jpg" height="35px" width="35px" class="delete"></td></tr>';
-    	      }
-                  table += '</table>';  
-                  $('.getAll')[0].innerHTML = table;
-      })
-	.fail(function(result){
-		alert(result);
-	})
-	
-      
-      
+function customer(){
+	var strVar="";
+	strVar += "<div class=\"cusDiv\">";
+	strVar += "	";
+	strVar += "		<div>";
+	strVar += "			<h2>Add Customer<\/h2>";
+	strVar += "		<\/div>";
+	strVar += "		<input type=\"text\" id=cusId>";
+	strVar += "		<div>";
+	strVar += "			<label>Customer Name*:<\/label>";
+	strVar += "		<\/div>";
+	strVar += "		<div>";
+	strVar += "			<input type=text id=\"cusname\">";
+	strVar += "		<\/div>";
+	strVar += "		";
+	strVar += "		<div>";
+	strVar += "			<label>Address*:<\/label>";
+	strVar += "		<\/div>";
+	strVar += "		<div>";
+	strVar += "			<input type=text id=\"addr\">";
+	strVar += "		<\/div>";
+	strVar += "		<div>";
+	strVar += "			<label>Contact Number*:<\/label>";
+	strVar += "		<\/div>";
+	strVar += "		<div>";
+	strVar += "			<input type=text id=\"conno\">";
+	strVar += "		<\/div>";
+	strVar += "		<div>";
+	strVar += "			<input type=submit value=\"Add\" id=\"add\">";
+	strVar += "			<input type=submit value=\"Update\" id=\"update\">";
+	strVar += "		<\/div>";
+	strVar += "";
+	strVar += "	<\/div>";
+	strVar += "	<div class=\"getAllCus\"><\/div>";
+$('.fin')[0].innerHTML = strVar;
+}
+function account(){
+	var acc="";
+	acc += "<div class=account><\/div>";
+	acc += "<div>";
+	acc += "<h3>AddAccounts<\/h3>";
+	acc += "<\/div>";
+	acc += "<div> ";
+	acc += "<label>Account Id:<\/label>";
+	acc += "<\/div>";
+	acc += "<div>";
+	acc += "<input type=text id=acc>";
+	acc += "<\/div>";
+	acc += "<div> ";
+	acc += "<label>Line:<\/label> ";
+	acc += "<\/div>";
+	acc += "<div>";
+	acc += "<input type=\"text\" id=line>";
+	acc += "<\/div>";
+	acc += "<div>";
+	acc += "<label>Collection Type:<\/label>";
+	acc += "<\/div>";
+	acc += "<div>";
+	acc += "<input type=text id=colltype>";
+	acc += "<\/div>";
+	acc += "<div>";
+	acc += "<label>Amount Given:<\/label>";
+	acc += "<\/div>";
+	acc += "<div>";
+	acc += "<input type=text id=amtgiven>";
+	acc += "<\/div>";
+	acc += "<div>";
+	acc += "<label>Amount To Pay:<\/label>";
+	acc += "<\/div>";
+	acc += "<div>";
+	acc += "<input type=text id=amttopay>";
+	acc += "<\/div>";
+	acc += "<div> ";
+	acc += "<label>Customer Id:<\/label> ";
+	acc += "<\/div>";
+	acc += "<div>";
+	acc += "<input type=text id=cusId>";
+	acc += "<\/div>";
+	acc += "<div>";
+	acc += "<input type=submit value=Add id=sub>";
+	acc += "<input type=submit value=Update id=update>";
+	acc += "<\/div>";
+	acc += "<div class=getAllAccount><\/div>";
+$('.fin')[0].innerHTML = acc;
+}
+function payment(){
+	var pay="";
+	pay += "<div class=pay>";
+	pay += "<div>";
+	pay += "<h3>AddPayment<\/h3>";
+	pay += "<\/div>";
+	pay += "<input type=text id=payId>";
+	pay += "<div> ";
+	pay += "<label>Account Number:<\/label> ";
+	pay += "<\/div>";
+	pay += "<div>";
+	pay += "<input type=\"text\" id=\"accId\">";
+	pay += "<\/div>";
+	pay += "<div>";
+	pay += "<label>Amount:<\/label>";
+	pay += "<\/div>";
+	pay += "<div>";
+	pay += "<input type=\"text\" id=\"amount\">";
+	pay += "<\/div>";
+	pay += "<div>";
+	pay += "<label>Date:<\/label>";
+	pay += "<\/div>";
+	pay += "<div>";
+	pay += "<input type=\"text\" id=\"date\">";
+	pay += "<\/div>";
+	pay += "<div>";
+	pay += "<input type=\"submit\" value=\"add\" id=\"addpay\">";
+	pay += "<input type=\"submit\" value=\"update\" id=\"updatepay\">";
+	pay += "<\/div>";
+	pay += "<\/div>";
+	pay += "<div class=\"getAllPayment\"><\/div>";
+$('.fin')[0].innerHTML = pay;
+}
+function statement(){
+	var sta="";
+	sta += "<div>";
+	sta += "<label>AccountNumber:<\/label>";
+	sta += "<\/div>";
+	sta += "<div>";
+	sta += "<input type=text id=accId>";
+	sta += "<\/div>";
+	sta += "<h4 id=name><\/h4>";
+	sta += "<h4 id=bal><\/h4>";
+	sta += "<div class=getStatement><\/div>";
+$('.fin')[0].innerHTML = sta;
 }

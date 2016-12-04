@@ -148,15 +148,17 @@ public class Account extends HttpServlet {
 					obj.put("cusName", rs.getString("cusName"));
 					Balance = rs.getInt("amountToPay");
 					obj.put("AmountToPay", Balance);
+					array.put(obj);
 				}
 				Class.forName("com.mysql.jdbc.Driver");
 				Statement stm = conn.createStatement();
-				String qu = "Select amount from Payment where accId="+ accId;
+				String qu = "Select amount,date from Payment where accId="+ accId;
 				ResultSet res = stm.executeQuery(qu);
 				while(res.next()){
 					JSONObject ob = new JSONObject();
 					int payment = res.getInt("amount");
 				    Balance = Balance - payment;
+				    ob.put("Date", res.getString("date"));
 					ob.put("pay", payment);
 					ob.put("Bal", Balance);
 					array.put(ob);
@@ -165,7 +167,6 @@ public class Account extends HttpServlet {
 				obj.put("status", "Failure");
 				e.printStackTrace();
 			}
-			response.getWriter().print(obj);
 			response.getWriter().print(array);
 		     
 		}
