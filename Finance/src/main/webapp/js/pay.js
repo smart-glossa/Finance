@@ -131,5 +131,58 @@ $(document).on('keyup','#payId',function(){
 			.fail(function(result){
 			  alert(result);
 			})
+	}else{
+		$('#accId').val("");
+		$('#amount').val("");
+		$('#date').val("");
 	}
+}).on('keypress','#payId',function(key){
+	if (key.which == 13){
+		$('#accId').focus();
+	}
+}).on('keypress','#accId',function(key){
+	if (key.which == 13){
+		$('#amount').focus();
+	}
+}).on('keypress','#amount',function(key){
+	if (key.which == 13){
+		$('#date').focus();
+	}
+}).on('keypress','#date',function(key){
+	if (key.which == 13){
+		$('#addpay').click();
+	}
+}).on('keypress','#payId,#accId,#amount',function(e){
+	if (e.which != 8 && e.which != 0 && e.which != 191 && (e.which < 48 || e.which > 57)) {
+        //display error message
+        $("#msg").html("Numbers Only").show().fadeOut(3000);
+               return false;
+    }
+}).on('keypress','#date',function(e){
+	var leng = $(this).val().length;
+
+    if (window.event) {
+      code = e.keyCode;
+    }else {
+      code = e.which;
+    };
+
+    var allowedCharacters = [49,50,51,52,53,54,55,56,57,48,45];
+    var isValidInput = false;
+
+    for (var i = allowedCharacters.length - 1; i >= 0; i--) {
+      if(allowedCharacters[i] == code){
+        isValidInput = true;
+      } 
+    };
+
+    if(isValidInput === false || /* Can only input 1,2,3,4,5,6,7,8,9 or - */
+     (code == 45 && (leng < 2 || leng > 5 || leng == 3 || leng == 4)) ||
+     ((leng == 2 || leng == 5) && code !== 45) || /* only can hit a - for 3rd pos. */
+      leng == 10 ) /* only want 10 characters "12-45-7890" */
+    {
+
+      event.preventDefault();
+      return;
+    }
 })

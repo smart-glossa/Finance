@@ -20,3 +20,14 @@ li  {
 li:hover {
     background-color: #03a9f4;
 }
+ input[type="text"] {
+  padding: 10px;
+  border: solid 1px #fff;
+  box-shadow: inset 1px 1px 2px 0 #707070;
+  transition: box-shadow 0.3s;
+  font-size:20;
+  outline-color:blue;
+}
+#msg{
+	color:red;
+}

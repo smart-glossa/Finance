@@ -78,6 +78,22 @@ $(document).on('click','#update',function(){
 	var cname = $('#cusname').val();
 	var add = $('#addr').val();
 	var cno = $('#conno').val();
+	if(cusId === ""){
+		$('#cusId').focus().css('outline-color','red');
+		return;
+	}
+	if(cname === ""){
+		$('#cusname').focus().css('outline-color','red');
+		return;
+	}
+	if(add === ""){
+		$('#addr').focus().css('outline-color','red');
+		return;
+	}
+	if(cno === ""){
+		$('conno').focus().css('outline-color','red');
+		return;
+	}
 	var url = "/Finance/finance?operation=updateCustomer&cusId=" + cusId +"&cname=" + cname+"&add=" + add +"&cno=" + cno ; 
 	$.ajax({
 		url:url,
@@ -85,6 +101,10 @@ $(document).on('click','#update',function(){
 	})
 	.done(function(result){
 		getAllCustomer();
+		$('#cusId').val("");
+		$('#cusname').val("");
+		$('#addr').val("");
+		$('#conno').val("");
 	})
 	.fail(function(result){
 		alert(result);
@@ -116,6 +136,52 @@ function getAllCustomer(){
 		alert(result);
 	})
 }
+$(document).on('keypress','#cusId',function(key){
+	if(key.which == 13){
+		$('#cusname').focus();
+	}
+})
+$(document).on('keypress','#cusname',function(key){
+	if(key.which == 13){
+		$('#addr').focus();
+	}
+	if(key.which == 38){
+		$('#cusId').focus();
+	}
+})
+$(document).on('keypress','#addr',function(key){
+	if(key.which == 13){
+		$('#conno').focus();
+	}
+	if(key.which == 38){
+		$('#cusname').focus();
+	}
+})
+$(document).on('keypress','#conno',function(key){
+	var div = $(this).parent();
+	if(key.which == 13){
+		$('#add').click();
+	}
+	else if(key.which == 38){
+		div.prev().children('#addr').focus();
+	}
+})
+$(document).on('keypress','#cusId,#conno',function(e){
+	if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+        //display error message
+        $("#msg").html("Numbers Only").show().fadeOut(3000);
+               return false;
+    }
+
+}).on('keypress','#cusname,#addr',function(event){
+	var inputValue = event.which;
+    // allow letters and whitespaces only.
+    if(!(inputValue >= 65 && inputValue <= 120) && (inputValue != 32 && inputValue != 0 && inputValue != 13)) { 
+        $("#msg").html("Alphabets only").show().fadeOut(3000);
+        event.preventDefault(); 
+    }
+})
+
 
 
 
