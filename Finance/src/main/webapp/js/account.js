@@ -2,8 +2,8 @@ $(document).ready(function(){
 $(document).on('click','#sub',function(){
 	var line = $("#line").val();
 	var cType = $("#colltype").val();
-	var amtGiven = $("#amtgiven").val();
-	var amttopay = $("#amttopay").val();
+	var amtGiven = parseInt($("#amtgiven").val());
+	var amttopay = parseInt($("#amttopay").val());
 	var cusId = $("#cusId").val();
 	if(line ===""){
 		$("#line").focus().css("outline-color","Red");
@@ -72,6 +72,11 @@ $(document).on('click','#update',function(){
 	}
 	if(cusId ===""){
 		$("#cusId").focus().css("outline-color","Red");
+		return false;
+	}
+	if(amttopay<amtGiven){
+		$("#amttopay").focus().css("outline-color","Red");
+		$("#msg").html("AmountToPay should be greater than AmountGiven").show().fadeOut(3000);
 		return false;
 	}
 	var url = "/Finance/account?operation=updateAccount&accId="+ accId +"&cusId="+ cusId +"&line="+ line +"&collType="+ cType +"&amountGiven="+ amtGiven +"&amountToPay="+amttopay;
@@ -227,7 +232,7 @@ $(document).on('click','.delete',function(){
 		$('#sub').click();
 	}
 }).on('keypress','#acc,#amtgiven,#amttopay,#cusId,#accId',function(e){
-	if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+	if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57) && e.which != 13) {
         //display error message
         $("#msg").html("Numbers Only").show().fadeOut(3000);
                return false;

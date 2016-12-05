@@ -1,11 +1,6 @@
 package com.smartglossa.Finance;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -31,37 +26,20 @@ public class FinanceServlet extends HttpServlet {
 			String addr = request.getParameter("add");
 			String conNo = request.getParameter("cno");
 			try {
-				Class.forName("com.mysql.jdbc.Driver");
-				Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/finance", "root", "root");
-				Statement stmt = conn.createStatement();
-				String query = "Insert into customer(cusName,address,contactNo) values('"+ cusName +"','"+ addr +"','"+ conNo +"')";
-				stmt.execute(query);
+				FinanceClass cus = new FinanceClass();
+				cus.addCustomer(cusName, addr, conNo);
 				obj.put("status", "success");
 			} catch (Exception e) {
-				obj.put("status", "Failure");
 				e.printStackTrace();
+				obj.put("status", "success");
 			}
 			response.getWriter().print(obj);
 		}else if(op.equals("getAllCustomer")){
 			JSONArray result = new JSONArray();
-			
 			try {
-				Class.forName("com.mysql.jdbc.Driver");
-				Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/finance", "root", "root");
-				Statement stmt = conn.createStatement();
-				String query = "select * from customer";
-				ResultSet set = stmt.executeQuery(query);
-				while(set.next()){
-					JSONObject obj = new JSONObject();
-					obj.put("cusId" ,set.getInt("cusId"));
-					obj.put("cusName",set.getString("cusName"));
-					obj.put("address",set.getString("address"));
-					obj.put("contactNo",set.getString("contactNo"));
-					result.put(obj);
-				}
-				
+				FinanceClass cus = new FinanceClass();
+				result = cus.getAllCustomer();
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			response.getWriter().print(result);
@@ -73,11 +51,8 @@ public class FinanceServlet extends HttpServlet {
 			String addr = request.getParameter("add");
 			String conNo = request.getParameter("cno");
 			try {
-				Class.forName("com.mysql.jdbc.Driver");
-				Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/finance", "root", "root");
-				Statement stmt = conn.createStatement();
-				String query = "update customer set cusName='"+ cusName +"',address='"+ addr +"',contactNo='"+ conNo +"'where cusId="+ cusId;
-				stmt.execute(query);
+				FinanceClass cus = new FinanceClass();
+				cus.updateCustomer(cusId, cusName, addr, conNo);
 				obj.put("status", "success");
 				
 			} catch (Exception e) {
@@ -90,18 +65,9 @@ public class FinanceServlet extends HttpServlet {
 			JSONObject obj = new JSONObject();
 			int cusId = Integer.parseInt(request.getParameter("cusId"));
 			try {
-				Class.forName("com.mysql.jdbc.Driver");
-				Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/finance", "root", "root");
-				Statement stmt = conn.createStatement();
-				String query = "select * from customer where cusId="+ cusId;
-				ResultSet set = stmt.executeQuery(query);
-				if(set.next()){
-					obj.put("cusId" ,set.getInt("cusId"));
-					obj.put("cusName",set.getString("cusName"));
-					obj.put("address",set.getString("address"));
-					obj.put("contactNo",set.getString("contactNo"));
-					
-				}
+				FinanceClass cus = new FinanceClass();
+				obj = cus.getOneCustomer(cusId);
+				
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -110,11 +76,8 @@ public class FinanceServlet extends HttpServlet {
 			JSONObject obj = new JSONObject();
 			int cusId = Integer.parseInt(request.getParameter("cusId"));
 			try {
-				Class.forName("com.mysql.jdbc.Driver");
-				Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/finance", "root", "root");
-				Statement stmt = conn.createStatement();
-				String query = "delete from customer where cusId="+ cusId;
-				stmt.execute(query);
+				FinanceClass cus = new FinanceClass();
+				cus.deleteCustomer(cusId);
 				obj.put("status", "success");
 				} catch (Exception e) {
 					obj.put("status","Failure");

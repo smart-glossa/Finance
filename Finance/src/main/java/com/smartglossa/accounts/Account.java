@@ -1,10 +1,7 @@
 package com.smartglossa.accounts;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -38,12 +35,8 @@ public class Account extends HttpServlet {
 			String amountGiven = request.getParameter("amountGiven");
 			String amountToPay = request.getParameter("amountToPay");
 			try {
-				Class.forName("com.mysql.jdbc.Driver");
-				Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/finance", "root", "root");
-				Statement stmt = conn.createStatement();
-				String query = "insert into Accounts(cusId,line,amountGiven,amountToPay,collType) values(" + cusId
-						+ ",'" + line + "','" + amountGiven + "','" + amountToPay + "','" + collType + "')";
-				stmt.execute(query);
+				AccountClass acc = new AccountClass();
+				acc.addAccount(cusId, line, collType, amountGiven, amountToPay);
 				obj.put("status", "success");
 			} catch (Exception e) {
 				obj.put("status", "failure");
@@ -59,11 +52,8 @@ public class Account extends HttpServlet {
 			String amountGiven = request.getParameter("amountGiven");
 			String amountToPay = request.getParameter("amountToPay");
 			try {
-				Class.forName("com.mysql.jdbc.Driver");
-				Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/finance", "root", "root");
-				Statement stmt = conn.createStatement();
-				String query = "update Accounts set cusId='" + cusId + "',line='" + line + "',amountGiven='" + amountGiven + "',amountToPay='" + amountToPay + "',collType='" + collType + "'where accId ="+ accId;
-				stmt.execute(query);
+				AccountClass acc = new AccountClass();
+				acc.updateAccount(accId, cusId, line, collType, amountGiven, amountToPay);
 				obj.put("status", "success");
 			} catch (Exception e) {
 				obj.put("status", "failure");
@@ -75,20 +65,8 @@ public class Account extends HttpServlet {
 			JSONObject obj = new JSONObject();
 			int accId = Integer.parseInt(request.getParameter("accId"));
 			try {
-				Class.forName("com.mysql.jdbc.Driver");
-				Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/finance", "root", "root");
-				Statement stmt = conn.createStatement();
-				String query = "select * from Accounts where accId=" + accId;
-				ResultSet set = stmt.executeQuery(query);
-				if (set.next()) {
-					obj.put("accId", set.getInt("accId"));
-					obj.put("line", set.getString("line"));
-					obj.put("collType", set.getString("collType"));
-					obj.put("amountGiven", set.getString("amountGiven"));
-					obj.put("amountToPay", set.getString("amountToPay"));
-					obj.put("cusId", set.getInt("cusId"));
-
-				}
+				AccountClass acc = new AccountClass();
+				obj = acc.getOneAccount(accId);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -97,78 +75,41 @@ public class Account extends HttpServlet {
 			JSONObject obj = new JSONObject();
 			int accId = Integer.parseInt(request.getParameter("accId"));
 			try {
-				Class.forName("com.mysql.jdbc.Driver");
-				Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/finance", "root", "root");
-				Statement stmt = conn.createStatement();
-				String query = "delete from Accounts where accId=" + accId;
-				stmt.execute(query);
+				AccountClass acc = new AccountClass();
+				acc.deleteAccount(accId);
 				obj.put("status", "success");
 			} catch (Exception e) {
 				obj.put("status", "Failure");
 				e.printStackTrace();
 			}
 			response.getWriter().print(obj);
-		}else if(operation.equals("getAllAccount")){
+		} else if (operation.equals("getAllAccount")) {
 			JSONArray result = new JSONArray();
 			try {
-				Class.forName("com.mysql.jdbc.Driver");
-				Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/finance", "root", "root");
-				Statement stmt = conn.createStatement();
-				String query = "Select *from Accounts";
-				ResultSet rs = stmt.executeQuery(query);
-				while(rs.next()){
-					JSONObject obj = new JSONObject();
-					obj.put("accId", rs.getInt("accId"));
-					obj.put("line", rs.getString("line"));
-					obj.put("collType", rs.getString("collType"));
-					obj.put("amountGiven", rs.getString("amountGiven"));
-					obj.put("amountToPay", rs.getString("amountToPay"));
-					obj.put("cusId", rs.getInt("cusId"));
-					result.put(obj);
-
-				}
+				AccountClass acc = new AccountClass();
+				result = acc.getAllAccount();
 			} catch (Exception e) {
 				JSONObject obj = new JSONObject();
 				obj.put("status", "failure");
-				result.put(obj);				e.printStackTrace();
+				result.put(obj);
+				e.printStackTrace();
 			}
 			response.getWriter().print(result);
-		}else if(operation.equals("getStatement")){
+		} else if (operation.equals("getStatement")) {
 			JSONObject obj = new JSONObject();
 			JSONArray array = new JSONArray();
 			int accId = Integer.parseInt(request.getParameter("accId"));
-			int Balance = 0;
+
 			try {
-				Class.forName("com.mysql.jdbc.Driver");
-				Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/finance", "root", "root");
-				Statement stmt = conn.createStatement();
-				String query = "Select Accounts.amountToPay,customer.cusName from Accounts,customer where accId="+ accId;
-				ResultSet rs = stmt.executeQuery(query);
-				if(rs.next()){
-					obj.put("cusName", rs.getString("cusName"));
-					Balance = rs.getInt("amountToPay");
-					obj.put("AmountToPay", Balance);
-					array.put(obj);
-				}
-				Class.forName("com.mysql.jdbc.Driver");
-				Statement stm = conn.createStatement();
-				String qu = "Select amount,date from Payment where accId="+ accId;
-				ResultSet res = stm.executeQuery(qu);
-				while(res.next()){
-					JSONObject ob = new JSONObject();
-					int payment = res.getInt("amount");
-				    Balance = Balance - payment;
-				    ob.put("Date", res.getString("date"));
-					ob.put("pay", payment);
-					ob.put("Bal", Balance);
-					array.put(ob);
-				}
+				AccountClass acc = new AccountClass();
+				array = acc.getStatement(accId);
+
 			} catch (Exception e) {
 				obj.put("status", "Failure");
 				e.printStackTrace();
 			}
 			response.getWriter().print(array);
-		     
+
 		}
 
 	}
