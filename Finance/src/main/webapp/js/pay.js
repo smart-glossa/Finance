@@ -81,7 +81,11 @@ $(document).on('click','#updatepay',function(){
 		return;
 	}
 	
-	var url = "/Finance/payment?operation=updatePayment&payId=" + payId +"&accId=" + accId +"&amount=" + amount +"&date=" + date ; 
+	var url = "/Finance/payment?operation=updatePayment&payId=" + payId +"&accId=" + accId +"&amount=" + amount +"&date=" + date;
+	var accId = $('#accId').val();
+	var amount = $('#amount').val();
+	var date = $('date').val();
+	var url = "/Finance/payment?operation=updatePayment&payId=" + payId +"&accId=" + accId+"&amount=" + amount +"&date=" + date ; 
 	$.ajax({
 		url:url,
 		type:'POST'
@@ -101,6 +105,7 @@ $(document).on('click','.delete',function(){
 	var td = $(this).parent();
 	var tr = td.parent();
 	var payId = tr.children()[0].innerHTML;
+	var cusId = tr.children()[0].innerHTML;
 	var url = "/Finance/payment?operation=deletePayment&payId="+ payId;
 	$.ajax({
 		url:url,
