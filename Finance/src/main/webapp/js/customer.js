@@ -23,6 +23,11 @@ $(document).on('click','#add',function(){
     	$("#msg").html("Enter Contact Number as correct format").show().fadeOut(3000)
     	return false;
     }
+    if (cno.charAt(0)!="7" && cno.charAt(0)!="8" && cno.charAt(0)!="9"){
+		$('#conno').focus().css('outline-color','red');
+    	$("#msg").html("Enter Contact Number as correct format").show().fadeOut(3000);
+	    return false
+	}
 	$.ajax({
 		url:url,
 		type:'POST'
@@ -101,9 +106,14 @@ $(document).on('click','#updateCus',function(){
 	}
 	if(cno.length !=10){
     	$('#conno').focus().css('outline-color','red');
-    	$("#msg").html("Enter Contact Number as correct format").show().fadeOut(3000)
+    	$("#msg").html("Enter Contact Number as correct format").show().fadeOut(3000);
     	return false;
     }
+	if (cno.charAt(0)!="7" && cno.charAt(0)!="8" && cno.charAt(0)!="9"){
+		$('#conno').focus().css('outline-color','red');
+    	$("#msg").html("Enter Contact Number as correct format").show().fadeOut(3000);
+	    return false
+	}
 	var url = "/Finance/finance?operation=updateCustomer&cusId=" + cusId +"&cname=" + cname+"&add=" + add +"&cno=" + cno ; 
 	$.ajax({
 		url:url,
