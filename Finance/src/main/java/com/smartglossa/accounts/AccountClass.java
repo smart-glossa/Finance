@@ -2,7 +2,6 @@ package com.smartglossa.accounts;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -14,7 +13,6 @@ public class AccountClass {
 	Connection conn = null;
 	Statement stmt = null;
 	ResultSet rs = null;
-	PreparedStatement ps = null;
 	
 	public AccountClass() throws ClassNotFoundException, SQLException {
 		openConnection();
@@ -129,9 +127,6 @@ public class AccountClass {
 		}
 		if (stmt != null) {
 			stmt.close();
-		}
-		if (ps != null) {
-			ps.close();
 		}
 		if (rs != null) {
 			rs.close();
