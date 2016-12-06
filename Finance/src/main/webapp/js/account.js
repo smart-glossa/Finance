@@ -2,9 +2,11 @@ $(document).ready(function(){
 $(document).on('click','#sub',function(){
 	var line = $("#line").val();
 	var cType = $("#colltype").val();
-	var amtGiven = parseInt($("#amtgiven").val());
-	var amttopay = parseInt($("#amttopay").val());
-	var cusId = $("#cusId").val();
+	var amtGiven = $("#amtgiven").val();
+	var amttopay = $("#amttopay").val();
+	var cusId = $("#cusId").val(); 
+	var amtG = parseInt(amtGiven);
+	var amtP = parseInt(amttopay);
 	if(line ===""){
 		$("#line").focus().css("outline-color","Red");
 		return false;
@@ -25,6 +27,11 @@ $(document).on('click','#sub',function(){
 		$("#cusId").focus().css("outline-color","Red");
 		return false;
 	}
+	if(amtG>=amtP){
+		$("#amttopay").focus().css("outline-color","Red");
+		$("#msg").html("AmountToPay should be greater than AmountGiven").show().fadeOut(3000);
+		return false;
+	}
 	var url =" http://localhost:8080/Finance/account?operation=addAccounts&line="+ line +"&collType="+cType+"&amountGiven="+amtGiven+"&amountToPay="+amttopay+"&cusId="+cusId ;
 	$.ajax({
 		url:url,
@@ -43,13 +50,15 @@ $(document).on('click','#sub',function(){
 	})
 });
 });
-$(document).on('click','#update',function(){
+$(document).on('click','#updateAcc',function(){
 	var accId = $('#acc').val();
 	var line = $('#line').val();
 	var cType = $('#colltype').val();
 	var amtGiven = $('#amtgiven').val();
 	var amttopay = $('#amttopay').val();
 	var cusId = $('#cusId').val();
+	var amtG = parseInt(amtGiven);
+	var amtP = parseInt(amttopay);
 	if(accId ===""){
 		$("#acc").focus().css("outline-color","red");
 		return false;
@@ -74,7 +83,7 @@ $(document).on('click','#update',function(){
 		$("#cusId").focus().css("outline-color","Red");
 		return false;
 	}
-	if(amttopay<amtGiven){
+	if(amtG>=amtP){
 		$("#amttopay").focus().css("outline-color","Red");
 		$("#msg").html("AmountToPay should be greater than AmountGiven").show().fadeOut(3000);
 		return false;

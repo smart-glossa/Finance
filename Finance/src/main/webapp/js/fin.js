@@ -27,7 +27,7 @@ function customer(){
 	strVar += "		<\/div>";
 	strVar += "		<div>";
 	strVar += "			<input type=submit value=\"Add\" id=\"add\">";
-	strVar += "			<input type=submit value=\"Update\" id=\"update\">";
+	strVar += "			<input type=submit value=\"Update\" id=\"updateCus\">";
 	strVar += "		<\/div>";
 	strVar += "";
 	strVar += "	<\/div>";
@@ -78,7 +78,7 @@ function account(){
 	acc += "<\/div>";
 	acc += "<div>";
 	acc += "<input type=submit value=Add id=sub>";
-	acc += "<input type=submit value=Update id=update>";
+	acc += "<input type=submit value=Update id=updateAcc>";
 	acc += "<\/div>";
 	acc += "<div class=getAllAccount><\/div>";
 $('.fin')[0].innerHTML = acc;

@@ -82,10 +82,6 @@ $(document).on('click','#updatepay',function(){
 	}
 	
 	var url = "/Finance/payment?operation=updatePayment&payId=" + payId +"&accId=" + accId +"&amount=" + amount +"&date=" + date;
-	var accId = $('#accId').val();
-	var amount = $('#amount').val();
-	var date = $('date').val();
-	var url = "/Finance/payment?operation=updatePayment&payId=" + payId +"&accId=" + accId+"&amount=" + amount +"&date=" + date ; 
 	$.ajax({
 		url:url,
 		type:'POST'
