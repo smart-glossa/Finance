@@ -18,7 +18,7 @@ Database:
   PRIMARY KEY (`accId`),
   KEY `cusId` (`cusId`),
   CONSTRAINT `Accounts_ibfk_1` FOREIGN KEY (`cusId`) REFERENCES `customer` (`cusId`)
-) ENGINE=InnoDB auto-increment=10001 DEFAULT CHARSET=latin1 |
+) ENGINE=InnoDB auto_increment=10001 DEFAULT CHARSET=latin1 |
 
 3.Payment :CREATE TABLE `Payment` (
   `payId` int(11) NOT NULL auto_increment,
