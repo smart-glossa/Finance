@@ -1,6 +1,6 @@
 function customer(){
 	var strVar="";
-	strVar += "<div class=\"cusDiv\">";
+	strVar += "<div class=\"cus\">";
 	strVar += "";
 	strVar += "		<div>";
 	strVar += "			<h2>Add Customer<\/h2>";
@@ -23,7 +23,7 @@ function customer(){
 	strVar += "			<label>Contact Number*:<\/label>";
 	strVar += "		<\/div>";
 	strVar += "		<div>";
-	strVar += "			<input type=text id=\"conno\" placeholder=\"Mobile Number\">";
+	strVar += "			<input type=text id=\"conno\" placeholder=\"Mobile Number\" maxlength=\"10\">";
 	strVar += "		<\/div>";
 	strVar += "		<div>";
 	strVar += "			<input type=submit value=\"Add\" id=\"add\">";

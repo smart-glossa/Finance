@@ -42,6 +42,7 @@ $(document).on('click','#add',function(){
 	.fail(function(result){
 		alert(result);
 	})
+	
 });
 $(document).on('click','.delete',function(){
 	var td = $(this).parent();

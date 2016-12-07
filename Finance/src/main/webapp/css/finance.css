@@ -32,3 +32,13 @@ li:hover {
 #msg{
 	color:red;
 }
+.getAllCus,.getAllAccount,.getAllPayment{
+	float:right;
+}
+.cus,.account,.pay{
+	width:250px;
+	float:left;
+	position:absolute;
+	z-index:100;
+	
+}
