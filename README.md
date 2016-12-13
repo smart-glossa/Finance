@@ -1,31 +1,46 @@
 Database:
 
-1.customer :CREATE TABLE `customer` (
-  `cusId` int(11) NOT NULL auto_increment,
-  `cusName` varchar(50) DEFAULT NULL,
-  `address` varchar(100) DEFAULT NULL,
-  `contactNo` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`cusId`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 |
+1.user  | CREATE TABLE `user` (
+  `userId` int(11) NOT NULL AUTO_INCREMENT,
+  `userName` varchar(50) DEFAULT NULL,
+  `password` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`userId`)
+) 
 
-2.Accounts :CREATE TABLE `Accounts` (
-  `accId` int(11) NOT NULL auto_increment,
+2. customer | CREATE TABLE `customer` (
+  `cusId` int(11) NOT NULL,
+  `cusName` varchar(50) DEFAULT NULL,
+  `address` varchar(50) DEFAULT NULL,
+  `phoneNo` varchar(50) DEFAULT NULL,
+  `Landline` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`cusId`)
+) 
+3.customerAccount | CREATE TABLE `customerAccount` (
   `cusId` int(11) DEFAULT NULL,
+  `accNo` int(11) NOT NULL,
+  PRIMARY KEY (`accNo`),
+  KEY `cusId` (`cusId`),
+  CONSTRAINT `customerAccount_ibfk_1` FOREIGN KEY (`cusId`) REFERENCES `customer` (`cusId`)
+)
+
+4.accounts | CREATE TABLE `accounts` (
+  `accId` int(11) NOT NULL AUTO_INCREMENT,
+  `accNo` int(11) DEFAULT NULL,
   `line` varchar(50) DEFAULT NULL,
+  `duration` varchar(50) DEFAULT NULL,
+  `modeOfPayment` varchar(50) DEFAULT NULL,
   `amountGiven` varchar(50) DEFAULT NULL,
   `amountToPay` varchar(50) DEFAULT NULL,
-  `collType` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`accId`),
-  KEY `cusId` (`cusId`),
-  CONSTRAINT `Accounts_ibfk_1` FOREIGN KEY (`cusId`) REFERENCES `customer` (`cusId`)
-) ENGINE=InnoDB auto_increment=10001 DEFAULT CHARSET=latin1 |
-
-3.Payment :CREATE TABLE `Payment` (
-  `payId` int(11) NOT NULL auto_increment,
-  `accId` int(11) DEFAULT NULL,
-  `amount` varchar(100) DEFAULT NULL,
   `date` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`payId`),
+  PRIMARY KEY (`accId`),
+  KEY `accNo` (`accNo`),
+  CONSTRAINT `accounts_ibfk_1` FOREIGN KEY (`accNo`) REFERENCES `customerAccount` (`accNo`)
+)
+
+5.payment | CREATE TABLE `payment` (
+  `payment` varchar(100) DEFAULT NULL,
+  `accId` int(11) DEFAULT NULL,
+  `paydate` varchar(50) DEFAULT NULL,
   KEY `accId` (`accId`),
-  CONSTRAINT `Payment_ibfk_1` FOREIGN KEY (`accId`) REFERENCES `Accounts` (`accId`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 |
+  CONSTRAINT `payment_ibfk_1` FOREIGN KEY (`accId`) REFERENCES `accounts` (`accId`)
+)
