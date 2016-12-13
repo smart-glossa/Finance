@@ -253,7 +253,6 @@ function previewStatement() {
     printWindow.document.close();
     printWindow.focus();
 }
-
 function getStatement() {
     var htmlFile = "";
     htmlFile += '<html><head><title>RECEIPT</title>';

@@ -10,7 +10,7 @@ function customer(){
 	strVar += "			<label>Customer Name*:<\/label>";
 	strVar += "		<\/div>";
 	strVar += "		<div>";
-	strVar += "			<input type=text id=\"cusname\" placeholder=\"Name\">";
+	strVar += "			<input type=text id=\"cusname\" placeholder=\"Name\"height:\">";
 	strVar += "		<\/div>";
 	strVar += "		";
 	strVar += "		<div>";
@@ -26,7 +26,7 @@ function customer(){
 	strVar += "			<input type=text id=\"conno\" placeholder=\"Mobile Number\" maxlength=\"10\">";
 	strVar += "		<\/div>";
 	strVar += "		<div>";
-	strVar += "			<input type=submit value=\"Add\" id=\"add\">";
+	strVar += "			<input type=submit value=\"Add\" id=\"add\" a href=\"account()\">";
 	strVar += "			<input type=submit value=\"Update\" id=\"updateCus\">";
 	strVar += "		<\/div>";
 	strVar += "";
@@ -36,7 +36,7 @@ $('.fin')[0].innerHTML = strVar;
 }
 function account(){
 	var acc="";
-	acc += "<div class=account><\/div>";
+	acc += "<div class=\"account\">";
 	acc += "<div>";
 	acc += "<h3>AddAccounts<\/h3>";
 	acc += "<\/div>";
@@ -128,6 +128,7 @@ $('.fin')[0].innerHTML = pay;
 }
 function statement(){
 	var sta="";
+	sta += "<div class=sta>";
 	sta += "<div>";
 	sta += "<label>AccountNumber:<\/label>";
 	sta += "<\/div>";
@@ -138,5 +139,6 @@ function statement(){
 	sta += "<h4 id=bal><\/h4>";
 	sta += "<div class=getStatement><\/div>";
 	sta += "<input type=button id=print value=Print onclick=previewStatement()>";
-$('.fin')[0].innerHTML = sta;
+	sta += "<\/div>";
+	$('.fin')[0].innerHTML = sta;
 }

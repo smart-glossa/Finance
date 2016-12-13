@@ -151,9 +151,9 @@ function getAllCustomer(){
     	    	  table += '<td>'+ res[i].contactNo +'</td>';
     	    	  table += '<td><img src="images/delete.jpg" height="35px" width="35px" class="delete"></td></tr>';
     	      }
-                  table += '</table>';  
+                  table += '</table>'; 
                   $('.getAllCus')[0].innerHTML = table;
-      })
+                  })
 	.fail(function(result){
 		alert(result);
 	})

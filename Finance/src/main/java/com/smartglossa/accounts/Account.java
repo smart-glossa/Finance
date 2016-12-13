@@ -13,7 +13,6 @@ import org.json.JSONObject;
 
 public class Account extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
 	public Account() {
 		super();
 	}
