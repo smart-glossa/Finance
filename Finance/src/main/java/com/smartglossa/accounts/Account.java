@@ -28,14 +28,16 @@ public class Account extends HttpServlet {
 		String operation = request.getParameter("operation");
 		if (operation.equals("addAccounts")) {
 			JSONObject obj = new JSONObject();
-			int cusId = Integer.parseInt(request.getParameter("cusId"));
+			int accNo = Integer.parseInt(request.getParameter("accNo"));
 			String line = request.getParameter("line");
-			String collType = request.getParameter("collType");
+			String duration = request.getParameter("duration");
+			String modeOfPayment = request.getParameter("modeOfPayment");
 			String amountGiven = request.getParameter("amountGiven");
 			String amountToPay = request.getParameter("amountToPay");
+			String paydate = request.getParameter("paydate");
 			try {
 				AccountClass acc = new AccountClass();
-				acc.addAccount(cusId, line, collType, amountGiven, amountToPay);
+				acc.addAccount(accNo, line, duration,modeOfPayment, amountGiven, amountToPay,paydate);
 				obj.put("status", "success");
 			} catch (Exception e) {
 				obj.put("status", "failure");
@@ -45,14 +47,16 @@ public class Account extends HttpServlet {
 		} else if (operation.equals("updateAccount")) {
 			JSONObject obj = new JSONObject();
 			int accId = Integer.parseInt(request.getParameter("accId"));
-			int cusId = Integer.parseInt(request.getParameter("cusId"));
+			int accNo = Integer.parseInt(request.getParameter("accNo"));
 			String line = request.getParameter("line");
-			String collType = request.getParameter("collType");
+			String duration = request.getParameter("duration");
+			String modeOfPayment = request.getParameter("modeOfPayment");
 			String amountGiven = request.getParameter("amountGiven");
 			String amountToPay = request.getParameter("amountToPay");
+			String paydate = request.getParameter("paydate");
 			try {
 				AccountClass acc = new AccountClass();
-				acc.updateAccount(accId, cusId, line, collType, amountGiven, amountToPay);
+				acc.updateAccount(accId, accNo, line, duration,modeOfPayment, amountGiven, amountToPay,paydate);
 				obj.put("status", "success");
 			} catch (Exception e) {
 				obj.put("status", "failure");
@@ -94,7 +98,7 @@ public class Account extends HttpServlet {
 				e.printStackTrace();
 			}
 			response.getWriter().print(result);
-		} else if (operation.equals("getStatement")) {
+		} /*else if (operation.equals("getStatement")) {
 			JSONObject obj = new JSONObject();
 			JSONArray array = new JSONArray();
 			int accId = Integer.parseInt(request.getParameter("accId"));
@@ -109,7 +113,7 @@ public class Account extends HttpServlet {
 			}
 			response.getWriter().print(array);
 
-		}
+		}*/
 
 	}
 }
