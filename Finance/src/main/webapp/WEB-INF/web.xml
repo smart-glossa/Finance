@@ -22,6 +22,27 @@
     	<servlet-name>PaymentServlet</servlet-name>
     	<servlet-class>com.smartglossa.payment.PaymentServlet</servlet-class>
     </servlet>
+    <servlet>
+    	<description>
+    	</description>
+    	<display-name>AccountServlet</display-name>
+    	<servlet-name>AccountServlet</servlet-name>
+    	<servlet-class>accountServlet.AccountServlet</servlet-class>
+    </servlet>
+    <servlet>
+    	<description>
+    	</description>
+    	<display-name>UserServlet</display-name>
+    	<servlet-name>UserServlet</servlet-name>
+    	<servlet-class>com.smartglossa.user.UserServlet</servlet-class>
+    </servlet>
+    <servlet>
+    	<description>
+    	</description>
+    	<display-name>CustomerAccount</display-name>
+    	<servlet-name>CustomerAccount</servlet-name>
+    	<servlet-class>com.smartglossa.customer.CustomerAccount</servlet-class>
+    </servlet>
     <servlet-mapping>
     	<servlet-name>FinanceServlet</servlet-name>
     	<url-pattern>/finance</url-pattern>
@@ -34,6 +55,19 @@
     	<servlet-name>PaymentServlet</servlet-name>
     	<url-pattern>/payment</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>AccountServlet</servlet-name>
+    	<url-pattern>/Account</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>UserServlet</servlet-name>
+    	<url-pattern>/UserServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>CustomerAccount</servlet-name>
+    	<url-pattern>/CustomerAccount</url-pattern>
+    </servlet-mapping>
+   
     <session-config>
         <session-timeout>
             30
