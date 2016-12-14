@@ -17,18 +17,18 @@ public class AccountClass {
 	public AccountClass() throws ClassNotFoundException, SQLException {
 		openConnection();
 	}
-	public void addAccount(int cusId,String line, String collType, String amountGiven, String amountToPay) throws SQLException{
+	public void addAccount(int accNo,String line,String duration, String modeOfPayment, String amountGiven, String amountToPay,String paydate) throws SQLException{
 		try{
-			String query = "insert into Accounts(cusId,line,amountGiven,amountToPay,collType) values(" + cusId
-					+ ",'" + line + "','" + amountGiven + "','" + amountToPay + "','" + collType + "')";
+			String query = "insert into Accounts(accNo,line,duration,modeOfPayment,amountGiven,amountToPay,paydate) values(" + accNo
+					+ ",'" + line + "','" +duration+ "','" +modeOfPayment+"','" + amountGiven + "','" + amountToPay + "','" +paydate+ "')";
 			stmt.execute(query);
 		}finally{
 			closeConnection();
 		}
 	}
-	public void updateAccount(int accId, int cusId, String line, String collType, String amountGiven, String amountToPay) throws SQLException{
+	public void updateAccount(int accId,int accNo, String line,String duration,String modeOfPayment, String amountGiven, String amountToPay,String paydate) throws SQLException{
 		try{
-			String query = "update Accounts set cusId='" + cusId + "',line='" + line + "',amountGiven='" + amountGiven + "',amountToPay='" + amountToPay + "',collType='" + collType + "'where accId ="+ accId;
+			String query = "update Accounts set accNo='" + accNo + "',line='" + line + "',duration='" +duration+ "',modeOfPayment='" +modeOfPayment+ "',amountGiven='" + amountGiven + "',amountToPay='" + amountToPay + "',paydate='" + paydate + "'where accId ="+ accId;
 			stmt.execute(query);
 		}finally{
 			closeConnection();
@@ -71,10 +71,11 @@ public class AccountClass {
 				JSONObject obj = new JSONObject();
 				obj.put("accId", rs.getInt("accId"));
 				obj.put("line", rs.getString("line"));
-				obj.put("collType", rs.getString("collType"));
+				obj.put("duration", rs.getString("duration"));
+				obj.put("modeOfPayment",rs.getString("modeOfPayment"));
 				obj.put("amountGiven", rs.getString("amountGiven"));
 				obj.put("amountToPay", rs.getString("amountToPay"));
-				obj.put("cusId", rs.getInt("cusId"));
+				obj.put("accNo", rs.getInt("accNo"));
 				res.put(obj);
 
 			}
@@ -84,7 +85,7 @@ public class AccountClass {
 		return res;
 		
 	}
-	public JSONArray getStatement(int accId) throws SQLException{
+	/*public JSONArray getStatement(int accId) throws SQLException{
 		JSONObject obj = new JSONObject();
 		JSONArray res = new JSONArray();
 		int Balance = 0;
@@ -114,7 +115,7 @@ public class AccountClass {
 		}
 		return res;
 		
-	}
+	}*/
 	private void openConnection() throws SQLException, ClassNotFoundException {
 		Class.forName("com.mysql.jdbc.Driver");
 		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/finance", "root", "root");
