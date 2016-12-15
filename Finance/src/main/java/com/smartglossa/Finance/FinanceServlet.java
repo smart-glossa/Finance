@@ -22,16 +22,18 @@ public class FinanceServlet extends HttpServlet {
 		String op = request.getParameter("operation");
 		if(op.equals("addCustomer")){
 			JSONObject obj = new JSONObject();
+			int cusId = Integer.parseInt(request.getParameter("cusId"));
 			String cusName = request.getParameter("cname");
 			String addr = request.getParameter("add");
-			String conNo = request.getParameter("cno");
+			String phoneNo = request.getParameter("pno");
+			String landline = request.getParameter("lno");
 			try {
 				FinanceClass cus = new FinanceClass();
-				cus.addCustomer(cusName, addr, conNo);
+				cus.addCustomer(cusId, cusName, addr, phoneNo, landline);
 				obj.put("status", "success");
 			} catch (Exception e) {
 				e.printStackTrace();
-				obj.put("status", "success");
+				obj.put("status", "Failure");
 			}
 			response.getWriter().print(obj);
 		}else if(op.equals("getAllCustomer")){
@@ -49,10 +51,11 @@ public class FinanceServlet extends HttpServlet {
 		 	int cusId = Integer.parseInt(request.getParameter("cusId"));
 			String cusName = request.getParameter("cname");
 			String addr = request.getParameter("add");
-			String conNo = request.getParameter("cno");
+			String phoneNo = request.getParameter("pno");
+			String landline = request.getParameter("lno");
 			try {
 				FinanceClass cus = new FinanceClass();
-				cus.updateCustomer(cusId, cusName, addr, conNo);
+				cus.updateCustomer(cusId, cusName, addr, phoneNo, landline);
 				obj.put("status", "success");
 				
 			} catch (Exception e) {

@@ -20,12 +20,12 @@ public class FinanceClass {
 		openConnection();
 	}
 
-	public void addCustomer(String cusName, String addr, String conNo) throws SQLException {
+	public void addCustomer(int cusId, String cusName, String addr, String phoneNo, String landline) throws SQLException {
 		JSONObject obj = new JSONObject();
 		try {
 
-			String query = "Insert into customer(cusName,address,contactNo) values('" + cusName + "','" + addr + "','"
-					+ conNo + "')";
+			String query = "Insert into customer(cusId,cusName,address,phoneNo,landLine) values("+ cusId +",'" + cusName + "','" + addr + "','"
+					+ phoneNo + "','"+ landline +"')";
 			stmt.execute(query);
 			obj.put("status", "success");
 		} finally {
@@ -43,7 +43,8 @@ public class FinanceClass {
 				obj.put("cusId", rs.getInt("cusId"));
 				obj.put("cusName", rs.getString("cusName"));
 				obj.put("address", rs.getString("address"));
-				obj.put("contactNo", rs.getString("contactNo"));
+				obj.put("phoneNo", rs.getString("phoneNo"));
+				obj.put("landLine", rs.getString("landLine"));
 				result.put(obj);
 			}
 		} finally {
@@ -52,10 +53,10 @@ public class FinanceClass {
 		return result;
 	}
 
-	public void updateCustomer(int cusId, String cusName, String addr, String conNo) throws SQLException {
+	public void updateCustomer(int cusId, String cusName, String addr, String phoneNo, String landline) throws SQLException {
 		try {
-			String query = "update customer set cusName='" + cusName + "',address='" + addr + "',contactNo='" + conNo
-					+ "'where cusId=" + cusId;
+			String query = "update customer set cusName='" + cusName + "',address='" + addr + "',phoneNo='" + phoneNo
+					+"',landLine='"+ landline + "'where cusId=" + cusId;
 			stmt.execute(query);
 		} finally {
 			closeConnection();
@@ -72,7 +73,8 @@ public class FinanceClass {
 				obj.put("cusId", rs.getInt("cusId"));
 				obj.put("cusName", rs.getString("cusName"));
 				obj.put("address", rs.getString("address"));
-				obj.put("contactNo", rs.getString("contactNo"));
+				obj.put("phoneNo", rs.getString("phoneNo"));
+				obj.put("landLine", rs.getString("landLine"));
 			}
 		} finally {
 			closeConnection();

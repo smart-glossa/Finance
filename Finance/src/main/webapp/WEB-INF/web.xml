@@ -65,7 +65,7 @@
     </servlet-mapping>
     <servlet-mapping>
     	<servlet-name>CustomerAccount</servlet-name>
-    	<url-pattern>/CustomerAccount</url-pattern>
+    	<url-pattern>/cusacc</url-pattern>
     </servlet-mapping>
    
     <session-config>
