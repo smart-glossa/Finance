@@ -23,12 +23,12 @@ public class PaymentServlet extends HttpServlet {
 		String op = request.getParameter("operation");
 		if (op.equals("addPayment")) {
 			JSONObject obj = new JSONObject();
-			String amount = request.getParameter("amount");
-			String date = request.getParameter("date");
-			String accId = request.getParameter("accId");
+			String payment = request.getParameter("payment");
+			int accId =Integer.parseInt(request.getParameter("accId"));
+		    String paydate = request.getParameter("paydate");
 			try {
 				PaymentClass pay = new PaymentClass();
-				pay.addPayment(amount, date, accId);
+				pay.addPayment(payment, accId, paydate);
 				obj.put("status", "success");
 			} catch (Exception e) {
 				obj.put("status", "Failure");

@@ -19,9 +19,9 @@ public class PaymentClass {
 	public PaymentClass() throws ClassNotFoundException, SQLException {
 		openConnection();
 	}
-	public void addPayment(String amount, String date, String accId) throws SQLException{
+	public void addPayment(String payment,int accId,String paydate) throws SQLException{
 		try{
-			String query = "Insert into Payment(accId,amount,date) values('"+ accId +"','"+ amount +"','"+ date +"')";
+			String query = "Insert into payment(payment,accId,paydate) values('"+ payment +"',"+ accId +",'"+ paydate +"')";
 			stmt.execute(query);
 		}finally{
 			closeConnection();
