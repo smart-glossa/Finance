@@ -5,7 +5,12 @@ function customer(){
 	strVar += "		<div>";
 	strVar += "			<h2>Add Customer<\/h2>";
 	strVar += "		<\/div>";
-	strVar += "		<input type=\"text\" id=cusId>";
+	strVar += "      <div>";
+	strVar += "          <label>Customer Id*:<\/label>";
+	strVar += "         <\/div>";
+	strVar += "       <div>"
+	strVar += "		<input type=\"text\" id=\"cusId\" placeholder=\"Id\"height:\">";
+	strVar += "        <\/div>"
 	strVar += "		<div>";
 	strVar += "			<label>Customer Name*:<\/label>";
 	strVar += "		<\/div>";
@@ -20,10 +25,16 @@ function customer(){
 	strVar += "			<input type=text id=\"addr\" placeholder=\"Address\">";
 	strVar += "		<\/div>";
 	strVar += "		<div>";
-	strVar += "			<label>Contact Number*:<\/label>";
+	strVar += "			<label>Phone Number*:<\/label>";
 	strVar += "		<\/div>";
 	strVar += "		<div>";
-	strVar += "			<input type=text id=\"conno\" placeholder=\"Mobile Number\" maxlength=\"10\">";
+	strVar += "			<input type=text id=\"phoneNo\" placeholder=\"Mobile Number\" maxlength=\"10\">";
+	strVar += "		<\/div>";
+	strVar += "      <div>";
+	strVar += "          <label>Landline Number*:<\/label>";
+	strVar += "         </div>";
+	strVar += "		<div>";
+	strVar += "			<input type=text id=\"landline\" placeholder=\"Landline\" maxlength=\"10\">";
 	strVar += "		<\/div>";
 	strVar += "		<div>";
 	strVar += "			<input type=submit value=\"Add\" id=\"add\" a href=\"account()\">";

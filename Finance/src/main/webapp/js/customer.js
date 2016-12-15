@@ -2,10 +2,16 @@ $(document).ready(function(){
 	$('#cus').click();
 })
 $(document).on('click','#add',function(){
+	var cusId = $('#cusId').val();
 	var cname = $('#cusname').val();
 	var add = $('#addr').val();
-	var cno = $('#conno').val();
-	var url = "/Finance/finance?operation=addCustomer&cname="+ cname +"&add="+ add +"&cno="+ cno ;
+	var pno = $('#phoneNo').val();
+	var lno = $('#landline').val();
+	var url = "/Finance/finance?operation=addCustomer&cusId="+cusId +"&cname="+ cname +"&add="+ add +"&pno="+ pno +"&lno=" + lno;
+	if(cusId === ""){
+		$('#cusId').focus().css('outline-color','red');
+		return false;
+	}
     if(cname === ""){
     	$('#cusname').focus().css('outline-color','red');
     	return false;
@@ -15,29 +21,33 @@ $(document).on('click','#add',function(){
     	$('#addr').focus().css('outline-color','red');
     	return false;
     }
-    if(cno === ""){
-    	$('#conno').focus().css('outline-color','red');
+    if(pno === ""){
+    	$('#phoneNo').focus().css('outline-color','red');
     	return false;
     }
-    if(cno.length !=10){
-    	$('#conno').focus().css('outline-color','red');
-    	$("#msg").html("Enter Contact Number as correct format").show().fadeOut(3000)
+    
+    if(pno.length !=10){
+    	$('#phoneNo').focus().css('outline-color','red');
+    	$("#msg").html("Enter Phone Number as correct format").show().fadeOut(3000)
     	return false;
     }
-    if (cno.charAt(0)!="7" && cno.charAt(0)!="8" && cno.charAt(0)!="9"){
-		$('#conno').focus().css('outline-color','red');
-    	$("#msg").html("Enter Contact Number as correct format").show().fadeOut(3000);
-	    return false
+    if (pno.charAt(0)!="7" && pno.charAt(0)!="8" && pno.charAt(0)!="9"){
+		$('#phoneNo').focus().css('outline-color','red');
+    	$("#msg").html("Enter Phone Number as correct format").show().fadeOut(3000);
+	    return false;
 	}
+    
 	$.ajax({
 		url:url,
 		type:'POST'
 	})
 	.done(function(result){
 		getAllCustomer();
+		$('#cusId').val("");
 		$('#cusname').val("");
 		$('#addr').val("");
-		$('#conno').val("");
+		$('#phoneNo').val("");
+		$('#landline').val("");
 	})
 	.fail(function(result){
 		alert(result);
@@ -74,22 +84,25 @@ $(document).on('keyup','#cusId',function(){
 				var res = JSON.parse(result);
 				$('#cusname').val(res.cusName);
 				$('#addr').val(res.address);
-				$('#conno').val(res.contactNo);
+				$('#phoneNo').val(res.phoneNo);
+				$('#landline').val(res.landLine);
 			})
 			.fail(function(result){
 				alert(result);
 			})
 			}else{
-			$('#cusname').val("");
+		    $('#cusname').val("");
 			$('#addr').val("");
-			$('#conno').val("");
+			$('#phoneNo').val("");
+			$('#landline').val("");
 		}
 });
 $(document).on('click','#updateCus',function(){
 	var cusId = $('#cusId').val();
 	var cname = $('#cusname').val();
 	var add = $('#addr').val();
-	var cno = $('#conno').val();
+	var pno = $('#phoneNo').val();
+	var lno = $('#landline').val();
 	if(cusId === ""){
 		$('#cusId').focus().css('outline-color','red');
 		return;
@@ -102,21 +115,36 @@ $(document).on('click','#updateCus',function(){
 		$('#addr').focus().css('outline-color','red');
 		return;
 	}
-	if(cno === ""){
-		$('conno').focus().css('outline-color','red');
+	
+	if(pno === ""){
+		$('phoneNo').focus().css('outline-color','red');
 		return;
 	}
-	if(cno.length !=10){
-    	$('#conno').focus().css('outline-color','red');
-    	$("#msg").html("Enter Contact Number as correct format").show().fadeOut(3000);
+	if(lno === ""){
+		$('landline').focus().css('outline-color','red');
+		return;
+	}
+	if(pno.length !=10){
+    	$('#phoneNo').focus().css('outline-color','red');
+    	$("#msg").html("Enter Phone Number  as correct format").show().fadeOut(3000);
     	return false;
     }
-	if (cno.charAt(0)!="7" && cno.charAt(0)!="8" && cno.charAt(0)!="9"){
+	if (pno.charAt(0)!="7" && pno.charAt(0)!="8" && pno.charAt(0)!="9"){
 		$('#conno').focus().css('outline-color','red');
-    	$("#msg").html("Enter Contact Number as correct format").show().fadeOut(3000);
+    	$("#msg").html("Enter Phone Number as correct format").show().fadeOut(3000);
 	    return false
 	}
-	var url = "/Finance/finance?operation=updateCustomer&cusId=" + cusId +"&cname=" + cname+"&add=" + add +"&cno=" + cno ; 
+	if(lno.length !=10){
+    	$('#landline').focus().css('outline-color','red');
+    	$("#msg").html("Enter Landline Number  as correct format").show().fadeOut(3000);
+    	return false;
+    }
+	if (lno.charAt(0)!="0"){
+		$('#conno').focus().css('outline-color','red');
+    	$("#msg").html("Enter Landline Number as correct format").show().fadeOut(3000);
+	    return false;
+	}
+	var url = "/Finance/finance?operation=updateCustomer&cusId=" + cusId +"&cname=" + cname+"&add=" + add +"&pno=" + pno +"&lno=" + lno; 
 	$.ajax({
 		url:url,
 		type:'POST'
@@ -126,7 +154,8 @@ $(document).on('click','#updateCus',function(){
 		$('#cusId').val("");
 		$('#cusname').val("");
 		$('#addr').val("");
-		$('#conno').val("");
+		$('#phoneNo').val("");
+		$('#landline').val("");
 	})
 	.fail(function(result){
 		alert(result);
@@ -142,13 +171,14 @@ function getAllCustomer(){
     	  var res = JSON.parse(result);
     	  var length = res.length;
     	  var table = '<table>'
-    		  table += '<tr><th>SerialNumber</th><th>CustomerName</th><th>Address</th><th>ContactNumber</th><th>Delete</th></tr>';
+    		  table += '<tr><th>SerialNumber</th><th>CustomerName</th><th>Address</th><th>PhoneNumber</th><th>LandlineNumber</th><th>Delete</th></tr>';
     	      for(i=0;i<length;i++){
     	    	  table += '<tr class="row">'
     	    	  table += '<td>'+ res[i].cusId +'</td>';
     	    	  table += '<td>'+ res[i].cusName +'</td>';
     	    	  table += '<td>'+ res[i].address +'</td>';
-    	    	  table += '<td>'+ res[i].contactNo +'</td>';
+    	    	  table += '<td>'+ res[i].phoneNo +'</td>';
+    	    	  table += '<td>' + res[i].landLine +'</td>';
     	    	  table += '<td><img src="images/delete.jpg" height="35px" width="35px" class="delete"></td></tr>';
     	      }
                   table += '</table>'; 
@@ -173,13 +203,13 @@ $(document).on('keypress','#cusname',function(key){
 })
 $(document).on('keypress','#addr',function(key){
 	if(key.which == 13){
-		$('#conno').focus();
+		$('#phoneNo').focus();
 	}
 	if(key.which == 38){
 		$('#cusname').focus();
 	}
 })
-$(document).on('keypress','#conno',function(key){
+$(document).on('keypress','#phoneNo',function(key){
 	var div = $(this).parent();
 	if(key.which == 13){
 		$('#add').click();
@@ -188,7 +218,7 @@ $(document).on('keypress','#conno',function(key){
 		div.prev().children('#addr').focus();
 	}
 })
-$(document).on('keypress','#cusId,#conno',function(e){
+$(document).on('keypress','#cusId,#phoneNo',function(e){
 	if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
         //display error message
         $("#msg").html("Numbers Only").show().fadeOut(3000);
