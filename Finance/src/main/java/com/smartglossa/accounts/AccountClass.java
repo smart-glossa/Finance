@@ -19,7 +19,7 @@ public class AccountClass {
 	}
 	public void addAccount(int accNo,String line,String duration, String modeOfPayment, String amountGiven, String amountToPay,String date) throws SQLException{
 		try{
-			String query = "insert into Accounts(accNo,line,duration,modeOfPayment,amountGiven,amountToPay,date) values(" + accNo
+			String query = "insert into accounts(accNo,line,duration,modeOfPayment,amountGiven,amountToPay,date) values(" + accNo
 					+ ",'" + line + "','" +duration+ "','" +modeOfPayment+"','" + amountGiven + "','" + amountToPay + "','" +date+ "')";
 			stmt.execute(query);
 		}finally{
@@ -28,7 +28,7 @@ public class AccountClass {
 	}
 	public void updateAccount(int accId,int accNo, String line,String duration,String modeOfPayment, String amountGiven, String amountToPay,String date) throws SQLException{
 		try{
-			String query = "update Accounts set accNo='" + accNo + "',line='" + line + "',duration='" +duration+ "',modeOfPayment='" +modeOfPayment+ "',amountGiven='" + amountGiven + "',amountToPay='" + amountToPay + "',date='" + date + "'where accId ="+ accId;
+			String query = "update accounts set accNo='" + accNo + "',line='" + line + "',duration='" +duration+ "',modeOfPayment='" +modeOfPayment+ "',amountGiven='" + amountGiven + "',amountToPay='" + amountToPay + "',date='" + date + "'where accId ="+ accId;
 			stmt.execute(query);
 		}finally{
 			closeConnection();
@@ -37,7 +37,7 @@ public class AccountClass {
 	public JSONObject getOneAccount(int accId) throws SQLException{
 		JSONObject obj = new JSONObject();
 		try{
-			String query = "select * from Accounts where accId=" + accId;
+			String query = "select * from accounts where accId=" + accId;
 			rs = stmt.executeQuery(query);
 			if (rs.next()) {
 				obj.put("accId", rs.getInt("accId"));
@@ -57,7 +57,7 @@ public class AccountClass {
 	}
 	public void deleteAccount(int accId) throws SQLException{
 		try{
-			String query = "delete from Accounts where accId=" + accId;
+			String query = "delete from accounts where accId=" + accId;
 			stmt.execute(query);
 		}finally{
 			closeConnection();
@@ -66,7 +66,7 @@ public class AccountClass {
 	public JSONArray getAllAccount() throws SQLException{
 		JSONArray res = new JSONArray();
 		try{
-			String query = "Select *from Accounts";
+			String query = "Select *from accounts";
 			rs = stmt.executeQuery(query);
 			while(rs.next()){
 				JSONObject obj = new JSONObject();

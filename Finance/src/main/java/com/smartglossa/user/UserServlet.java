@@ -57,6 +57,7 @@ public class UserServlet extends HttpServlet {
 			ResultSet rs = stmt.executeQuery(query);
 			if(rs.next()){
 				obj.put("user", rs.getString("userName"));
+				obj.put("status", "success");
 			}
 		} catch (Exception e) {
 			obj.put("status", "Failure");
