@@ -20,7 +20,7 @@ Database:
   `accNo` int(11) NOT NULL,
   PRIMARY KEY (`accNo`),
   KEY `cusId` (`cusId`),
-  CONSTRAINT `customerAccount_ibfk_1` FOREIGN KEY (`cusId`) REFERENCES `customer` (`cusId`)
+  CONSTRAINT `customerAccount_ibfk_1` FOREIGN KEY (`cusId`) REFERENCES `customer` (`cusId`) on delete cascade
 )
 
 4.accounts | CREATE TABLE `accounts` (
@@ -34,13 +34,13 @@ Database:
   `date` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`accId`),
   KEY `accNo` (`accNo`),
-  CONSTRAINT `accounts_ibfk_1` FOREIGN KEY (`accNo`) REFERENCES `customerAccount` (`accNo`)
-)
+  CONSTRAINT `accounts_ibfk_1` FOREIGN KEY (`accNo`) REFERENCES `customerAccount` (`accNo`) on delete cascade
+ )
 
 5.payment | CREATE TABLE `payment` (
   `payment` varchar(100) DEFAULT NULL,
   `accId` int(11) DEFAULT NULL,
   `paydate` varchar(50) DEFAULT NULL,
   KEY `accId` (`accId`),
-  CONSTRAINT `payment_ibfk_1` FOREIGN KEY (`accId`) REFERENCES `accounts` (`accId`)
+  CONSTRAINT `payment_ibfk_1` FOREIGN KEY (`accId`) REFERENCES `accounts` (`accId`) on delete cascade
 )
