@@ -17,18 +17,18 @@ public class AccountClass {
 	public AccountClass() throws ClassNotFoundException, SQLException {
 		openConnection();
 	}
-	public void addAccount(int accNo,String line,String duration, String modeOfPayment, String amountGiven, String amountToPay,String paydate) throws SQLException{
+	public void addAccount(int accNo,String line,String duration, String modeOfPayment, String amountGiven, String amountToPay,String date) throws SQLException{
 		try{
-			String query = "insert into Accounts(accNo,line,duration,modeOfPayment,amountGiven,amountToPay,paydate) values(" + accNo
-					+ ",'" + line + "','" +duration+ "','" +modeOfPayment+"','" + amountGiven + "','" + amountToPay + "','" +paydate+ "')";
+			String query = "insert into Accounts(accNo,line,duration,modeOfPayment,amountGiven,amountToPay,date) values(" + accNo
+					+ ",'" + line + "','" +duration+ "','" +modeOfPayment+"','" + amountGiven + "','" + amountToPay + "','" +date+ "')";
 			stmt.execute(query);
 		}finally{
 			closeConnection();
 		}
 	}
-	public void updateAccount(int accId,int accNo, String line,String duration,String modeOfPayment, String amountGiven, String amountToPay,String paydate) throws SQLException{
+	public void updateAccount(int accId,int accNo, String line,String duration,String modeOfPayment, String amountGiven, String amountToPay,String date) throws SQLException{
 		try{
-			String query = "update Accounts set accNo='" + accNo + "',line='" + line + "',duration='" +duration+ "',modeOfPayment='" +modeOfPayment+ "',amountGiven='" + amountGiven + "',amountToPay='" + amountToPay + "',paydate='" + paydate + "'where accId ="+ accId;
+			String query = "update Accounts set accNo='" + accNo + "',line='" + line + "',duration='" +duration+ "',modeOfPayment='" +modeOfPayment+ "',amountGiven='" + amountGiven + "',amountToPay='" + amountToPay + "',date='" + date + "'where accId ="+ accId;
 			stmt.execute(query);
 		}finally{
 			closeConnection();
@@ -41,12 +41,13 @@ public class AccountClass {
 			rs = stmt.executeQuery(query);
 			if (rs.next()) {
 				obj.put("accId", rs.getInt("accId"));
+				obj.put("accNo", rs.getString("accNo"));
 				obj.put("line", rs.getString("line"));
-				obj.put("collType", rs.getString("collType"));
+				obj.put("duration", rs.getString("duration"));
+				obj.put("modeOfPayment", rs.getString("modeOfPayment"));								
 				obj.put("amountGiven", rs.getString("amountGiven"));
 				obj.put("amountToPay", rs.getString("amountToPay"));
-				obj.put("cusId", rs.getInt("cusId"));
-
+				obj.put("date", rs.getInt("date"));
 			}
 		}finally{
 			closeConnection();
@@ -70,12 +71,13 @@ public class AccountClass {
 			while(rs.next()){
 				JSONObject obj = new JSONObject();
 				obj.put("accId", rs.getInt("accId"));
+				obj.put("accNo", rs.getInt("accNo"));
 				obj.put("line", rs.getString("line"));
 				obj.put("duration", rs.getString("duration"));
 				obj.put("modeOfPayment",rs.getString("modeOfPayment"));
 				obj.put("amountGiven", rs.getString("amountGiven"));
 				obj.put("amountToPay", rs.getString("amountToPay"));
-				obj.put("accNo", rs.getInt("accNo"));
+				obj.put("date", rs.getString("date"));
 				res.put(obj);
 
 			}

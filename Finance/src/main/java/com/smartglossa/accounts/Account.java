@@ -34,10 +34,10 @@ public class Account extends HttpServlet {
 			String modeOfPayment = request.getParameter("modeOfPayment");
 			String amountGiven = request.getParameter("amountGiven");
 			String amountToPay = request.getParameter("amountToPay");
-			String paydate = request.getParameter("paydate");
+			String date = request.getParameter("date");
 			try {
 				AccountClass acc = new AccountClass();
-				acc.addAccount(accNo, line, duration,modeOfPayment, amountGiven, amountToPay,paydate);
+				acc.addAccount(accNo, line, duration,modeOfPayment, amountGiven, amountToPay,date);
 				obj.put("status", "success");
 			} catch (Exception e) {
 				obj.put("status", "failure");
@@ -53,10 +53,10 @@ public class Account extends HttpServlet {
 			String modeOfPayment = request.getParameter("modeOfPayment");
 			String amountGiven = request.getParameter("amountGiven");
 			String amountToPay = request.getParameter("amountToPay");
-			String paydate = request.getParameter("paydate");
+			String date = request.getParameter("date");
 			try {
 				AccountClass acc = new AccountClass();
-				acc.updateAccount(accId, accNo, line, duration,modeOfPayment, amountGiven, amountToPay,paydate);
+				acc.updateAccount(accId, accNo, line, duration,modeOfPayment, amountGiven, amountToPay,date);
 				obj.put("status", "success");
 			} catch (Exception e) {
 				obj.put("status", "failure");
