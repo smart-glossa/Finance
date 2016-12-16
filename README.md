@@ -18,6 +18,7 @@ Database:
 3.customerAccount | CREATE TABLE `customerAccount` (
   `cusId` int(11) DEFAULT NULL,
   `accNo` int(11) NOT NULL,
+  'currentAccId' int(11) FOREIGN KEY,
   PRIMARY KEY (`accNo`),
   KEY `cusId` (`cusId`),
   CONSTRAINT `customerAccount_ibfk_1` FOREIGN KEY (`cusId`) REFERENCES `customer` (`cusId`) on delete cascade
