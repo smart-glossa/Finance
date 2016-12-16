@@ -1,4 +1,5 @@
 $(document).ready(function(){
+	//Adding accounts file
 $(document).on('click','#sub',function(){
 	var acc = $("#acc").val();
 	var line = $("#line").val();

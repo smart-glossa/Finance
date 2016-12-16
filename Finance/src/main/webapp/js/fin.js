@@ -161,3 +161,4 @@ function statement(){
 	sta += "<\/div>";
 	$('.fin')[0].innerHTML = sta;
 }
+//Adding js file
