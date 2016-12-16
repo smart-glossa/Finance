@@ -50,13 +50,12 @@ public class PaymentServlet extends HttpServlet {
 
 		} else if (op.equals("updatePayment")) {
 			JSONObject obj = new JSONObject();
-			int pId = Integer.parseInt(request.getParameter("payId"));
-			String accId = request.getParameter("accId");
-			String amount = request.getParameter("amount");
-			String date = request.getParameter("date");
+			String payment = request.getParameter("payment");
+			int accId = Integer.parseInt(request.getParameter("accId"));
+			String paydate = request.getParameter("paydate");
 			try {
 				PaymentClass pay = new PaymentClass();
-				pay.updatePayment(pId, amount, date, accId);
+				pay.updatePayment(payment,accId,paydate);
 				obj.put("status", "success");
 
 			} catch (Exception e) {

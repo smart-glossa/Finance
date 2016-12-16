@@ -1,31 +1,31 @@
 $(document).ready(function(){
 })
 $(document).on('click','#addpay',function(){
+	var  payment = $('#payment').val();
 	var  accId = $('#accId').val();
-	var  amount = $('#amount').val();
-	var  date = $('#date').val();
-	if(accId ===""){
+	var  paydate = $('#paydate').val();
+	if(payment ===""){
+		$('#payment').focus().css('outline-color','red');
+		return;
+	}
+	if(acccId ===""){
 		$('#accId').focus().css('outline-color','red');
 		return;
 	}
-	if(amount ===""){
-		$('#amount').focus().css('outline-color','red');
+	if(paydate ===""){
+		$('#paydate').focus().css('outline-color','red');
 		return;
 	}
-	if(date ===""){
-		$('#date').focus().css('outline-color','red');
-		return;
-	}
-	var url= "/Finance/payment?operation=addPayment&accId=" + accId +"&amount=" + amount +"&date=" + date;
+	var url= "/Finance/payment?operation=addPayment&payment=" + payment +"&accId=" + accId +"&paydate=" + paydate;
 	$.ajax({
 		url:url,
 		type:'POST'
 	})
 	.done(function(result){
 		getAllPayment();
+		$('#payment').val("");
 		$('#accId').val("");
-		$('#amount').val("");
-		$('#date').val("");
+		$('#paydate').val("");
 	})
 	.fail(function(result){
 		alert(result);
@@ -41,7 +41,7 @@ function getAllPayment(){
 		var res = JSON.parse(result);
 		var length = res.length;
 		var table = '<table>'
-			table += '<tr><th>SerialNumber</th><th>Account Number</th><th>Amount</th><th>Date</th></tr>'
+			table += '<tr><th>SerialNumber</th><th>Payment</th><th>Account Id</th><th>PayDate</th></tr>'
 				for(i=0;i<length;i++){
 					table += '<tr class="row">'
 					table += '<td>' + res[i].pId +'</td>';	
@@ -59,8 +59,7 @@ function getAllPayment(){
 			alert(result);
 		})
 }
-$(document).on('click','#updatepay',function(){
-	var payId = $('#payId').val();
+/*$(document).on('click','#updatepay',function(){
 	var  accId = $('#accId').val();
 	var  amount = $('#amount').val();
 	var  date = $('#date').val();
@@ -159,4 +158,4 @@ $(document).on('keyup','#payId',function(){
         $("#msg").html("Numbers Only").show().fadeOut(3000);
                return false;
     }
-})
+})*/

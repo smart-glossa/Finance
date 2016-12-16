@@ -34,10 +34,9 @@ public class PaymentClass {
 			rs = stmt.executeQuery(query);
 			while(rs.next()){
 				JSONObject obj = new JSONObject();
-				obj.put("pId",rs.getString("payId"));
+				obj.put("payment",rs.getString("payment"));
 				obj.put("accId",rs.getString("accId"));
-				obj.put("amount",rs.getString("amount"));
-				obj.put("date",rs.getString("date"));
+				obj.put("paydate",rs.getString("paydate"));
 				res.put(obj);
 			}
 		}finally{
@@ -46,9 +45,9 @@ public class PaymentClass {
 		return res;
 		
 	}
-	public void updatePayment(int pId, String amount, String date, String accId) throws SQLException{
+	public void updatePayment( String payment,int accId , String paydate) throws SQLException{
 		try{
-			String query = "update Payment set accId="+ accId +",amount='"+ amount +"',date='"+ date +"'where payId="+ pId;
+			String query = "update Payment set  payment='" + payment +"',accId="+ accId +",paydate='"+ paydate ;
 			stmt.execute(query);
 		}finally{
 			closeConnection();
@@ -60,10 +59,9 @@ public class PaymentClass {
 			String query = "select * from Payment where payId="+ pId;
 			rs = stmt.executeQuery(query);
 			if(rs.next()){
-				obj.put("pId",rs.getString("payId"));
 				obj.put("amount",rs.getString("amount"));
-				obj.put("date",rs.getString("date"));
 				obj.put("accId",rs.getString("accId"));
+				obj.put("paydate",rs.getString("paydate"));
 			}
 		}finally{
 			closeConnection();
@@ -71,9 +69,9 @@ public class PaymentClass {
 		return obj;
 		
 	}
-	public void deletePayment(int pId) throws SQLException{
+	public void deletePayment(int accId) throws SQLException{
 		try{
-			String query = "delete from Payment where payId="+ pId;
+			String query = "delete from Payment where accId="+ accId;
 			stmt.execute(query);
 		}finally{
 			closeConnection();
@@ -99,6 +97,8 @@ public class PaymentClass {
 			rs.close();
 		}
 	}
+		
+	}
 
 
-}
+
