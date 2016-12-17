@@ -75,7 +75,7 @@ function customer(){
 	cus += "<input type=\"button\" value=\"Update\" id=\"updateCus\"><\/td>";
 	cus += "<\/tr>";
 	cus += "<\/table>";
-	cus += "<\/div>";
+	cus += "<\/div>"; 
 	cus += "<div class=\"getAllCus\"><\/div>";
 $('.fin')[0].innerHTML = cus;
 }

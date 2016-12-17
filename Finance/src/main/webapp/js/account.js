@@ -217,7 +217,7 @@ $(document).on('click','.delete',function(){
 		alert(result);
 	})
 });
-
+ 
 	/*$(document).on('keyup','#accId',function(){
 		var accId = $('#accId').val();
 		if(accId.length===5){
