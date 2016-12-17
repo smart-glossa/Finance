@@ -15,7 +15,7 @@ public class AccountClass {
 	ResultSet rs = null;
 	
 	public AccountClass() throws ClassNotFoundException, SQLException {
-		openConnection();
+		openConnection(); 
 	}
 	public void addAccount(int accNo,String line,String duration, String modeOfPayment, String amountGiven, String amountToPay,String date,String currentAccount) throws SQLException{
 		try{
