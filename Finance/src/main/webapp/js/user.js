@@ -1,4 +1,8 @@
 $(document).ready(function(){
+	if(getCookie("uname") != undefined){
+		window.location.href = "home.html";
+	}
+});
 	$(document).on('click','#adduser',function(){
 		var uname = $('#uname').val();
 		var pass = $('#pass').val();
@@ -43,6 +47,7 @@ $(document).ready(function(){
 			//alert(result);
 			var res = JSON.parse(result);
 			if(res.status == "success"){
+				document.cookie = "uname="+ uname;
 				window.location.href = "home.html";
 			}
 		})
@@ -50,4 +55,19 @@ $(document).ready(function(){
 			alert(result);
 		})
 	})
-});
+	
+
+function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return undefined;
+}
