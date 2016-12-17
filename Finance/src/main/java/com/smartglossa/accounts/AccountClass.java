@@ -21,7 +21,7 @@ public class AccountClass {
 		try{
 			String query = "insert into accounts(accNo,line,duration,modeOfPayment,amountGiven,amountToPay,date,currentAccount) values(" + accNo
 					+ ",'" + line + "','" +duration+ "','" +modeOfPayment+"','" + amountGiven + "','" + amountToPay + "','" +date+ "','" +currentAccount+ "')";
-			stmt.execute(query);
+			stmt.execute(query); 
 		}finally{
 			closeConnection();
 		}

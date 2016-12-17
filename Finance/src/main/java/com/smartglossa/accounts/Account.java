@@ -43,7 +43,7 @@ public class Account extends HttpServlet {
 			} catch (Exception e) {
 				obj.put("status", "failure");
 				e.printStackTrace();
-			}
+			} 
 			response.getWriter().print(obj);
 		} else if (operation.equals("updateAccount")) {
 			JSONObject obj = new JSONObject();
