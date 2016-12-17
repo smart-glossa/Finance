@@ -1,7 +1,7 @@
 $(document).ready(function(){
 	//Adding accounts file
 $(document).on('click','#sub',function(){
-	var acc = $("#acc").val();
+	var accNo = $("#acc").val();
 	var line = $("#line").val();
 	var duration = $("#duration").val();
 	var modeofpay = $("#modeofpay").val();
@@ -10,7 +10,7 @@ $(document).on('click','#sub',function(){
 	var date = $("#date").val();
 	var amtG = parseInt(amtGiven);
 	var amtP = parseInt(amttopay);
-	if(acc ===""){
+	if(accNo ===""){
 		$('#acc').focus().css("outline-color","red");
 		return false;
 	}
@@ -43,7 +43,7 @@ $(document).on('click','#sub',function(){
 		$("#msg").html("AmountToPay should be greater than AmountGiven").show().fadeOut(3000);
 		return false;
 	}
-	var url =" http://localhost:8080/Finance/account?operation=addAccounts&acc="+ acc +"&line="+ line +"&duration="+duration+"&modeOfPayment="+modeofpay+"&amountGiven="+amtGiven+"&amountToPay="+amttopay+"&date="+date;
+	var url =" http://localhost:8080/Finance/account?operation=addAccounts&acc="+ accNo +"&line="+ line +"&duration="+duration+"&modeOfPayment="+modeofpay+"&amountGiven="+amtGiven+"&amountToPay="+amttopay+"&date="+date;
 	$.ajax({
 		url:url,
 		typ:'POST'
@@ -64,16 +64,16 @@ $(document).on('click','#sub',function(){
 });
 });
 $(document).on('click','#updateAcc',function(){
-	var acc = $('#acc').val();
+	var accNo = $('#acc').val();
 	var line = $('#line').val();
-	var cType = $('#duration').val();
+	var duration = $('#duration').val();
 	var modeofpay = $('modeofpay').val();
 	var amtGiven = $('#amtgiven').val();
 	var amttopay = $('#amttopay').val();
 	var date = $('date').val();
 	var amtG = parseInt(amtGiven);
 	var amtP = parseInt(amttopay);
-	if(accId ===""){
+	if(accNo ===""){
 		$("#acc").focus().css("outline-color","red");
 		return false;
 	}
@@ -106,7 +106,7 @@ $(document).on('click','#updateAcc',function(){
 		$("#msg").html("AmountToPay should be greater than AmountGiven").show().fadeOut(3000);
 		return false;
 	}
-	var url = "/Finance/account?operation=updateAccount&accNo="+ accNo +"&cusId="+ cusId +"&line="+ line +"&duration="+ duration +"modeofpay="+modeofpay+"&amountGiven="+ amtGiven +"&amountToPay="+amttopay+"date="+date;
+	var url = "/Finance/account?operation=updateAccount&accNo="+ acc +"&line="+ line +"&duration="+ duration +"modeofpay="+modeofpay+"&amountGiven="+ amtGiven +"&amountToPay="+amttopay+"date="+date;
 	$.ajax({
 		url:url,
 		type:'POST'
@@ -128,8 +128,8 @@ $(document).on('click','#updateAcc',function(){
 $(document).on('keyup','#acc',function(){
 	var acc = $('#acc').val();
 	if(acc !== ""){
-		if(acc.length===5){
-			var url = "/Finance/account?operation=getOneAccount&acc="+ acc;
+		if(accNo.length===1){
+			var url = "/Finance/account?operation=getOneAccount&acc="+ accNo;
 			$.ajax({
 				url:url,
 				type:'POST'
@@ -194,7 +194,7 @@ $(document).on('click','.delete',function(){
 	var td = $(this).parent();
 	var tr = td.parent();
 	var accId = tr.children()[0].innerHTML;
-	var url = "/Finance/account?operation=deleteCustomer&acc="+ acc;
+	var url = "/Finance/account?operation=deleteCustomer&acc="+ accNo;
 	$.ajax({
 		url:url,
 		type:'POST'
