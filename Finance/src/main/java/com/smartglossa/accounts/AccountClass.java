@@ -17,18 +17,18 @@ public class AccountClass {
 	public AccountClass() throws ClassNotFoundException, SQLException {
 		openConnection();
 	}
-	public void addAccount(int accNo,String line,String duration, String modeOfPayment, String amountGiven, String amountToPay,String date) throws SQLException{
+	public void addAccount(int accNo,String line,String duration, String modeOfPayment, String amountGiven, String amountToPay,String date,String currentAccount) throws SQLException{
 		try{
-			String query = "insert into accounts(accNo,line,duration,modeOfPayment,amountGiven,amountToPay,date) values(" + accNo
-					+ ",'" + line + "','" +duration+ "','" +modeOfPayment+"','" + amountGiven + "','" + amountToPay + "','" +date+ "')";
+			String query = "insert into accounts(accNo,line,duration,modeOfPayment,amountGiven,amountToPay,date,currentAccount) values(" + accNo
+					+ ",'" + line + "','" +duration+ "','" +modeOfPayment+"','" + amountGiven + "','" + amountToPay + "','" +date+ "','" +currentAccount+ "')";
 			stmt.execute(query);
 		}finally{
 			closeConnection();
 		}
 	}
-	public void updateAccount(int accId,int accNo, String line,String duration,String modeOfPayment, String amountGiven, String amountToPay,String date) throws SQLException{
+	public void updateAccount(int accId,int accNo, String line,String duration,String modeOfPayment, String amountGiven, String amountToPay,String date,String currentAccount) throws SQLException{
 		try{
-			String query = "update accounts set accNo='" + accNo + "',line='" + line + "',duration='" +duration+ "',modeOfPayment='" +modeOfPayment+ "',amountGiven='" + amountGiven + "',amountToPay='" + amountToPay + "',date='" + date + "'where accId ="+ accId;
+			String query = "update accounts set accNo='" + accNo + "',line='" + line + "',duration='" +duration+ "',modeOfPayment='" +modeOfPayment+ "',amountGiven='" + amountGiven + "',amountToPay='" + amountToPay + "',date='" + date + "',currentAccount='"+currentAccount+"'where accId ="+ accId;
 			stmt.execute(query);
 		}finally{
 			closeConnection();
@@ -48,6 +48,7 @@ public class AccountClass {
 				obj.put("amountGiven", rs.getString("amountGiven"));
 				obj.put("amountToPay", rs.getString("amountToPay"));
 				obj.put("date", rs.getInt("date"));
+				obj.put("currentAccount", rs.getString("currentAccount"));
 			}
 		}finally{
 			closeConnection();
