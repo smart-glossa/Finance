@@ -1,13 +1,14 @@
 $(document).ready(function(){
 	//Adding accounts file
 $(document).on('click','#sub',function(){
-	var accNo = $("#acc").val();
-	var line = $("#line").val();
-	var duration = $("#duration").val();
-	var modeofpay = $("#modeofpay").val();
-	var amtGiven = $("#amtgiven").val();
-	var amttopay = $("#amttopay").val();
-	var date = $("#date").val();
+	var accNo = $('#acc').val();
+	var line = $('#line').val();
+	var duration = $('#duration').val();
+	var modeofpay = $('#modeofpay').val();
+	var amtGiven = $('#amtgiven').val();
+	var amttopay = $('#amttopay').val();
+	var date = $('#date').val();
+	var currentAccount = $('#currentacc').val("");
 	var amtG = parseInt(amtGiven);
 	var amtP = parseInt(amttopay);
 	if(accNo ===""){
@@ -38,12 +39,16 @@ $(document).on('click','#sub',function(){
 		$("#date").focus().css("outline-color","red");
 		return false;
 	}
+	if(currentAccount ===""){
+		$('#currentacc').focus.css("outline-color","red");
+		return false;
+	}
 	if(amtG>=amtP){
 		$("#amttopay").focus().css("outline-color","Red");
 		$("#msg").html("AmountToPay should be greater than AmountGiven").show().fadeOut(3000);
 		return false;
 	}
-	var url =" http://localhost:8080/Finance/account?operation=addAccounts&acc="+ accNo +"&line="+ line +"&duration="+duration+"&modeOfPayment="+modeofpay+"&amountGiven="+amtGiven+"&amountToPay="+amttopay+"&date="+date;
+	var url =" http://localhost:8080/Finance/account?operation=addAccounts&acc="+ accNo +"&line="+ line +"&duration="+duration+"&modeOfPayment="+modeofpay+"&amountGiven="+amtGiven+"&amountToPay="+amttopay+"&date="+date+"&currentaccount="+currentAccount;
 	$.ajax({
 		url:url,
 		typ:'POST'
@@ -57,6 +62,7 @@ $(document).on('click','#sub',function(){
 		$('#amtgiven').val("");
 		$('#amttopay').val("");
 		$('#date').val("");
+        $('#currentacc').val("");
 	})
 	.fail(function(result){
 		alert(result);
@@ -71,6 +77,7 @@ $(document).on('click','#updateAcc',function(){
 	var amtGiven = $('#amtgiven').val();
 	var amttopay = $('#amttopay').val();
 	var date = $('date').val();
+	var currentAccount = $('#currentacc').val();
 	var amtG = parseInt(amtGiven);
 	var amtP = parseInt(amttopay);
 	if(accNo ===""){
@@ -120,6 +127,7 @@ $(document).on('click','#updateAcc',function(){
 		$('#amtgiven').val("");
 		$('#amttopay').val("");
 		$('#date').val("");
+		$('#currentacc').val("");
 	})
 	.fail(function(result){
 		alert(result);
@@ -143,6 +151,7 @@ $(document).on('keyup','#acc',function(){
 					$('#amtgiven').val(res.amountGiven);
 					$('#amttopay').val(res.amountToPay);
 					$('#date').val(res.date);
+					$('#currentacc').val(res.currentAccount);
 			})
 			.fail(function(result){
 			  alert(result);
@@ -155,6 +164,7 @@ $(document).on('keyup','#acc',function(){
 			$('#amtgiven').val("");
 			$('#amttopay').val("");
 			$('#date').val("");
+			$('#currentacc').val("");
 		}
 		
 	}
@@ -171,7 +181,7 @@ function getAllAccount(){
     	  var res = JSON.parse(result);
     	  var length = res.length;
     	  var table = '<table>'
-    		  table += '<tr><th>AccountId</th><th>AccountNumber</th><th>Line</th><th>Duration</th><th>Mode Of Pay</th><th>AmountGiven</th><th>AmountToPay</th><th>date</th><th>Delete</th></tr>';
+    		  table += '<tr><th>AccountId</th><th>AccountNumber</th><th>Line</th><th>Duration</th><th>Mode Of Pay</th><th>AmountGiven</th><th>AmountToPay</th><th>date</th><th>currentAccount</th><th>Delete</th></tr>';
     	      for(i=0;i<length;i++){
     	    	  table += '<tr class="row">'
     	    	  table += '<td>'+ res[i].acc+'</td>';
@@ -181,6 +191,7 @@ function getAllAccount(){
     	    	  table += '<td>'+ res[i].amountGiven +'</td>';
     	    	  table += '<td>'+ res[i].amountToPay +'</td>';
     	    	  table += '<td>'+ res[i].date +'</td>';
+    	    	  table += '<td>'+ res[i].currentAccount +'</td>';
     	    	  table += '<td><img src="images/delete.jpg" height="35px" width="35px" class="delete"></td></tr>';
     	      }
                   table += '</table>';  
@@ -205,7 +216,6 @@ $(document).on('click','.delete',function(){
 	fail(function(result){
 		alert(result);
 	})
-
 });
 
 	/*$(document).on('keyup','#accId',function(){
@@ -243,11 +253,6 @@ $(document).on('click','.delete',function(){
 	        	   }
 	        	  
 	           }) 
-	           .on('keypress','#acc',function(key){
-	if (key.which == 13){
-		$('#sub').click();
-	}
-	           })
 	$(document).on('keypress','#line',function(key){
 	        if (key.which == 13){
 	        		$('#duration').focus();	  
@@ -272,9 +277,13 @@ $(document).on('click','.delete',function(){
 	}
 }).on('keypress','#date',function(key){
 	if(key.which == 13){
-		$('#accNo').focus();
+		$('#currentacc').focus();
 	}
-}).on('keypress','#acc,#modeofpay,#amtgiven,#amttopay',function(e){
+}).on('keypress','#currentacc',function(key){
+	if(key.which == 13){
+	}
+})
+.on('keypress','#acc,#modeofpay,#amtgiven,#amttopay',function(e){
 	if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57) && e.which != 13) {
         //display error message
         $("#msg").html("Numbers Only").show().fadeOut(3000);

@@ -67,6 +67,10 @@ function customer(){
 	cus += "<td><input type=\"text\" placeholder=\"Date\" id=\"date\"><\/td>";
 	cus += "<\/tr>";
 	cus += "<tr>";
+	cus += "<td>Current Account*:<\/td>";
+	cus += "<td><input type=\"text\" placeholder=\"Current Account\" id=\"currentacc\"><\/td>";
+	cus += "<\/tr>";
+	cus += "<tr>";
 	cus += "<td><input type=\"button\" value=\"Add\" id=\"add\">";
 	cus += "<input type=\"button\" value=\"Update\" id=\"updateCus\"><\/td>";
 	cus += "<\/tr>";
