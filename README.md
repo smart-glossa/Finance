@@ -45,3 +45,31 @@ Database:
   KEY `accId` (`accId`),
   CONSTRAINT `payment_ibfk_1` FOREIGN KEY (`accId`) REFERENCES `accounts` (`accId`) on delete cascade
 )
+PURCHASE:
+1. purchaseLineItem | CREATE TABLE `purchaseLineItem` (
+  `purchaseId` int(11) DEFAULT NULL,
+  `productId` int(11) DEFAULT NULL,
+  `purchaseLineId` int(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`purchaseLineId`),
+  KEY `purchaseId` (`purchaseId`),
+  KEY `productId` (`productId`),
+  CONSTRAINT `purchaseLineItem_ibfk_1` FOREIGN KEY (`purchaseId`) REFERENCES `purchaseMetaData` (`purchaseId`) ON DELETE CASCADE,
+  CONSTRAINT `purchaseLineItem_ibfk_2` FOREIGN KEY (`productId`) REFERENCES `product` (`productId`) ON DELETE CASCADE
+  
+  2. purchaseMetaData | CREATE TABLE `purchaseMetaData` (
+  `purchaseId` int(11) NOT NULL,
+  `billDate` date DEFAULT NULL,
+  `vat` float DEFAULT NULL,
+  `discount` float DEFAULT NULL,
+  `billTotal` float DEFAULT NULL,
+  PRIMARY KEY (`purchaseId`)
+) 
+3.purchasePayment | CREATE TABLE `purchasePayment` (
+  `purchaseId` int(11) DEFAULT NULL,
+  `payId` int(11) NOT NULL AUTO_INCREMENT,
+  `payDate` date DEFAULT NULL,
+  `paidAmount` float DEFAULT NULL,
+  PRIMARY KEY (`payId`),
+  KEY `purchaseId` (`purchaseId`),
+  CONSTRAINT `purchasePayment_ibfk_1` FOREIGN KEY (`purchaseId`) REFERENCES `purchaseMetaData` (`purchaseId`) ON DELETE CASCADE
+) 
