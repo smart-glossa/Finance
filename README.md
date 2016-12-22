@@ -1,4 +1,5 @@
-Database:
+
+<h1>MySQL Database:</h1>
 
 <p>
 1.user  | CREATE TABLE `user` (
