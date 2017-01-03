@@ -1,10 +1,6 @@
 package com.smartglossa.user;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -15,56 +11,63 @@ import org.json.JSONObject;
 
 public class UserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    public UserServlet() {
-        super();
-    }
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public UserServlet() {
+		super();
+	}
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		doPost(request, response);
 
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		String op = request.getParameter("operation");
-		if(op.equals("addUser")){
+		if (op.equals("addUser")) {
 			JSONObject obj = new JSONObject();
+			String name = request.getParameter("name");
 			String uname = request.getParameter("uname");
 			String pass = request.getParameter("pass");
+			String address = request.getParameter("address");
+			String mobileNumber = request.getParameter("mobileNumber");
 			try {
-				Class.forName("com.mysql.jdbc.Driver");
-				Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/finance", "root", "root");
-				Statement stmt = conn.createStatement();
-				String query = "insert into user(userName,password) values('"+ uname +"','"+ pass +"')";
-				stmt.execute(query);
-				obj.put("status", "success");
-				
-
+				UserApplication user = new UserApplication();
+				user.addUser(name, uname, pass, address, mobileNumber);
+				obj.put("status", 1);
 			} catch (Exception e) {
-				obj.put("status", "Failure");
+				obj.put("status", 0);
 				e.printStackTrace();
 			}
 			response.getWriter().print(obj);
-	}else if(op.equals("login")){
-		JSONObject obj = new JSONObject();
-		String uname = request.getParameter("user");
-		String pass = request.getParameter("passw");
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/finance", "root", "root");
-			Statement stmt = conn.createStatement();
-			String query = "Select *from user where userName='"+ uname +"'AND password="+ pass;
-			ResultSet rs = stmt.executeQuery(query);
-			if(rs.next()){
-				obj.put("user", rs.getString("userName"));
-				obj.put("status", "success");
+		} else if (op.equals("login")) {
+			JSONObject result = new JSONObject();
+			String uname = request.getParameter("user");
+			String pass = request.getParameter("passw");
+			try {
+				UserApplication user = new UserApplication();
+				result = user.login(uname, pass);
+				result.put("status", 1);
+				response.getWriter().print(result);
+			} catch (Exception e) {
+				result.put("status", 0);
+				response.getWriter().print(result);
+				e.printStackTrace();
 			}
-		} catch (Exception e) {
-			obj.put("status", "Failure");
-			e.printStackTrace();
+		} else if (op.equals("getName")) {
+			JSONObject result = new JSONObject();
+			String uname = request.getParameter("uname");
+			try {
+				UserApplication user = new UserApplication();
+				result = user.getName(uname);
+				response.getWriter().print(result);
+			} catch (Exception e) {
+				result.put("status", 0);
+				response.getWriter().print(result);
+				e.printStackTrace();
+			}
 		}
-		response.getWriter().print(obj);
-	}
 
 	}
 }

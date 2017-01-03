@@ -11,32 +11,38 @@ import org.json.JSONObject;
 
 public class FinanceServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-  
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		doPost(request, response);
 
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		String op = request.getParameter("operation");
-		if(op.equals("addCustomer")){
+		if (op.equals("addCustomer")) {
 			JSONObject obj = new JSONObject();
 			int cusId = Integer.parseInt(request.getParameter("cusId"));
+			int cusAcc = Integer.parseInt(request.getParameter("cusAccount"));
 			String cusName = request.getParameter("cname");
-			String addr = request.getParameter("add");
-			String phoneNo = request.getParameter("pno");
-			String landline = request.getParameter("lno");
+			String address = request.getParameter("add");
+			String mobileNo = request.getParameter("mno");
+			String landLine = request.getParameter("lno");
+			String referralName = request.getParameter("refName");
+			String referralAddress = request.getParameter("refAdd");
+			String referralContactNo = request.getParameter("refConNo");
 			try {
 				FinanceClass cus = new FinanceClass();
-				cus.addCustomer(cusId, cusName, addr, phoneNo, landline);
-				obj.put("status", "success");
+				cus.addCustomer(cusId, cusAcc, cusName, address, mobileNo, referralName, referralAddress,
+						referralContactNo, landLine);
+				obj.put("status", 1);
 			} catch (Exception e) {
 				e.printStackTrace();
-				obj.put("status", "Failure");
+				obj.put("status", 0);
 			}
 			response.getWriter().print(obj);
-		}else if(op.equals("getAllCustomer")){
+		} else if (op.equals("getAllCustomer")) {
 			JSONArray result = new JSONArray();
 			try {
 				FinanceClass cus = new FinanceClass();
@@ -46,49 +52,52 @@ public class FinanceServlet extends HttpServlet {
 			}
 			response.getWriter().print(result);
 
-		}else if(op.equals("updateCustomer")){
+		} else if (op.equals("updateCustomer")) {
 			JSONObject obj = new JSONObject();
-		 	int cusId = Integer.parseInt(request.getParameter("cusId"));
+			int cusId = Integer.parseInt(request.getParameter("cusId"));
+			int cusAcc = Integer.parseInt(request.getParameter("cusAccount"));
 			String cusName = request.getParameter("cname");
-			String addr = request.getParameter("add");
-			String phoneNo = request.getParameter("pno");
-			String landline = request.getParameter("lno");
+			String address = request.getParameter("add");
+			String mobileNo = request.getParameter("mno");
+			String landLine = request.getParameter("lno");
+			String referralName = request.getParameter("refName");
+			String referralAddress = request.getParameter("refAdd");
+			String referralContactNo = request.getParameter("refConNo");
 			try {
 				FinanceClass cus = new FinanceClass();
-				cus.updateCustomer(cusId, cusName, addr, phoneNo, landline);
-				obj.put("status", "success");
-				
+				cus.updateCustomer(cusId, cusAcc, cusName, address, mobileNo, referralName, referralAddress,
+						referralContactNo, landLine);
+				obj.put("status", 1);
+
 			} catch (Exception e) {
-				obj.put("status", "Failure");
+				obj.put("status", 0);
 				e.printStackTrace();
 			}
 			response.getWriter().print(obj);
-			
-		}else if(op.equals("getOneCustomer")){
+
+		} else if (op.equals("getOneCustomer")) {
 			JSONObject obj = new JSONObject();
 			int cusId = Integer.parseInt(request.getParameter("cusId"));
 			try {
 				FinanceClass cus = new FinanceClass();
 				obj = cus.getOneCustomer(cusId);
-				
+
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			response.getWriter().print(obj);
-		}else if(op.equals("deleteCustomer")){
+		} else if (op.equals("deleteCustomer")) {
 			JSONObject obj = new JSONObject();
 			int cusId = Integer.parseInt(request.getParameter("cusId"));
 			try {
 				FinanceClass cus = new FinanceClass();
 				cus.deleteCustomer(cusId);
 				obj.put("status", "success");
-				} catch (Exception e) {
-					obj.put("status","Failure");
+			} catch (Exception e) {
+				obj.put("status", "Failure");
 				e.printStackTrace();
 			}
-			 response.getWriter().print(obj);
+			response.getWriter().print(obj);
 		}
 	}
-
 }
- 

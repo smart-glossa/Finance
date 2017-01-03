@@ -4,8 +4,15 @@ $(document).ready(function(){
 	}
 });
 	$(document).on('click','#adduser',function(){
+		var name = $('#name').val();
 		var uname = $('#uname').val();
 		var pass = $('#pass').val();
+		var address = $('#address').val();
+		var mobileNo = $('#mobileNo').val();
+		if(name===""){
+			$('#name').focus().css('outline-color','red');
+			return false;
+		}
 		if(uname===""){
 			$('#uname').focus().css('outline-color','red');
 			return false;
@@ -14,15 +21,26 @@ $(document).ready(function(){
 			$('#pass').focus().css('outline-color','red');
 			return false;
 		}
-		var url = "http://localhost:8080/Finance/user?operation=addUser&uname="+ uname +"&pass="+ pass;
+		if(address===""){
+			$('#address').focus().css('outline-color','red');
+			return false;
+		}
+		if(mobileNo===""){
+			$('#mobileNo').focus().css('outline-color','red');
+			return false;
+		}
+		var url = "http://localhost:8080/Finance/user?operation=addUser&name=" + name +"&uname="+ uname +"&pass="+ pass +"&address="+ address +"&mobileNumber=" + mobileNo;
 		$.ajax({
 			url:url,
 			type:'POST'
 		})
 		.done(function(result){
 			alert(result);
+			$('#name').val("");
 			$('#uname').val("");
 			$('#pass').val("");
+			$('#address').val("");
+			$('#mobileNo').val("");
 		})
 		.fail(function(result){
 			alert(result);
@@ -46,7 +64,7 @@ $(document).ready(function(){
 		.done(function(result){
 			//alert(result);
 			var res = JSON.parse(result);
-			if(res.status == "success"){
+			if(res.status == 1){
 				document.cookie = "uname="+ uname;
 				window.location.href = "home.html";
 			}

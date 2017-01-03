@@ -35,9 +35,9 @@ public class CustomerAccount extends HttpServlet {
 				Statement stmt = conn.createStatement();
 				String query = "Insert into customerAccount(cusId,accNo)values("+ cusId +","+ accNum +")";
 				stmt.execute(query);
-				obj.put("status", "success");
+				obj.put("status", 1);
 			} catch (Exception e) {
-				obj.put("status", "failure");
+				obj.put("status", 0);
 				e.printStackTrace();
 			}
 			response.getWriter().print(obj);

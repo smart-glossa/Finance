@@ -1,6 +1,6 @@
 $(document).ready(function(){
 	//Adding accounts file
-$(document).on('click','#sub',function(){
+$(document).on('click','#add',function(){
 	var accNo = $('#acc').val();
 	var line = $('#line').val();
 	var duration = $('#duration').val();

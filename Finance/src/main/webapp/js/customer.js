@@ -12,7 +12,7 @@ $(document).on('click','#add',function(){
 	var add = $('#addr').val();
 	var pno = $('#phoneNo').val();
 	var lno = $('#landline').val();
-	var url = "/Finance/finance?operation=addCustomer&cusId="+cusId +"&cname="+ cname +"&add="+ add +"&pno="+ pno +"&lno=" + lno;
+	var url = "/Finance/finance?operation=addCustomer&cusId="+cusId +"&cname="+ cname +"&add="+ add +"&mno="+ pno +"&lno=" + lno;
 	if(cusId === ""){
 		$('#cusId').focus().css('outline-color','red');
 		return false;
@@ -149,7 +149,7 @@ $(document).on('click','#updateCus',function(){
     	$("#msg").html("Enter Landline Number as correct format").show().fadeOut(3000);
 	    return false;
 	}
-	var url = "/Finance/finance?operation=updateCustomer&cusId=" + cusId +"&cname=" + cname+"&add=" + add +"&pno=" + pno +"&lno=" + lno; 
+	var url = "/Finance/finance?operation=updateCustomer&cusId=" + cusId +"&cname=" + cname+"&add=" + add +"&mno=" + pno +"&lno=" + lno; 
 	$.ajax({
 		url:url,
 		type:'POST'

@@ -10,6 +10,8 @@ import java.sql.Statement;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.smartglossa.user.UserConstants;
+
 public class FinanceClass {
 	Connection conn = null;
 	Statement stmt = null;
@@ -20,14 +22,17 @@ public class FinanceClass {
 		openConnection();
 	}
 
-	public void addCustomer(int cusId, String cusName, String addr, String phoneNo, String landline) throws SQLException {
-		JSONObject obj = new JSONObject();
+	public void addCustomer(int cusId, int cusAcc, String cusName, String address, String mobileNo, String referralName,
+			String referralAddress, String referralContactNo, String landLine) throws SQLException {
 		try {
 
-			String query = "Insert into customer(cusId,cusName,address,phoneNo,landLine) values("+ cusId +",'" + cusName + "','" + addr + "','"
-					+ phoneNo + "','"+ landline +"')";
+			String query = "Insert into customer(customerId,customerName,address,mobileNumber,referralName,referralAddress,referralContactNo,landLine) values("
+					+ cusId + ",'" + cusName + "','" + address + "','" + mobileNo + "','" + referralName + "','"
+					+ referralAddress + "','" + referralContactNo + "','" + landLine + "')";
 			stmt.execute(query);
-			obj.put("status", "success");
+			String query1 = "Insert into customerAccount(accountNumber,customerId) values(" + cusAcc + "," + cusId
+					+ ")";
+			stmt.execute(query1);
 		} finally {
 			closeConnection();
 		}
@@ -40,11 +45,14 @@ public class FinanceClass {
 			rs = stmt.executeQuery(query);
 			while (rs.next()) {
 				JSONObject obj = new JSONObject();
-				obj.put("cusId", rs.getInt("cusId"));
-				obj.put("cusName", rs.getString("cusName"));
+				obj.put("cusId", rs.getInt("customerId"));
+				obj.put("cusName", rs.getString("customerName"));
 				obj.put("address", rs.getString("address"));
-				obj.put("phoneNo", rs.getString("phoneNo"));
+				obj.put("mobileNo", rs.getString("mobileNumber"));
 				obj.put("landLine", rs.getString("landLine"));
+				obj.put("referenceName", rs.getString("referralName"));
+				obj.put("referenceAddress", rs.getString("referralAddress"));
+				obj.put("referenceContactNo", rs.getString("referralContactNo"));
 				result.put(obj);
 			}
 		} finally {
@@ -53,10 +61,12 @@ public class FinanceClass {
 		return result;
 	}
 
-	public void updateCustomer(int cusId, String cusName, String addr, String phoneNo, String landline) throws SQLException {
+	public void updateCustomer(int cusId, int cusAcc, String cusName, String address, String mobileNo,
+			String referralName, String referralAddress, String referralContactNo, String landLine) throws SQLException {
 		try {
-			String query = "update customer set cusName='" + cusName + "',address='" + addr + "',phoneNo='" + phoneNo
-					+"',landLine='"+ landline + "'where cusId=" + cusId;
+			String query = "update customer set customerName='" + cusName + "',address='" + address + "',mobileNumber='"
+					+ mobileNo + "',referralName='" + referralName + "',referralAddress='" + referralAddress
+					+ "',landLine='" + landLine +"',referralContactNo='" + referralContactNo + "'where customerId=" + cusId;
 			stmt.execute(query);
 		} finally {
 			closeConnection();
@@ -67,14 +77,17 @@ public class FinanceClass {
 	public JSONObject getOneCustomer(int cusId) throws SQLException {
 		JSONObject obj = new JSONObject();
 		try {
-			String query = "select * from customer where cusId=" + cusId;
-		    rs = stmt.executeQuery(query);
+			String query = "select * from customer where customerId=" + cusId;
+			rs = stmt.executeQuery(query);
 			if (rs.next()) {
-				obj.put("cusId", rs.getInt("cusId"));
-				obj.put("cusName", rs.getString("cusName"));
+				obj.put("cusId", rs.getInt("customerId"));
+				obj.put("cusName", rs.getString("customerName"));
 				obj.put("address", rs.getString("address"));
-				obj.put("phoneNo", rs.getString("phoneNo"));
+				obj.put("mobileNo", rs.getString("mobileNumber"));
 				obj.put("landLine", rs.getString("landLine"));
+				obj.put("referenceName", rs.getString("referralName"));
+				obj.put("referenceAddress", rs.getString("referralAddress"));
+				obj.put("referenceContactNo", rs.getString("referralContactNo"));
 			}
 		} finally {
 			closeConnection();
@@ -82,18 +95,20 @@ public class FinanceClass {
 		return obj;
 
 	}
-	public void deleteCustomer(int cusId) throws SQLException{
-		try{
-			String query = "delete from customer where cusId="+ cusId;
+
+	public void deleteCustomer(int cusId) throws SQLException {
+		try {
+			String query = "delete from customer where customerId=" + cusId;
 			stmt.execute(query);
-		}finally{
+		} finally {
 			closeConnection();
 		}
 	}
 
 	private void openConnection() throws SQLException, ClassNotFoundException {
 		Class.forName("com.mysql.jdbc.Driver");
-		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/finance", "root", "root");
+		conn = DriverManager.getConnection("jdbc:mysql://" + UserConstants.MYSQL_SERVER + "/" + UserConstants.DATABASE,
+				UserConstants.USERNAME, UserConstants.PASSWORD);
 		stmt = conn.createStatement();
 	}
 

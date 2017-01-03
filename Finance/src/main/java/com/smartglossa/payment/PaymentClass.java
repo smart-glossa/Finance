@@ -19,9 +19,9 @@ public class PaymentClass {
 	public PaymentClass() throws ClassNotFoundException, SQLException {
 		openConnection();
 	}
-	public void addPayment(String payment,int accId,String paydate) throws SQLException{
+	public void addPayment(String payment,int accId,String paydate,int userId) throws SQLException{
 		try{
-			String query = "Insert into payment(payment,accId,paydate) values('"+ payment +"',"+ accId +",'"+ paydate +"')";
+			String query = "Insert into payment(payment,accId,paydate,userId) values('"+ payment +"',"+ accId +",'"+ paydate +"',"+ userId +")";
 			stmt.execute(query);
 		}finally{
 			closeConnection();
@@ -45,9 +45,9 @@ public class PaymentClass {
 		return res;
 		
 	}
-	public void updatePayment( String payment,int accId , String paydate) throws SQLException{
+	public void updatePayment( String payment,int accId , String paydate, int userId) throws SQLException{
 		try{
-			String query = "update Payment set  payment='" + payment +"',accId="+ accId +",paydate='"+ paydate ;
+			String query = "update payment set  payment='" + payment +"',accId="+ accId +",paydate='"+ paydate +"',userId="+ userId;
 			stmt.execute(query);
 		}finally{
 			closeConnection();
@@ -56,7 +56,7 @@ public class PaymentClass {
 	public JSONObject getOnePayment(int pId) throws SQLException{
 		JSONObject obj = new JSONObject();
 		try{
-			String query = "select * from Payment where payId="+ pId;
+			String query = "select * from payment where payId="+ pId;
 			rs = stmt.executeQuery(query);
 			if(rs.next()){
 				obj.put("amount",rs.getString("amount"));
@@ -71,7 +71,7 @@ public class PaymentClass {
 	}
 	public void deletePayment(int accId) throws SQLException{
 		try{
-			String query = "delete from Payment where accId="+ accId;
+			String query = "delete from payment where accId="+ accId;
 			stmt.execute(query);
 		}finally{
 			closeConnection();

@@ -39,9 +39,9 @@ public class Account extends HttpServlet {
 			try {
 				AccountClass acc = new AccountClass();
 				acc.addAccount(accNo, line, duration,modeOfPayment, amountGiven, amountToPay,date,currentAccount);
-				obj.put("status", "success");
+				obj.put("status", 1);
 			} catch (Exception e) {
-				obj.put("status", "failure");
+				obj.put("status", 0);
 				e.printStackTrace();
 			}  
 			response.getWriter().print(obj);
@@ -59,9 +59,9 @@ public class Account extends HttpServlet {
 			try {
 				AccountClass acc = new AccountClass();
 				acc.updateAccount(accId, accNo, line, duration,modeOfPayment, amountGiven, amountToPay,date,currentAccount);
-				obj.put("status", "success");
+				obj.put("status", 1);
 			} catch (Exception e) {
-				obj.put("status", "failure");
+				obj.put("status", 0);
 				e.printStackTrace();
 			}
 			response.getWriter().print(obj);
@@ -82,9 +82,9 @@ public class Account extends HttpServlet {
 			try {
 				AccountClass acc = new AccountClass();
 				acc.deleteAccount(accId);
-				obj.put("status", "success");
+				obj.put("status", 1);
 			} catch (Exception e) {
-				obj.put("status", "Failure");
+				obj.put("status", 0);
 				e.printStackTrace();
 			}
 			response.getWriter().print(obj);
@@ -95,12 +95,24 @@ public class Account extends HttpServlet {
 				result = acc.getAllAccount();
 			} catch (Exception e) {
 				JSONObject obj = new JSONObject();
-				obj.put("status", "failure");
+				obj.put("status", 0);
 				result.put(obj);
 				e.printStackTrace();
 			}
 			response.getWriter().print(result);
-		} /*else if (operation.equals("getStatement")) {
+		} else if(operation.equals("getDetailByLine")){
+			JSONArray result = new JSONArray();
+			String line = request.getParameter("line");
+			try{
+				AccountClass acc = new AccountClass();
+				result = acc.getDetailByLine(line);
+				
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+			response.getWriter().print(result);
+		}
+			/*else if (operation.equals("getStatement")) {
 			JSONObject obj = new JSONObject();
 			JSONArray array = new JSONArray();
 			int accId = Integer.parseInt(request.getParameter("accId"));
