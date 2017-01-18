@@ -21,7 +21,7 @@ public class AccountClass {
 	}
 
 	public void addAccount(int accNo, String line, String duration, String modeOfPayment, String amountGiven,
-			String amountToPay, String date, String currentAccount) throws SQLException {
+			String amountToPay, String date, boolean currentAccount) throws SQLException {
 		try {
 			String query = "insert into accounts(accountNumber,line,duration,modeOfPayment,amountGiven,amountToPay,givenDate) values("
 					+ accNo + ",'" + line + "','" + duration + "','" + modeOfPayment + "','" + amountGiven + "','"
@@ -67,7 +67,6 @@ public class AccountClass {
 		return obj;
 
 	}
-
 	public void deleteAccount(int accId) throws SQLException {
 		try {
 			String query = "delete from accounts where accId=" + accId;
@@ -76,7 +75,6 @@ public class AccountClass {
 			closeConnection();
 		}
 	}
-
 	public JSONArray getAllAccount() throws SQLException {
 		JSONArray res = new JSONArray();
 		try {

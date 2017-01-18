@@ -35,7 +35,11 @@ public class Account extends HttpServlet {
 			String amountGiven = request.getParameter("amountGiven");
 			String amountToPay = request.getParameter("amountToPay");
 			String date = request.getParameter("date");
-			String currentAccount = request.getParameter("currentAccount");
+			boolean currentAccount;
+			if(request.getParameter("currentAccount") == null)
+					currentAccount = false;
+			else
+				currentAccount = true;
 			try {
 				AccountClass acc = new AccountClass();
 				acc.addAccount(accNo, line, duration,modeOfPayment, amountGiven, amountToPay,date,currentAccount);
