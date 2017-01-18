@@ -23,9 +23,9 @@ public class AccountClass {
 	public void addAccount(int accNo, String line, String duration, String modeOfPayment, String amountGiven,
 			String amountToPay, String date, boolean currentAccount) throws SQLException {
 		try {
-			String query = "insert into accounts(accountNumber,line,duration,modeOfPayment,amountGiven,amountToPay,givenDate) values("
+			String query = "insert into accounts(accountNumber,line,duration,modeOfPayment,amountGiven,amountToPay,givenDate,currentAccount) values("
 					+ accNo + ",'" + line + "','" + duration + "','" + modeOfPayment + "','" + amountGiven + "','"
-					+ amountToPay + "','" + date + "')";
+					+ amountToPay + "','" + date + "',"+currentAccount+")";
 			stmt.execute(query);
 		} finally {
 			closeConnection();
@@ -33,7 +33,7 @@ public class AccountClass {
 	}
 
 	public void updateAccount(int accId, int accNo, String line, String duration, String modeOfPayment,
-			String amountGiven, String amountToPay, String date, String currentAccount) throws SQLException {
+			String amountGiven, String amountToPay, String date, boolean currentAccount) throws SQLException {
 		try {
 			String query = "update accounts set accountNumber='" + accNo + "',line='" + line + "',duration='" + duration
 					+ "',modeOfPayment='" + modeOfPayment + "',amountGiven='" + amountGiven + "',amountToPay='"
