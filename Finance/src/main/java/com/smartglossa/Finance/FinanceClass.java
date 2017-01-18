@@ -77,7 +77,7 @@ public class FinanceClass {
 	public JSONObject getOneCustomer(int cusId) throws SQLException {
 		JSONObject obj = new JSONObject();
 		try {
-			String query = "select * from customer where customerId=" + cusId;
+			String query = "select * from customer,customerAccount where customer.customerId=" + cusId +" AND customerAccount.customerId="+ cusId;
 			rs = stmt.executeQuery(query);
 			if (rs.next()) {
 				obj.put("cusId", rs.getInt("customerId"));
@@ -88,6 +88,7 @@ public class FinanceClass {
 				obj.put("referenceName", rs.getString("referralName"));
 				obj.put("referenceAddress", rs.getString("referralAddress"));
 				obj.put("referenceContactNo", rs.getString("referralContactNo"));
+				obj.put("accNo", rs.getInt("accountNumber"));
 			}
 		} finally {
 			closeConnection();

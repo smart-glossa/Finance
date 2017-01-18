@@ -37,7 +37,7 @@ public class AccountClass {
 		try {
 			String query = "update accounts set accountNumber='" + accNo + "',line='" + line + "',duration='" + duration
 					+ "',modeOfPayment='" + modeOfPayment + "',amountGiven='" + amountGiven + "',amountToPay='"
-					+ amountToPay + "',date='" + date + "',currentAccount='" + currentAccount + "'where accId ="
+					+ amountToPay + "',givenDate='" + date + "',currentAccount='" + currentAccount + "'where accId ="
 					+ accId;
 			stmt.execute(query);
 		} finally {
@@ -52,13 +52,13 @@ public class AccountClass {
 			rs = stmt.executeQuery(query);
 			if (rs.next()) {
 				obj.put("accId", rs.getInt("accId"));
-				obj.put("accNo", rs.getString("accNo"));
+				obj.put("accNo", rs.getInt("accountNumber"));
 				obj.put("line", rs.getString("line"));
 				obj.put("duration", rs.getString("duration"));
 				obj.put("modeOfPayment", rs.getString("modeOfPayment"));
-				obj.put("amountGiven", rs.getString("amountGiven"));
-				obj.put("amountToPay", rs.getString("amountToPay"));
-				obj.put("date", rs.getInt("date"));
+				obj.put("amountGiven", rs.getFloat("amountGiven"));
+				obj.put("amountToPay", rs.getFloat("amountToPay"));
+				obj.put("date", rs.getString("givenDate"));
 				obj.put("currentAccount", rs.getString("currentAccount"));
 			}
 		} finally {
@@ -85,13 +85,13 @@ public class AccountClass {
 			while (rs.next()) {
 				JSONObject obj = new JSONObject();
 				obj.put("accId", rs.getInt("accId"));
-				obj.put("accNo", rs.getInt("accNo"));
+				obj.put("accNo", rs.getInt("accountNumber"));
 				obj.put("line", rs.getString("line"));
 				obj.put("duration", rs.getString("duration"));
 				obj.put("modeOfPayment", rs.getString("modeOfPayment"));
-				obj.put("amountGiven", rs.getString("amountGiven"));
-				obj.put("amountToPay", rs.getString("amountToPay"));
-				obj.put("date", rs.getString("date"));
+				obj.put("amountGiven", rs.getFloat("amountGiven"));
+				obj.put("amountToPay", rs.getFloat("amountToPay"));
+				obj.put("date", rs.getString("givenDate"));
 				res.put(obj);
 
 			}
