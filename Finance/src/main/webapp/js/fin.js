@@ -57,10 +57,14 @@ function account() {
   acc += "<h3>AddAccounts<\/h3>";
   acc += "<\/div>";
   acc += "<table>";
-	acc += "<tr>";
-	acc += "<td>Account Number*:<\/td>";
-	acc += "<td><input type=\"text\" id=\"accNo\"><\/td>";
-	acc += "<\/tr>";
+  acc += "<tr>";
+  acc += "<td>Account Id*:<\/td>";
+  acc += "<td><input type=\"text\" id=\"accId\"><\/td>";
+  acc += "<\/tr>";
+  acc += "<tr>";
+  acc += "<td>Account Number*:<\/td>";
+  acc += "<td><input type=\"text\" id=\"accNo\"><\/td>";
+  acc += "<\/tr>";
   acc += "<tr>";
   acc += "<td>Line*:<\/td>";
   acc += "<td><select id=\"line\" style=\"width: 220px;\">";
@@ -104,14 +108,12 @@ function account() {
   acc += "<td>Current Account*:<\/td>";
   acc += "<td><input type=\"text\" placeholder=\"Current Account\" id=\"currentacc\"><\/td>";
   acc += "<\/tr>";
-
   acc += "<tr>";
   acc += "<td><\/td>";
   acc += "<td><input type=submit value=Add id=addAcc>";
   acc += "<input type=submit value=Update id=updateAcc><\/td>";
   acc += "<\/tr>";
   acc += "<\/table>";
-
   acc += "<div class=getAllAccount><\/div>";
   $('.fin')[0].innerHTML = acc;
 }

@@ -83,7 +83,6 @@ $(document).on('click', '.delete', function() {
 $(document).on('keyup', '#cusId', function() {
   var cusId = $('#cusId').val();
   if (cusId !== "") {
-
     var url = "/Finance/finance?operation=getOneCustomer&cusId=" + cusId;
     $.ajax({
         url: url,

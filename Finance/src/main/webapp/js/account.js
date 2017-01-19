@@ -54,6 +54,10 @@ $(document).ready(function() {
         typ: 'POST'
       })
       .done(function(result) {
+    	  var res = JSON.parse(result);
+			if (res.status == 1){
+				alert("Added Sussfully");
+			}
         $('#accNo').val("");
         $('#line').val("");
         $('#duration').val("");
@@ -132,18 +136,18 @@ $(document).on('click', '#updateAcc', function() {
       alert(result);
     })
 });
-$(document).on('keyup', '#acc', function() {
-  var acc = $('#acc').val();
-  if (acc !== "") {
-    if (accNo.length === 1) {
-      var url = "/Finance/account?operation=getOneAccount&acc=" + accNo;
+$(document).on('keyup', '#accId', function() {
+  var accId = $('#accId').val();
+  if (accId !== "") {
+    if (accId.length === 1) {
+      var url = "/Finance/account?operation=getOneAccount&accId=" + accId;
       $.ajax({
           url: url,
           type: 'POST'
         })
         .done(function(result) {
           var res = JSON.parse(result);
-          $('#acc').val(res.accNo);
+          $('#accNo').val(res.accNo);
           $('#line').val(res.line);
           $('#duration').val(res.duration);
           $('#modeofpay').val(res.modeofpay)
@@ -155,8 +159,9 @@ $(document).on('keyup', '#acc', function() {
         .fail(function(result) {
           alert(result);
         })
-    } else {
-      $('#acc').val("");
+    }
+  }else {
+      $('#accNo').val("");
       $('#line').val("");
       $('#duration').val("");
       $('#modeofpay').val("");
@@ -165,12 +170,7 @@ $(document).on('keyup', '#acc', function() {
       $('#date').val("");
       $('#currentacc').val("");
     }
-
-  }
-
-
 })
-
 function getAllAccount() {
   var url = "/Finance/account?operation=getAllAccount";
   $.ajax({
