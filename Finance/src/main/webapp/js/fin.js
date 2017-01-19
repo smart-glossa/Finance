@@ -120,36 +120,38 @@ function account() {
 
 function payment() {
   var pay = "";
-  pay += "<div class=pay>";
+  pay += "<div class=\"payment\">";
   pay += "<div>";
-  pay += "<h3>AddPayment<\/h3>";
+  pay += "<h3>Add Payments<\/h3>";
   pay += "<\/div>";
-  pay += "<input type=text id=payId>";
-  pay += "<div> ";
-  pay += "<label>Account Number:<\/label> ";
+  pay += "<table>";
+  pay += "<tr>";
+  pay += "<td>Account Id*:<\/td>";
+  pay += "<td><input type=\"text\" id=\"accId\"><\/td>";
+  pay += "<\/tr>";
+  pay += "<tr>";
+  pay += "<td>User Name*:<\/td>";
+  pay += "<td><input type=\"text\" id=\"uName\"><\/td>";
+  pay += "<\/tr>";
+  pay += "<tr>";
+  pay += "<td>Amount*:<\/td>";
+  pay += "<td><input type=\"text\" id=\"amount\"><\/td>";
+  pay += "<\/tr>";
+  pay += "<tr>";
+  pay += "<td>Collection Date*:<\/td>";
+  pay += "<td><input type=\"text\" id=\"collDate\"><\/td>";
+  pay += "<\/tr>";
+  pay += "<tr>";
+  pay += "<td>Entry Date*:<\/td>";
+  pay += "<td><input type=\"text\" id=\"entry\"><\/td>";
+  pay += "<\/tr>";
+  pay += "<tr>";
+  pay += "<td><\/td>";
+  pay += "<td><input type=submit value=Add id=addAcc>";
+  pay += "<\/tr>";
+  pay += "<\/table>";
   pay += "<\/div>";
-  pay += "<div>";
-  pay += "<input type=\"text\" id=\"accId\" placeholder=\"Account Number\">";
-  pay += "<\/div>";
-  pay += "<div>";
-  pay += "<label>Amount:<\/label>";
-  pay += "<\/div>";
-  pay += "<div>";
-  pay += "<input type=\"text\" id=\"amount\" placeholder=\"Paid Amount\">";
-  pay += "<\/div>";
-  pay += "<div>";
-  pay += "<label>Date:<\/label>";
-  pay += "<\/div>";
-  pay += "<div>";
-  pay += "<input placeholder=\"Date\" class=\"textbox-n\" type=\"text\" onfocus=\"(this.type='date')\"  id=\"date\"> ";
-  pay += "<\/div>";
-  pay += "<div>";
-  pay += "<input type=\"submit\" value=\"Add\" id=\"addpay\">";
-  pay += "<input type=\"submit\" value=\"Update\" id=\"updatepay\">";
-  pay += "<\/div>";
-  pay += "<\/div>";
-  pay += "<div class=\"getAllPayment\"><\/div>";
-  $('.fin')[0].innerHTML = pay;
+   $('.fin')[0].innerHTML = pay;
 }
 
 function statement() {

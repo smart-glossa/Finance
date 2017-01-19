@@ -27,10 +27,10 @@ public class PaymentServlet extends HttpServlet {
 			String collectionDate = request.getParameter("cdate");
 			String entryDate = request.getParameter("eDate");
 			int accId = Integer.parseInt(request.getParameter("accId"));
-			String uname = request.getParameter("uname");
+			String uName = request.getParameter("uname");
 			try {
 				PaymentClass pay = new PaymentClass();
-				pay.addPayment(payment, accId, paydate, accId);
+				pay.addPayment(amount, collectionDate, entryDate, accId, uName);
 				obj.put("status", "success");
 			} catch (Exception e) {
 				obj.put("status", "Failure");
@@ -52,12 +52,14 @@ public class PaymentServlet extends HttpServlet {
 
 		} else if (op.equals("updatePayment")) {
 			JSONObject obj = new JSONObject();
-			String payment = request.getParameter("payment");
+			float amount = Float.parseFloat(request.getParameter("amount"));
+			String collectionDate = request.getParameter("collDate");
+			String entryDate = request.getParameter("entryDate");
 			int accId = Integer.parseInt(request.getParameter("accId"));
-			String paydate = request.getParameter("paydate");
+			String uName = request.getParameter("uName");
 			try {
 				PaymentClass pay = new PaymentClass();
-				pay.updatePayment(payment,accId,paydate, accId);
+                pay.updatePayment(amount, collectionDate, entryDate, accId, uName);
 				obj.put("status", "success");
 
 			} catch (Exception e) {
@@ -68,20 +70,20 @@ public class PaymentServlet extends HttpServlet {
 
 		} else if (op.equals("getOnePayment")) {
 			JSONObject obj = new JSONObject();
-			int pId = Integer.parseInt(request.getParameter("payId"));
+			int accId = Integer.parseInt(request.getParameter("accId"));
 			try {
 				PaymentClass pay = new PaymentClass();
-				obj = pay.getOnePayment(pId);
+				obj = pay.getOnePayment(accId);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			response.getWriter().print(obj);
 		} else if (op.equals("deletePayment")) {
 			JSONObject obj = new JSONObject();
-			int pId = Integer.parseInt(request.getParameter("pId"));
+			int accId = Integer.parseInt(request.getParameter("accId"));
 			try {
 				PaymentClass pay = new PaymentClass();
-				pay.deletePayment(pId);
+				pay.deletePayment(accId);
 				obj.put("status", "success");
 			} catch (Exception e) {
 				obj.put("status", "Failure");

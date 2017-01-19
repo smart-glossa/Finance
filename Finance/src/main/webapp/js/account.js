@@ -150,7 +150,7 @@ $(document).on('keyup', '#accId', function() {
           $('#accNo').val(res.accNo);
           $('#line').val(res.line);
           $('#duration').val(res.duration);
-          $('#modeofpay').val(res.modeofpay)
+          $('#modeofpay').val(res.modeOfPayment);
           $('#amtgiven').val(res.amountGiven);
           $('#amttopay').val(res.amountToPay);
           $('#date').val(res.date);

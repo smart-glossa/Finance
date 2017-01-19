@@ -15,63 +15,65 @@ public class PaymentClass {
 	Statement stmt = null;
 	ResultSet rs = null;
 	PreparedStatement ps = null;
-	
 	public PaymentClass() throws ClassNotFoundException, SQLException {
 		openConnection();
 	}
-	public void addPayment(String payment,int accId,String paydate,int userId) throws SQLException{
+	public void addPayment(float amount,String collectionDate,String entryDate,int accId,String uName) throws SQLException{
 		try{
-			String query = "Insert into payment(payment,accId,paydate,userId) values('"+ payment +"',"+ accId +",'"+ paydate +"',"+ userId +")";
+			String query = "Insert into payment(amount,collectionDate,EntryDate,accountId,userName) values('"+ amount +"','"+ collectionDate+"','"+ entryDate +"',"+ accId +",'"+uName+"')";
 			stmt.execute(query);
 		}finally{
 			closeConnection();
 		}
 	}
 	public JSONArray getAllPayment() throws SQLException{
-		JSONArray res = new JSONArray();
+		JSONArray result = new JSONArray();
 		try{
-			String query = "select * from Payment";
+			String query = "select * from payment";
 			rs = stmt.executeQuery(query);
 			while(rs.next()){
 				JSONObject obj = new JSONObject();
-				obj.put("payment",rs.getString("payment"));
-				obj.put("accId",rs.getString("accId"));
-				obj.put("paydate",rs.getString("paydate"));
-				res.put(obj);
+				obj.put("amount",rs.getString("amount"));
+				obj.put("collectionDate",rs.getString("collectionDate"));
+				obj.put("EntryDate",rs.getString("EntryDate"));
+				obj.put("accountId",rs.getString("accountId"));
+				obj.put("userName",rs.getString("userName"));
+				result.put(obj);
 			}
 		}finally{
 			closeConnection();
 		}
-		return res;
+		return result;
 		
 	}
-	public void updatePayment( String payment,int accId , String paydate, int userId) throws SQLException{
+	public void updatePayment( float amount,String collectionDate , String entryDate, int accId,String uName ) throws SQLException{
 		try{
-			String query = "update payment set  payment='" + payment +"',accId="+ accId +",paydate='"+ paydate +"',userId="+ userId;
+			String query = "update payment set  amount='" + amount +"',collectionDate='"+ collectionDate +"',EntryDate='"+ entryDate +"',userName='"+ uName +"',where accountId="+accId ;
 			stmt.execute(query);
 		}finally{
 			closeConnection();
 		}
 	}
-	public JSONObject getOnePayment(int pId) throws SQLException{
+	public JSONObject getOnePayment(int accId) throws SQLException{
 		JSONObject obj = new JSONObject();
 		try{
-			String query = "select * from payment where payId="+ pId;
+			String query = "select * from payment where accountId="+ accId;
 			rs = stmt.executeQuery(query);
 			if(rs.next()){
-				obj.put("amount",rs.getString("amount"));
-				obj.put("accId",rs.getString("accId"));
-				obj.put("paydate",rs.getString("paydate"));
+				obj.put("amount",rs.getFloat("amount"));
+				obj.put("collectionDate",rs.getString("collectionDate"));
+				obj.put("EntryDate",rs.getString("EntryDate"));
+				obj.put("accountId", rs.getInt("accountId"));
+				obj.put("userName",rs.getString("userName"));
 			}
 		}finally{
 			closeConnection();
 		}
 		return obj;
-		
 	}
 	public void deletePayment(int accId) throws SQLException{
 		try{
-			String query = "delete from payment where accId="+ accId;
+			String query = "delete from payment where accountId="+ accId;
 			stmt.execute(query);
 		}finally{
 			closeConnection();
