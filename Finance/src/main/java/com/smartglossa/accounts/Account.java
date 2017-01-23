@@ -2,7 +2,6 @@ package com.smartglossa.accounts;
 
 import java.io.IOException;
 
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +12,7 @@ import org.json.JSONObject;
 
 public class Account extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+
 	public Account() {
 		super();
 	}
@@ -35,15 +35,15 @@ public class Account extends HttpServlet {
 			String amountGiven = request.getParameter("amountGiven");
 			String amountToPay = request.getParameter("amountToPay");
 			String date = request.getParameter("date");
-			boolean currentAccount=Boolean.parseBoolean(request.getParameter("currentAccount"));
+			boolean currentAccount = Boolean.parseBoolean(request.getParameter("currentAccount"));
 			try {
 				AccountClass acc = new AccountClass();
-				acc.addAccount(accNo, line, duration,modeOfPayment, amountGiven, amountToPay,date,currentAccount);
+				acc.addAccount(accNo, line, duration, modeOfPayment, amountGiven, amountToPay, date, currentAccount);
 				obj.put("status", 1);
 			} catch (Exception e) {
 				obj.put("status", 0);
 				e.printStackTrace();
-			}  
+			}
 			response.getWriter().print(obj);
 		} else if (operation.equals("updateAccount")) {
 			JSONObject obj = new JSONObject();
@@ -55,10 +55,11 @@ public class Account extends HttpServlet {
 			String amountGiven = request.getParameter("amountGiven");
 			String amountToPay = request.getParameter("amountToPay");
 			String date = request.getParameter("date");
-			boolean currentAccount=Boolean.parseBoolean(request.getParameter("currentAccount"));
+			boolean currentAccount = Boolean.parseBoolean(request.getParameter("currentAccount"));
 			try {
 				AccountClass acc = new AccountClass();
-				acc.updateAccount(accId, accNo, line, duration,modeOfPayment, amountGiven, amountToPay,date,currentAccount);
+				acc.updateAccount(accId, accNo, line, duration, modeOfPayment, amountGiven, amountToPay, date,
+						currentAccount);
 				obj.put("status", 1);
 			} catch (Exception e) {
 				obj.put("status", 0);
@@ -100,34 +101,31 @@ public class Account extends HttpServlet {
 				e.printStackTrace();
 			}
 			response.getWriter().print(result);
-		} else if(operation.equals("getDetailByLine")){
+		} else if (operation.equals("getDetailByLine")) {
 			JSONArray result = new JSONArray();
 			String line = request.getParameter("line");
-			try{
+			try {
 				AccountClass acc = new AccountClass();
 				result = acc.getDetailByLine(line);
-				
-			}catch(Exception e){
+
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			response.getWriter().print(result);
 		}
-			/*else if (operation.equals("getStatement")) {
-			JSONObject obj = new JSONObject();
-			JSONArray array = new JSONArray();
-			int accId = Integer.parseInt(request.getParameter("accId"));
-
-			try {
-				AccountClass acc = new AccountClass();
-				array = acc.getStatement(accId);
-
-			} catch (Exception e) {
-				obj.put("status", "Failure");
-				e.printStackTrace();
-			}
-			response.getWriter().print(array);
-
-		}*/
+		/*
+		 * else if (operation.equals("getStatement")) { JSONObject obj = new
+		 * JSONObject(); JSONArray array = new JSONArray(); int accId =
+		 * Integer.parseInt(request.getParameter("accId"));
+		 * 
+		 * try { AccountClass acc = new AccountClass(); array =
+		 * acc.getStatement(accId);
+		 * 
+		 * } catch (Exception e) { obj.put("status", "Failure");
+		 * e.printStackTrace(); } response.getWriter().print(array);
+		 * 
+		 * }
+		 */
 
 	}
 }

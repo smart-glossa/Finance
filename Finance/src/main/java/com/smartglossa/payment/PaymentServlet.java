@@ -26,11 +26,11 @@ public class PaymentServlet extends HttpServlet {
 			float amount = Float.parseFloat(request.getParameter("amt"));
 			String collectionDate = request.getParameter("cdate");
 			String entryDate = request.getParameter("eDate");
-			int accId = Integer.parseInt(request.getParameter("accId"));
+			int accNo = Integer.parseInt(request.getParameter("accNo"));
 			String uName = request.getParameter("uname");
 			try {
 				PaymentClass pay = new PaymentClass();
-				pay.addPayment(amount, collectionDate, entryDate, accId, uName);
+				pay.addPayment(amount, collectionDate, entryDate, uName, accNo);
 				obj.put("status", "success");
 			} catch (Exception e) {
 				obj.put("status", "Failure");
@@ -39,7 +39,6 @@ public class PaymentServlet extends HttpServlet {
 			response.getWriter().print(obj);
 		} else if (op.equals("getAllPayment")) {
 			JSONArray result = new JSONArray();
-
 			try {
 
 				PaymentClass pay = new PaymentClass();
@@ -59,7 +58,7 @@ public class PaymentServlet extends HttpServlet {
 			String uName = request.getParameter("uName");
 			try {
 				PaymentClass pay = new PaymentClass();
-                pay.updatePayment(amount, collectionDate, entryDate, accId, uName);
+				pay.updatePayment(amount, collectionDate, entryDate, accId, uName);
 				obj.put("status", "success");
 
 			} catch (Exception e) {
@@ -90,6 +89,17 @@ public class PaymentServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 			response.getWriter().print(obj);
+		} else if(op.equals("getId")){
+			JSONObject obj = new JSONObject();
+			int accNo = Integer.parseInt(request.getParameter("accNo"));
+			try {
+				PaymentClass pay = new PaymentClass();
+				
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			
+			
 		}
 	}
 

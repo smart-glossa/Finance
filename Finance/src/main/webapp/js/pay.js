@@ -29,7 +29,7 @@ $(document).on('click','#addpay',function(){
 	$.ajax({
 		url:url,
 		type:'POST'
-	})
+	})    
 	.done(function(result){
 		getAllPayment();
 		$('#accId').val("");
