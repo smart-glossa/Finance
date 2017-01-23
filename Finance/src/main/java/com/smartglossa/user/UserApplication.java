@@ -34,7 +34,7 @@ public class UserApplication {
 	public JSONObject login(String uname, String pass) throws SQLException {
 		JSONObject obj = new JSONObject();
 		try {
-			String query = "Select * from user where userName='" + uname + "'AND password=" + pass;
+			String query = "Select * from user where userName='" + uname + "'AND password='" + pass + "'";
 			rs = stmt.executeQuery(query);
 			if (rs.next()) {
 				obj.put("user", rs.getString("userName"));
