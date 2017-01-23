@@ -1,31 +1,42 @@
 $(document).ready(function(){
-})
 $(document).on('click','#addpay',function(){
-	var  payment = $('#payment').val();
 	var  accId = $('#accId').val();
-	var  paydate = $('#paydate').val();
-	if(payment ===""){
-		$('#payment').focus().css('outline-color','red');
-		return;
-	}
-	if(acccId ===""){
+	var  uname = $('#uName').val();
+	var  amount = $('#amount').val();
+	var  collDate = $('#collDate').val();
+	var  entrydate = $('#entry').val();
+	if(accId ===""){
 		$('#accId').focus().css('outline-color','red');
 		return;
 	}
-	if(paydate ===""){
-		$('#paydate').focus().css('outline-color','red');
+	if(uname ===""){
+		$('#uName').focus().css('outline-color','red');
 		return;
 	}
-	var url= "/Finance/payment?operation=addPayment&payment=" + payment +"&accId=" + accId +"&paydate=" + paydate;
+	if(amount ===""){
+		$('#amount').focus().css('outline-color','red');
+		return;
+	}
+	if(collDate ===""){
+		$('#collDate').focus().css('outline-color','red');
+		return;
+	}
+	if( entrydate ===""){
+		$('#entry').focus().css('outline-color','red');
+		return;
+	}
+	var url= "/Finance/payment?operation=addPayment&accId=" + accId +"&uName=" + uname +"&amount=" + amount +"&collDate="+collDate+"&entryDate="+entrydate;
 	$.ajax({
 		url:url,
 		type:'POST'
 	})
 	.done(function(result){
 		getAllPayment();
-		$('#payment').val("");
 		$('#accId').val("");
-		$('#paydate').val("");
+		$('#uName').val("");
+		$('#collDate').val("");
+		$('#entry').val("");
+		$('#amount').val("");
 	})
 	.fail(function(result){
 		alert(result);
@@ -41,19 +52,18 @@ function getAllPayment(){
 		var res = JSON.parse(result);
 		var length = res.length;
 		var table = '<table>'
-			table += '<tr><th>SerialNumber</th><th>Payment</th><th>Account Id</th><th>PayDate</th></tr>'
+			table += '<tr><th>SerialNumber</th><th>Account Id</th><th>User Name</th><th>Amount</th><th>Collection Type</th><th>EntryDate</th></tr>'
 				for(i=0;i<length;i++){
 					table += '<tr class="row">'
-					table += '<td>' + res[i].pId +'</td>';	
-				    table += '<td>' + res[i].accId +'</td>';
+					table += '<td>' + res[i].accId +'</td>';	
+				    table += '<td>' + res[i].uname +'</td>';
 					table += '<td>' + res[i].amount +'</td>';
-					table += '<td>' + res[i]. date +'</td>';
+					table += '<td>' + res[i]. colltype +'</td>';
+					table += '<td>' + res[i]. entryDate +'</td>';
 	    	    	table += '<td><img src="images/delete.jpg" height="35px" width="35px" class="delete"></td></tr>';
-
 				}
 					table += '</table>';  
 	                  $('.getAllPayment')[0].innerHTML = table;
-				
 	      })
 		.fail(function(result){
 			alert(result);
@@ -159,3 +169,4 @@ $(document).on('keyup','#payId',function(){
                return false;
     }
 })*/
+});
