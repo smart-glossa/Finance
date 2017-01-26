@@ -1,5 +1,5 @@
 $(document).ready(function(){
-$(document).on('click','#addpay',function(){
+$(document).on('click','#addPay',function(){
 	var  accId = $('#accId').val();
 	var  uname = $('#uName').val();
 	var  amount = $('#amount').val();

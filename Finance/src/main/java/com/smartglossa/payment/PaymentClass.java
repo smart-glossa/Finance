@@ -28,10 +28,10 @@ public class PaymentClass {
 			rs = stmt.executeQuery(query);
 			while (rs.next()) {
 				accId = rs.getInt("accId");
+			}
 				String query1 = "Insert into payment(amount,collectionDate,EntryDate,accId,userName) values('"
 						+ amount + "','" + collectionDate + "','" + entryDate + "'," + accId + ",'" + uName + "')";
 				stmt.execute(query1);
-			}
 		} finally {
 			closeConnection();
 		}

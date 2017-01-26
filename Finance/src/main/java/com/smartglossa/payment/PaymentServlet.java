@@ -31,9 +31,9 @@ public class PaymentServlet extends HttpServlet {
 			try {
 				PaymentClass pay = new PaymentClass();
 				pay.addPayment(amount, collectionDate, entryDate, uName, accNo);
-				obj.put("status", "success");
+				obj.put("status", 1);
 			} catch (Exception e) {
-				obj.put("status", "Failure");
+				obj.put("status",0);
 				e.printStackTrace();
 			}
 			response.getWriter().print(obj);

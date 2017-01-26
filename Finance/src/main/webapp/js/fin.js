@@ -147,7 +147,7 @@ function payment() {
   pay += "<\/tr>";
   pay += "<tr>";
   pay += "<td><\/td>";
-  pay += "<td><input type=submit value=Add id=addAcc>";
+  pay += "<td><input type=submit value=Add id=addPay>";
   pay += "<\/tr>";
   pay += "<\/table>";
   pay += "<\/div>";
