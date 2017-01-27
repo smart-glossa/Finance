@@ -5,11 +5,11 @@ function customer() {
   cus += "<table>";
   cus += "<tr>";
   cus += "<td>Customer Id*:<\/td>";
-  cus += "<td><input type=\"text\" id=\"cusId\"><\/td>";
+  cus += "<td><input type=\"text\" id=\"cusId\" placeholder=\"customerId\"><\/td>";
   cus += "<\/tr>";
   cus += "<tr>";
   cus += "<td>Account Number*:<\/td>";
-  cus += "<td><input type=\"text\" id=\"accNo\"><\/td>";
+  cus += "<td><input type=\"text\" id=\"accNo\" placeholder=\"AccountNumber\"><\/td>";
   cus += "<\/tr>";
   cus += "<tr>";
   cus += "<td>Customer Name*:<\/td>";
@@ -29,15 +29,15 @@ function customer() {
   cus += "<\/tr>"; 
   cus += "<tr>";
   cus += "<td>Referrence Name<\/td>";
-  cus += "<td><input type=\"text\" id=\"refName\"><\/td>";
+  cus += "<td><input type=\"text\" id=\"refName\" placeholder=\"ReferrenceName\"><\/td>";
   cus += "<\/tr>";
   cus += "<tr>";
   cus += "<td>Referrrence Address<\/td>";
-  cus += "<td><input type=\"text\" id=\"refAddress\"><\/td>";
+  cus += "<td><input type=\"text\" id=\"refAddress\" placeholder=\"ReferrenceAddress\"><\/td>";
   cus += "<\/tr>";
   cus += "<tr>";
   cus += "<td>Referrence Contact Number<\/td>";
-  cus += "<td><input type=\"text\" id=\"refConNo\"><\/td>";
+  cus += "<td><input type=\"text\" id=\"refConNo\" placeholder=\"ReferrenceContactNumber\"><\/td>";
   cus += "<\/tr>";
   cus += "<tr>";
   cus += "<td></td>"

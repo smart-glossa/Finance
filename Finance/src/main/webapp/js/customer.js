@@ -53,10 +53,14 @@ $(document).on('click', '#add', function() {
     .done(function(result) {
       getAllCustomer();
       $('#cusId').val("");
+      $('#accNo').val("");
       $('#cusname').val("");
       $('#addr').val("");
       $('#phoneNo').val("");
       $('#landline').val("");
+      $('#refName').val("");
+      $('#refAddress').val("");
+      $('#refConNo').val("");
     })
     .fail(function(result) {
       alert(result);
