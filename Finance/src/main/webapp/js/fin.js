@@ -26,7 +26,7 @@ function customer() {
   cus += "<tr>";
   cus += "<td>LandLine Number*:<\/td>";
   cus += "<td><input type=\"text\" placeholder=\"LandLine\" id=\"landline\" maxlength=\"11\"><\/td>";
-  cus += "<\/tr>"; 
+  cus += "<\/tr>";
   cus += "<tr>";
   cus += "<td>Referrence Name<\/td>";
   cus += "<td><input type=\"text\" id=\"refName\" placeholder=\"ReferrenceName\"><\/td>";
@@ -63,7 +63,7 @@ function account() {
   acc += "<\/tr>";
   acc += "<tr>";
   acc += "<td>Account Number*:<\/td>";
-  acc += "<td><input type=\"text\" id=\"accNo\"><\/td>";
+  acc += "<td><input type=\"text\" id=\"accNo\" placeholder=\"Account Number\"><\/td>";
   acc += "<\/tr>";
   acc += "<tr>";
   acc += "<td>Line*:<\/td>";
@@ -139,11 +139,11 @@ function payment() {
   pay += "<\/tr>";
   pay += "<tr>";
   pay += "<td>Collection Date*:<\/td>";
-  pay += "<td><input type=\"date\" placeholder=\"Collection Date\" id=\"collDate\"><\/td>";
+  pay += "<td><input placeholder=\"Date\" class=\"textbox-n\" type=\"text\" onfocus=\"(this.type='date')\"  id=\"collDate\"><\/td>";
   pay += "<\/tr>";
   pay += "<tr>";
   pay += "<td>Entry Date*:<\/td>";
-  pay += "<td><input type=\"date\" placeholder=\"Entry Date\" id=\"entry\"><\/td>";
+  pay += "<td><input placeholder=\"Date\" class=\"textbox-n\" type=\"text\" onfocus=\"(this.type='date')\"  id=\"entry\"><\/td>";
   pay += "<\/tr>";
   pay += "<tr>";
   pay += "<td><\/td>";
@@ -151,7 +151,7 @@ function payment() {
   pay += "<\/tr>";
   pay += "<\/table>";
   pay += "<\/div>";
-   $('.fin')[0].innerHTML = pay;
+  $('.fin')[0].innerHTML = pay;
 }
 
 function statement() {
