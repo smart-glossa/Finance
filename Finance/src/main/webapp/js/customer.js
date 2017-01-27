@@ -13,10 +13,10 @@ $(document).on('click', '#add', function() {
   var add = $('#addr').val();
   var pno = $('#phoneNo').val();
   var lno = $('#landline').val();
-	var refName = $('#refName').val();
-	var refAddress = $('#refAddress').val();
-	var refConNo = $('#refConNo').val();
-  var url = "/Finance/finance?operation=addCustomer&cusId=" + cusId + "&cusAccount=" + accNo +"&cname=" + cname + "&add=" + add + "&mno=" + pno + "&lno=" + lno +"&refName=" + refName +"&refAdd=" + refAddress +"&refeContNo=" + refConNo;
+  var refName = $('#refName').val();
+  var refAddress = $('#refAddress').val();
+  var refConNo = $('#refConNo').val();
+  var url = "/Finance/finance?operation=addCustomer&cusId=" + cusId + "&cusAccount=" + accNo + "&cname=" + cname + "&add=" + add + "&mno=" + pno + "&lno=" + lno + "&refName=" + refName + "&refAdd=" + refAddress + "&refeContNo=" + refConNo;
   if (cusId === "") {
     $('#cusId').focus().css('outline-color', 'red');
     return false;
@@ -99,9 +99,9 @@ $(document).on('keyup', '#cusId', function() {
         $('#address').val(res.address);
         $('#phoneNo').val(res.mobileNo);
         $('#landline').val(res.landLine);
-		$('#refName').val(res.referenceName);
-		$('#refAddress').val(res.referenceAddress);
-		$('#refConNo').val(res.referenceContactNo);
+        $('#refName').val(res.referenceName);
+        $('#refAddress').val(res.referenceAddress);
+        $('#refConNo').val(res.referenceContactNo);
       })
       .fail(function(result) {
         alert(result);
@@ -113,8 +113,8 @@ $(document).on('keyup', '#cusId', function() {
     $('#phoneNo').val("");
     $('#landline').val("");
     $('#refName').val("");
-	$('#refAddress').val("");
-	$('#refConNo').val("");
+    $('#refAddress').val("");
+    $('#refConNo').val("");
   }
 });
 $(document).on('click', '#updateCus', function() {
@@ -171,11 +171,14 @@ $(document).on('click', '#updateCus', function() {
     })
     .done(function(result) {
       getAllCustomer();
-      $('#cusId').val("");
       $('#cusname').val("");
-      $('#addr').val("");
+      $('#accNo').val("");
+      $('#address').val("");
       $('#phoneNo').val("");
       $('#landline').val("");
+      $('#refName').val("");
+      $('#refAddress').val("");
+      $('#refConNo').val("");
     })
     .fail(function(result) {
       alert(result);
@@ -192,7 +195,7 @@ function getAllCustomer() {
       var res = JSON.parse(result);
       var length = res.length;
       var table = '<table>'
-      table += '<tr><th>SerialNumber</th><th>CustomerName</th><th>Address</th><th>PhoneNumber</th><th>LandlineNumber</th><th>Delete</th></tr>';
+      table += '<tr><th>SerialNumber</th><th>CustomerName</th><th>Address</th><th>PhoneNumber</th><th>LandlineNumber</th><th>Delete</th><th>Reference Name</th><th>Reference Address</th><th>Reference ContactNumber</th></tr>';
       for (i = 0; i < length; i++) {
         table += '<tr class="row">'
         table += '<td>' + res[i].cusId + '</td>';
@@ -200,6 +203,9 @@ function getAllCustomer() {
         table += '<td>' + res[i].address + '</td>';
         table += '<td>' + res[i].phoneNo + '</td>';
         table += '<td>' + res[i].landLine + '</td>';
+        table += '<td>' + res[i].referenceName + '</td>';
+        table += '<td>' + res[i].referenceAddress + '</td>';
+        table += '<td>' + res[i].referenceContactNo + '</td>';
         table += '<td><img src="images/delete.jpg" height="35px" width="35px" class="delete"></td></tr>';
       }
       table += '</table>';
