@@ -40,7 +40,6 @@ public class PaymentServlet extends HttpServlet {
 		} else if (op.equals("getAllPayment")) {
 			JSONArray result = new JSONArray();
 			try {
-
 				PaymentClass pay = new PaymentClass();
 				result = pay.getAllPayment();
 
