@@ -96,7 +96,7 @@ $(document).on('keyup', '#cusId', function() {
         var res = JSON.parse(result);
         $('#cusname').val(res.cusName);
         $('#accNo').val(res.accNo);
-        $('#address').val(res.address);
+        $('#addr').val(res.address);
         $('#phoneNo').val(res.mobileNo);
         $('#landline').val(res.landLine);
         $('#refName').val(res.referenceName);
@@ -109,7 +109,7 @@ $(document).on('keyup', '#cusId', function() {
   } else {
     $('#cusname').val("");
     $('#accNo').val("");
-    $('#address').val("");
+    $('#addr').val("");
     $('#phoneNo').val("");
     $('#landline').val("");
     $('#refName').val("");
@@ -173,7 +173,7 @@ $(document).on('click', '#updateCus', function() {
       getAllCustomer();
       $('#cusname').val("");
       $('#accNo').val("");
-      $('#address').val("");
+      $('#addr').val("");
       $('#phoneNo').val("");
       $('#landline').val("");
       $('#refName').val("");
@@ -201,7 +201,7 @@ function getAllCustomer() {
         table += '<td>' + res[i].cusId + '</td>';
         table += '<td>' + res[i].cusName + '</td>';
         table += '<td>' + res[i].address + '</td>';
-        table += '<td>' + res[i].phoneNo + '</td>';
+        table += '<td>' + res[i].mobileNo + '</td>';
         table += '<td>' + res[i].landLine + '</td>';
         table += '<td>' + res[i].referenceName + '</td>';
         table += '<td>' + res[i].referenceAddress + '</td>';
@@ -251,7 +251,7 @@ $(document).on('keypress', '#cusId,#phoneNo,#landline,#refConNo,#cusId,#accNo', 
     return false;
   }
 
-}).on('keypress', '#cusname,#address,#refName,#refAddress', function(event) {
+}).on('keypress', '#cusname,#addr,#refName,#refAddress', function(event) {
   var inputValue = event.which;
   // allow letters and whitespaces only.
   if (!(inputValue >= 65 && inputValue <= 122) && (inputValue != 32 && inputValue != 0 && inputValue != 13)) {

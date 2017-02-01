@@ -17,7 +17,7 @@ function customer() {
   cus += "<\/tr>";
   cus += "<tr>";
   cus += "<td>Address*:<\/td>";
-  cus += "<td><input type=\"text\" placeholder=\"Address\" id=\"address\"><\/td>";
+  cus += "<td><input type=\"text\" placeholder=\"Address\" id=\"addr\"><\/td>";
   cus += "<\/tr>";
   cus += "<tr>";
   cus += "<td>Mobile Number*:<\/td>";
