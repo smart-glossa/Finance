@@ -1,12 +1,14 @@
 $(document).ready(function() {
+	
+});
   $(document).on('click', '#addPay', function() {
-    var accId = $('#accId').val();
+    var accNo = $('#accNo').val();
     var uname = $('#uName').val();
     var amount = $('#amount').val();
     var collDate = $('#collDate').val();
     var entrydate = $('#entry').val();
-    if (accId === "") {
-      $('#accId').focus().css('outline-color', 'red');
+    if (accNo === "") {
+      $('#accNo').focus().css('outline-color', 'red');
       return;
     }
     if (uname === "") {
@@ -25,14 +27,14 @@ $(document).ready(function() {
       $('#entry').focus().css('outline-color', 'red');
       return;
     }
-    var url = "/Finance/payment?operation=addPayment&accId=" + accId + "&uName=" + uname + "&amount=" + amount + "&collDate=" + collDate + "&entryDate=" + entrydate;
+    var url = "/Finance/payment?operation=addPayment&accNo="+accNo+"&amt="+amount+"&cdate="+collDate+"&eDate="+entrydate+"&uname="+uname+"";
     $.ajax({
         url: url,
         type: 'POST'
       })
       .done(function(result) {
         getAllPayment();
-        $('#accId').val("");
+        $('#accNo').val("");
         $('#uName').val("");
         $('#collDate').val("");
         $('#entry').val("");
@@ -170,4 +172,4 @@ $(document).ready(function() {
                  return false;
       }
   })*/
-});
+

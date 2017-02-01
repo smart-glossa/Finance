@@ -106,8 +106,10 @@ function account() {
   acc += "<\/tr>";
   acc += "<tr>";
   acc += "<td>Current Account*:<\/td>";
-  acc += "<td><input type=\"text\" placeholder=\"Current Account\" id=\"currentacc\"><\/td>";
-  acc += "<\/tr>";
+  acc += "<td><select Id=\"currentAcc\" style=\"width: 220px;\">";
+  acc += "<option><\/option>";
+  acc += "<option>Create New Account<\/option>";
+  acc += "<\/select><\/tr>";
   acc += "<tr>";
   acc += "<td><\/td>";
   acc += "<td><input type=submit value=Add id=addAcc>";
@@ -126,8 +128,8 @@ function payment() {
   pay += "<\/div>";
   pay += "<table>";
   pay += "<tr>";
-  pay += "<td>Account Id*:<\/td>";
-  pay += "<td><input type=\"text\" placeholder=\"Account Id\" id=\"accId\"><\/td>";
+  pay += "<td>Account Number*:<\/td>";
+  pay += "<td><input type=\"text\" placeholder=\"Account Number\" id=\"accNo\"><\/td>";
   pay += "<\/tr>";
   pay += "<tr>";
   pay += "<td>User Name*:<\/td>";
@@ -147,7 +149,7 @@ function payment() {
   pay += "<\/tr>";
   pay += "<tr>";
   pay += "<td><\/td>";
-  pay += "<td><input type=submit value=Add id=addPay>";
+  pay += "<td><input type=\"submit\" value=\"Add\" id=\"addPay\"><\/td>";
   pay += "<\/tr>";
   pay += "<\/table>";
   pay += "<\/div>";
