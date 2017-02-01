@@ -25,7 +25,6 @@ $(document).on('click', '#add', function() {
     $('#cusname').focus().css('outline-color', 'red');
     return false;
   }
-
   if (add === "") {
     $('#addr').focus().css('outline-color', 'red');
     return false;
