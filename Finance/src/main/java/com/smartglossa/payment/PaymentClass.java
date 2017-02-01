@@ -19,17 +19,16 @@ public class PaymentClass {
 	public PaymentClass() throws ClassNotFoundException, SQLException {
 		openConnection();
 	}
-
 	public void addPayment(float amount, String collectionDate, String entryDate, String uName, int accNo)
 			throws SQLException {
-		int accId = 0;
+		//int accId = 0;
 		try {
 			String query = "select accId from accounts where accountNumber=" + accNo + " AND currentAccount=1";
 			rs = stmt.executeQuery(query);
-			while (rs.next()) {
-				accId = rs.getInt("accId");
-				String query1 = "Insert into payment(amount,collectionDate,EntryDate,accountId,userName) values('"
-						+ amount + "','" + collectionDate + "','" + entryDate + "'," + accId + ",'" + uName + "')";
+			if (rs.next()) {
+			int accId = rs.getInt(1);
+				String query1 = "Insert into payment(amount,collectionDate,EntryDate,accountId,userName) values("
+						+ amount + ",'" + collectionDate + "','" + entryDate + "'," + accId + ",'" + uName + "')";
 				stmt.execute(query1);
 			}
 		} finally {
