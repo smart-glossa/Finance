@@ -1,9 +1,9 @@
 function customer() {
   var cus = "";
-  cus += "<div class=\"cus\">";
+  cus += "<div class=\"cus\">";               
   cus += "<h2> Add Customer <\/h2>";
   cus += "<table>";         
-  cus += "<tr>";
+  cus += "<tr>";          
   cus += "<td>Customer Id*:<\/td>";
   cus += "<td><input type=\"text\" id=\"cusId\" placeholder=\"customerId\"><\/td>";
   cus += "<\/tr>";
