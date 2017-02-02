@@ -8,7 +8,6 @@ $(document).ready(function() {
     var amtGiven = $('#amtgiven').val();
     var amttopay = $('#amttopay').val();
     var date = $('#date').val();
-    var currentAccount = $('#currentacc').val("");
     var amtG = parseInt(amtGiven);
     var amtP = parseInt(amttopay);
     if (accNo === "") {
@@ -39,16 +38,12 @@ $(document).ready(function() {
       $("#date").focus().css("outline-color", "red");
       return false;
     }
-    if (currentAccount === "") {
-      $('#currentacc').focus.css("outline-color", "red");
-      return false;
-    }
     if (amtG >= amtP) {
       $("#amttopay").focus().css("outline-color", "Red");
       $("#msg").html("PayAmount should be greater than GivenAmount").show().fadeOut(3000);
       return false;
     }
-    var url = " http://localhost:8080/Finance/account?operation=addAccounts&accNo=" + accNo + "&line=" + line + "&duration=" + duration + "&modeOfPayment=" + modeofpay + "&amountGiven=" + amtGiven + "&amountToPay=" + amttopay + "&date=" + date + "&currentAccount=" + currentAccount;
+    var url = " http://localhost:8080/Finance/account?operation=addAccounts&accNo=" + accNo + "&line=" + line + "&duration=" + duration + "&modeOfPayment=" + modeofpay + "&amountGiven=" + amtGiven + "&amountToPay=" + amttopay + "&date=" + date +"";
     $.ajax({
         url: url,
         typ: 'POST'
@@ -65,7 +60,6 @@ $(document).ready(function() {
         $('#amtgiven').val("");
         $('#amttopay').val("");
         $('#date').val("");
-        $('#currentacc').val("");
       })
       .fail(function(result) {
         alert(result);
@@ -80,7 +74,6 @@ $(document).on('click', '#updateAcc', function() {
   var amtGiven = $('#amtgiven').val();
   var amttopay = $('#amttopay').val();
   var date = $('date').val();
-  var currentAccount = $('#currentacc').val();
   var amtG = parseInt(amtGiven);
   var amtP = parseInt(amttopay);
   if (accNo === "") {
@@ -130,7 +123,6 @@ $(document).on('click', '#updateAcc', function() {
       $('#amtgiven').val("");
       $('#amttopay').val("");
       $('#date').val("");
-      $('#currentacc').val("");
     })
     .fail(function(result) {
       alert(result);
@@ -154,7 +146,6 @@ $(document).on('keyup', '#accId', function() {
           $('#amtgiven').val(res.amountGiven);
           $('#amttopay').val(res.amountToPay);
           $('#date').val(res.date);
-          $('#currentacc').val(res.currentAccount);
         })
         .fail(function(result) {
           alert(result);
@@ -168,7 +159,6 @@ $(document).on('keyup', '#accId', function() {
       $('#amtgiven').val("");
       $('#amttopay').val("");
       $('#date').val("");
-      $('#currentacc').val("");
     }
 })
 function getAllAccount() {
