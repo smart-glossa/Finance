@@ -279,7 +279,7 @@ $(document).on('keypress', '#line', function(key) {
       return false;
     }
   })
-  /*function previewStatement() {
+ /* function previewStatement() {
       var printWindow = window.open('', '', 'height=400,width=800');
       printWindow.document.write(getStatement());
       printWindow.document.close();
@@ -295,7 +295,7 @@ $(document).on('keypress', '#line', function(key) {
       htmlFile += '<h4>Outstanding:'+ $("#bal").text() +'</h4>';
       htmlFile += "<table>";
       htmlFile += "<tr><th>Serial Number</th><th>Payment Date</th><th>Paid</th><th>Balance</th></tr>";
-      /*var tr = $(".row")[0].children;
+      var tr = $(".row")[0].children;
       for (var i = 0; i < tr.length; i++) {
           var div = $(tr[i]);
           if ($(div.children(".sno")[0]).val().trim() !== "") {

@@ -43,7 +43,7 @@ $(document).on('click', '#add', function() {
     $("#msg").html("Enter Phone Number as correct format").show().fadeOut(3000);
     return false;
   }
-  var url = "/Finance/finance?operation=addCustomer&cusId=" + cusId + "&cusAccount=" + accNo + "&cname=" + cname + "&add=" + add + "&mno=" + pno + "&lno=" + lno + "&refName=" + refName + "&refAdd=" + refAddress + "&refeContNo=" + refConNo;
+  var url = "/Finance/finance?operation=addCustomer&cusId=" + cusId + "&cusAccount=" + accNo + "&cname=" + cname + "&add=" + add + "&mno=" + pno + "&lno=" + lno + "&refName=" + refName + "&refAdd=" + refAddress + "&refConNo=" + refConNo;
   $.ajax({
       url: url,
       type: 'POST'
