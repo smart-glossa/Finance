@@ -12,7 +12,7 @@ function customer() {
   cus += "<td><input type=\"text\" id=\"accNo\" placeholder=\"AccountNumber\"><\/td>";
   cus += "<\/tr>";
   cus += "<tr>";
-  cus += "<td>Customer Name*:<\/td>";
+  cus += "<td>Customer Name*:<\/td>";     
   cus += "<td><input type=\"text\" placeholder=\"Name\" id=\"cusname\"><\/td>";
   cus += "<\/tr>";
   cus += "<tr>";

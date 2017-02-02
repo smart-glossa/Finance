@@ -25,10 +25,9 @@ public class FinanceClass {
 	public void addCustomer(int cusId, int cusAcc, String cusName, String address, String mobileNo, String referralName,
 			String referralAddress, String referralContactNo, String landLine) throws SQLException {
 		try {
-
-			String query = "Insert into customer(customerId,customerName,address,mobileNumber,referralName,referralAddress,referralContactNo,landLine) values("
-					+ cusId + ",'" + cusName + "','" + address + "','" + mobileNo + "','" + referralName + "','"
-					+ referralAddress + "','" + referralContactNo + "','" + landLine + "')";
+			String query = "Insert into customer(customerName,address,mobileNumber,referralName,referralAddress,referralContactNo,landLine) values('"
+					+ cusName + "','" + address + "','" + mobileNo + "','" + referralName + "','" + referralAddress
+					+ "','" + referralContactNo + "','" + landLine + "')";
 			stmt.execute(query);
 			String query1 = "Insert into customerAccount(accountNumber,customerId) values(" + cusAcc + "," + cusId
 					+ ")";
@@ -62,11 +61,13 @@ public class FinanceClass {
 	}
 
 	public void updateCustomer(int cusId, int cusAcc, String cusName, String address, String mobileNo,
-			String referralName, String referralAddress, String referralContactNo, String landLine) throws SQLException {
+			String referralName, String referralAddress, String referralContactNo, String landLine)
+			throws SQLException {
 		try {
 			String query = "update customer set customerName='" + cusName + "',address='" + address + "',mobileNumber='"
 					+ mobileNo + "',referralName='" + referralName + "',referralAddress='" + referralAddress
-					+ "',landLine='" + landLine +"',referralContactNo='" + referralContactNo + "'where customerId=" + cusId;
+					+ "',landLine='" + landLine + "',referralContactNo='" + referralContactNo + "'where customerId="
+					+ cusId;
 			stmt.execute(query);
 		} finally {
 			closeConnection();
@@ -77,7 +78,8 @@ public class FinanceClass {
 	public JSONObject getOneCustomer(int cusId) throws SQLException {
 		JSONObject obj = new JSONObject();
 		try {
-			String query = "select * from customer,customerAccount where customer.customerId=" + cusId +" AND customerAccount.customerId="+ cusId;
+			String query = "select * from customer,customerAccount where customer.customerId=" + cusId
+					+ " AND customerAccount.customerId=" + cusId;
 			rs = stmt.executeQuery(query);
 			if (rs.next()) {
 				obj.put("cusId", rs.getInt("customerId"));
