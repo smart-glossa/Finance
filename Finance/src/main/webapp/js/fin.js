@@ -29,7 +29,7 @@ function customer() {
   cus += "<\/tr>";
   cus += "<tr>";
   cus += "<td>Referrence Name<\/td>";
-  cus += "<td><input type=\"text\" id=\"refName\" placeholder=\"ReferrenceName\"><\/td>";
+  cus += "<td><input type=\"text\" id=\"refName\" placeholder=\"ReferrenceName\"><\/td>";	
   cus += "<\/tr>";
   cus += "<tr>";
   cus += "<td>Referrrence Address<\/td>";
@@ -104,12 +104,6 @@ function account() {
   acc += "<td>Given Date*:<\/td>";
   acc += "<td><input placeholder=\"Date\" class=\"textbox-n\" type=\"text\" onfocus=\"(this.type='date')\"  id=\"date\"><\/td>";
   acc += "<\/tr>";
-  acc += "<tr>";
-  acc += "<td>Current Account*:<\/td>";
-  acc += "<td><select Id=\"currentAcc\" style=\"width: 220px;\">";
-  acc += "<option><\/option>";
-  acc += "<option>Create New Account<\/option>";
-  acc += "<\/select><\/tr>";
   acc += "<tr>";
   acc += "<td><\/td>";
   acc += "<td><input type=submit value=Add id=addAcc>";
