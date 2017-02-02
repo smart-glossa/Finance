@@ -15,7 +15,7 @@
 </p>
 <p>
 2. CREATE TABLE `customer` (
-  `customerId` int(11) NOT NULL,
+  `customerId` int(11) NOT NULL AUTO_INCREMENT,
   `customerName` varchar(100) NOT NULL,
   `address` varchar(255) NOT NULL,
   `mobileNumber` varchar(12) DEFAULT NULL,
@@ -24,8 +24,8 @@
   `referralContactNo` varchar(12) DEFAULT NULL,
   `landLine` varchar(15) DEFAULT NULL,
   PRIMARY KEY (`customerId`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 |
 
-) 
 </p>
 <p>
 3.CREATE TABLE `customerAccount` (
