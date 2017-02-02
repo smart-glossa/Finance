@@ -16,7 +16,6 @@ $(document).on('click', '#add', function() {
   var refName = $('#refName').val();
   var refAddress = $('#refAddress').val();
   var refConNo = $('#refConNo').val();
-  var url = "/Finance/finance?operation=addCustomer&cusId=" + cusId + "&cusAccount=" + accNo + "&cname=" + cname + "&add=" + add + "&mno=" + pno + "&lno=" + lno + "&refName=" + refName + "&refAdd=" + refAddress + "&refeContNo=" + refConNo;
   if (cusId === "") {
     $('#cusId').focus().css('outline-color', 'red');
     return false;
@@ -44,7 +43,7 @@ $(document).on('click', '#add', function() {
     $("#msg").html("Enter Phone Number as correct format").show().fadeOut(3000);
     return false;
   }
-
+  var url = "/Finance/finance?operation=addCustomer&cusId=" + cusId + "&cusAccount=" + accNo + "&cname=" + cname + "&add=" + add + "&mno=" + pno + "&lno=" + lno + "&refName=" + refName + "&refAdd=" + refAddress + "&refeContNo=" + refConNo;
   $.ajax({
       url: url,
       type: 'POST'
@@ -183,18 +182,17 @@ $(document).on('click', '#updateCus', function() {
       alert(result);
     })
 })
-
 function getAllCustomer() {
   var url = "/Finance/finance?operation=getAllCustomer";
   $.ajax({
       url: url,
       type: 'POST'
     })
-    .done(function(result) {
+    .done(function(result) {   
       var res = JSON.parse(result);
       var length = res.length;
       var table = '<table>'
-      table += '<tr><th>SerialNumber</th><th>CustomerName</th><th>Address</th><th>PhoneNumber</th><th>LandlineNumber</th><th>Delete</th><th>Reference Name</th><th>Reference Address</th><th>Reference ContactNumber</th></tr>';
+      table += '<tr><th>SerialNumber</th><th>CustomerName</th><th>Address</th><th>PhoneNumber</th><th>LandlineNumber</th><th>Reference Name</th><th>Reference Address</th><th>Reference ContactNumber</th><th>Delete</th></tr>';
       for (i = 0; i < length; i++) {
         table += '<tr class="row">'
         table += '<td>' + res[i].cusId + '</td>';

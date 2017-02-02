@@ -35,7 +35,6 @@ public class PaymentClass {
 			closeConnection();
 		}
 	}
-
 	public JSONArray getAllPayment() throws SQLException {
 		JSONArray result = new JSONArray();
 		try {

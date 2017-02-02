@@ -39,6 +39,7 @@ $(document).ready(function() {
         $('#collDate').val("");
         $('#entry').val("");
         $('#amount').val("");
+        alert("added succesfully")
       })
       .fail(function(result) {
         alert(result);

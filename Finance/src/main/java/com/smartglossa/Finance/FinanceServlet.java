@@ -41,7 +41,7 @@ public class FinanceServlet extends HttpServlet {
 				e.printStackTrace();
 				obj.put("status", 0);
 			}
-			response.getWriter().print(obj);
+			response.getWriter().print(obj);   
 		} else if (op.equals("getAllCustomer")) {
 			JSONArray result = new JSONArray();
 			try {

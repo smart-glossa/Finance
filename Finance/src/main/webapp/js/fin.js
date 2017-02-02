@@ -51,7 +51,7 @@ function customer() {
 }
 
 function account() {
-  var acc = "";
+  var acc = "";   
   acc += "<div class=\"account\">";
   acc += "<div>";
   acc += "<h3>AddAccounts<\/h3>";

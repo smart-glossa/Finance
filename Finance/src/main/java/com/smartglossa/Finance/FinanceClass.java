@@ -24,7 +24,7 @@ public class FinanceClass {
 
 	public void addCustomer(int cusId, int cusAcc, String cusName, String address, String mobileNo, String referralName,
 			String referralAddress, String referralContactNo, String landLine) throws SQLException {
-		try {
+		try {   
 			String query = "Insert into customer(customerName,address,mobileNumber,referralName,referralAddress,referralContactNo,landLine) values('"
 					+ cusName + "','" + address + "','" + mobileNo + "','" + referralName + "','" + referralAddress
 					+ "','" + referralContactNo + "','" + landLine + "')";
