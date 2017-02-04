@@ -109,7 +109,7 @@ $(document).on('click', '#updateAcc', function() {
     $("#msg").html("AmountToPay should be greater than AmountGiven").show().fadeOut(3000);
     return false;
   }
-  var url = "/Finance/account?operation=updateAccount&accNo=" + acc + "&line=" + line + "&duration=" + duration + "modeofpayment=" + modeofpay + "&amountGiven=" + amtGiven + "&amountToPay=" + amttopay + "&date=" + date +"&currentAccount=" + currentAccount;
+  var url = "/Finance/account?operation=updateAccount&accNo=" + accNo + "&line=" + line + "&duration=" + duration + "modeofpayment=" + modeofpay + "&amountGiven=" + amtGiven + "&amountToPay=" + amttopay + "&date=" + date +"&currentAccount=" + currentAccount;
   $.ajax({
       url: url,
       type: 'POST'
@@ -132,7 +132,7 @@ $(document).on('keyup', '#accId', function() {
   var accId = $('#accId').val();
   if (accId !== "") {
     if (accId.length === 1) {
-      var url = "/Finance/account?operation=getOneAccount&accId=" + accId;
+      var url = "/Finance/account?operation=getOneAccount&accId=" + accId +"";
       $.ajax({
           url: url,
           type: 'POST'
@@ -171,7 +171,7 @@ function getAllAccount() {
       var res = JSON.parse(result);
       var length = res.length;
       var table = '<table>'
-      table += '<tr><th>AccountId</th><th>AccountNumber</th><th>Line</th><th>Duration</th><th>Mode Of Pay</th><th>AmountGiven</th><th>AmountToPay</th><th>date</th><th>currentAccount</th><th>Delete</th></tr>';
+      table += '<tr><th>AccountNumber</th><th>Line</th><th>Duration</th><th>Mode Of Pay</th><th>AmountGiven</th><th>AmountToPay</th><th>date</th><th>currentAccount</th><th>Delete</th></tr>';
       for (i = 0; i < length; i++) {
         table += '<tr class="row">'
         table += '<td>' + res[i].acc + '</td>';

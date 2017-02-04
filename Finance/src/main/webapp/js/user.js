@@ -81,8 +81,6 @@ $(document).ready(function(){
 			alert(result);
 		})
 	})
-	
-
 function getCookie(cname) {
     var name = cname + "=";
     var ca = document.cookie.split(';');
