@@ -58,10 +58,6 @@ function account() {
   acc += "<\/div>";
   acc += "<table>";
   acc += "<tr>";
-  acc += "<td>Account Id*:<\/td>";
-  acc += "<td><input type=\"text\" id=\"accId\"><\/td>";
-  acc += "<\/tr>";
-  acc += "<tr>";
   acc += "<td>Account Number*:<\/td>";
   acc += "<td><input type=\"text\" id=\"accNo\" placeholder=\"Account Number\"><\/td>";
   acc += "<\/tr>";

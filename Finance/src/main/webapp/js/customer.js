@@ -80,7 +80,6 @@ $(document).on('click', '.delete', function() {
   fail(function(result) {
     alert(result);
   })
-
 });
 $(document).on('keyup', '#cusId', function() {
   var cusId = $('#cusId').val();
@@ -116,11 +115,15 @@ $(document).on('keyup', '#cusId', function() {
   }
 });
 $(document).on('click', '#updateCus', function() {
-  var cusId = $('#cusId').val();
-  var cname = $('#cusname').val();
-  var add = $('#addr').val();
-  var pno = $('#phoneNo').val();
-  var lno = $('#landline').val();
+	 var cusId = $('#cusId').val();
+	  var accNo = $('#accNo').val();
+	  var cname = $('#cusname').val();
+	  var add = $('#addr').val();
+	  var pno = $('#phoneNo').val();
+	  var lno = $('#landline').val();
+	  var refName = $('#refName').val();
+	  var refAddress = $('#refAddress').val();
+	  var refConNo = $('#refConNo').val();
   if (cusId === "") {
     $('#cusId').focus().css('outline-color', 'red');
     return;
@@ -162,7 +165,7 @@ $(document).on('click', '#updateCus', function() {
     $("#msg").html("Enter Landline Number as correct format").show().fadeOut(3000);
     return false;
   }
-  var url = "/Finance/finance?operation=updateCustomer&cusId=" + cusId + "&cname=" + cname + "&add=" + add + "&mno=" + pno + "&lno=" + lno;
+  var url = "http://localhost:8080/Finance/finance?operation=updateCustomer&cusId="+cusId+"&cusAccount="+accNo+"&cname="+cname+"&add="+add+"&mno="+pno+"&lno="+lno+"&refName="+refName+"&refAdd="+refAddress+"&refConNo="+refConNo+"";
   $.ajax({
       url: url,
       type: 'POST'
