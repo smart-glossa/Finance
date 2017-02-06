@@ -61,6 +61,8 @@ public class UserServlet extends HttpServlet {
 			try {
 				UserApplication user = new UserApplication();
 				result = user.getName(uname);
+				result.put("status", 1);
+				result.put("message", "uname");
 				response.getWriter().print(result);
 			} catch (Exception e) {
 				result.put("status", 0);

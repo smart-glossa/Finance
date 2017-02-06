@@ -1,8 +1,11 @@
+
 $(document).ready(function() {
-	
-});
+	  
+
   $(document).on('click', '#addPay', function() {
     var accNo = $('#accNo').val();
+    //var value = $.cookie("#uName");
+ 
     var uname = $('#uName').val();
     var amount = $('#amount').val();
     var collDate = $('#collDate').val();
@@ -45,7 +48,24 @@ $(document).ready(function() {
         alert(result);
       })
   });
-
+});
+  function applyUname(){
+		var uname = getCookie("cname");
+		$.ajax({
+			
+			url: "/Finance/finance?operation=getName&userName=" + uname,
+			type: 'POST'
+		})
+		.done(function(result){
+			result = JSON.parse(result);
+			if (result.status == 1) {
+				$(".abcd").text("Welcome Mr. "+ result.uname);
+			}
+		})
+		.fail(function(result){
+			console.log(result);
+		});
+	}
   function getAllPayment() {
     var url = "/Finance/payment?operation=getAllPayment";
     $.ajax({

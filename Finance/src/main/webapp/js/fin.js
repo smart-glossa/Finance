@@ -110,6 +110,23 @@ function account() {
   $('.fin')[0].innerHTML = acc;
 }
 /* Adding payment detail */
+function getCookie(uname){
+	cName = "";
+	pCOOKIES = new Array();
+	pCOOKIES = document.cookie.split('; ');
+	for(bb = 0; bb < pCOOKIES.length; bb++){
+		NmeVal  = new Array();
+		NmeVal  = pCOOKIES[bb].split('=');
+		if(NmeVal[0] == w){
+			cName = unescape(NmeVal[1]);
+		}
+	}
+	return cName;
+}
+function myFunction() {
+    var x = document.cookie;
+    document.getElementById("uName").innerHTML = x;
+}
 function payment() {
   var pay = "";
   pay += "<div class=\"payment\">";
@@ -121,10 +138,10 @@ function payment() {
   pay += "<td>Account Number*:<\/td>";
   pay += "<td><input type=\"text\" placeholder=\"Account Number\" id=\"accNo\"><\/td>";
   pay += "<\/tr>";
-  pay += "<tr>";
+ /*pay += "<tr>";
   pay += "<td>User Name*:<\/td>";
-  pay += "<td><input type=\"text\" placeholder=\"User Name\" id=\"uName\"><\/td>";
-  pay += "<\/tr>";
+  pay += "<td><input type=\"text\" id=\"uName\" value=\"$.cookie('uname')\"><\/td>";
+  pay += "<\/tr>";*/
   pay += "<tr>";
   pay += "<td>Amount*:<\/td>";
   pay += "<td><input type=\"text\" placeholder=\"Amount\" id=\"amount\"><\/td>";
